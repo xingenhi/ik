@@ -6,5 +6,5 @@
 
 
 
-[开始阅读](README.md)
+[开始阅读](doc/README.md)
 [我的Gitee](https://gitee.com/xingenhi)

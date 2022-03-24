@@ -1,3 +1,4 @@
+# Fink
 # 01-Flink的特点
 
 * 事件驱动（Event-driven）
@@ -7501,16 +7502,16 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 
 # 14-基于flink的电商用户行为数据分析
 
-\[[Flink电商项目第一天-电商用户行为分析及完整图步骤解析-热门商品统计TopN的实现](https://blog.csdn.net/qq_40180229/article/details/106502286)\](https://blog.csdn.net/qq\_40180229/article/details/106502286)
+> [Flink电商项目第一天-电商用户行为分析及完整图步骤解析-热门商品统计TopN的实现](https://blog.csdn.net/qq_40180229/article/details/106502286)
 
 * 批处理和流处理
 * 电商用户行为分析
 * 数据源解析
 * 项目模块划分
 
-## [14.1 批处理和流处理](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_141-%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E6%B5%81%E5%A4%84%E7%90%86)
+## [14.1 批处理和流处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_141-%e6%89%b9%e5%a4%84%e7%90%86%e5%92%8c%e6%b5%81%e5%a4%84%e7%90%86)
 
-### [批处理](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%89%B9%E5%A4%84%E7%90%86)
+### [批处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%89%b9%e5%a4%84%e7%90%86)
 
 批处理主要操作大容量静态数据集，并在计算过程完成后返回结果。
 
@@ -7522,7 +7523,7 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * **持久：数据通常始终存储在某种类型的持久存储位置中**
 * **大量：批处理操作通常是处理极为海量数据集的唯一方法**
 
-### [流处理](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%81%E5%A4%84%E7%90%86)
+### [流处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%b5%81%e5%a4%84%e7%90%86)
 
 流处理可以对随时进入系统的数据进行计算。
 
@@ -7534,9 +7535,9 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * 处理工作是基于事件的，除非明确停止否则没有“尽头”
 * 处理结果立刻可用，并会随着新数据的抵达继续更新。
 
-## [14.2 电商用户行为分析](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_142-%E7%94%B5%E5%95%86%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90)
+## [14.2 电商用户行为分析](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_142-%e7%94%b5%e5%95%86%e7%94%a8%e6%88%b7%e8%a1%8c%e4%b8%ba%e5%88%86%e6%9e%90)
 
-!\[image\](images/20200602182834724.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorayD2LhRzChwozk2gRMmbI0ytPHoNVcTUmAze9Eq1-CKM.png)
 
 * 统计分析
 * 点击、浏览
@@ -7546,52 +7547,52 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * 下订单、支付、登录
 * 刷单监控，订单失效监控，恶意登录（短时间内频繁登录失败）监控
 
-### [项目模块设计](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E9%A1%B9%E7%9B%AE%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1)
+### [项目模块设计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e9%a1%b9%e7%9b%ae%e6%a8%a1%e5%9d%97%e8%ae%be%e8%ae%a1)
 
-!\[image\](images/20200602183018421.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraPkmZ3hEHkbJAPfW1yfoPCRtFIZdVETb1VaJHs5yjiww.png)
 
-!\[image\](images/20200602183121950.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraNO8l50Bh6BfbMRmKOHv6IaiHEiB4hPaUmsvED7jTgoA.png)
 
-### [数据源](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%95%B0%E6%8D%AE%E6%BA%90)
+### [数据源](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%95%b0%e6%8d%ae%e6%ba%90)
 
-!\[image\](images/20200602183227549.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraILolEWZu_4yNaUJq3KFXkymTakUvYP1TLtk-3G7nljQ.png)
 
-### [数据源-数据结构](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%95%B0%E6%8D%AE%E6%BA%90-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+### [数据源-数据结构](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%95%b0%e6%8d%ae%e6%ba%90-%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84)
 
 **UserBehavior**
 
-!\[image\](images/20200602183249723.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora3ExsNEnyJ-4IAtretMAR1HrN-xvqLiHz8xC51iTldIc.png)
 
 **ApacheLogEvent**
 
-!\[image\](images/20200602183323920.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoratmdcZbifftybvpni2mBMnGwg_yVZFr5eTiD1KNKLRJQ.png)
 
-## [14.3 项目模块](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_143-%E9%A1%B9%E7%9B%AE%E6%A8%A1%E5%9D%97)
+## [14.3 项目模块](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_143-%e9%a1%b9%e7%9b%ae%e6%a8%a1%e5%9d%97)
 
-!\[image\](images/20200602183434342.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora8cLxUEi1tqGDnqmuKPrTWHCQoAVrypulZe4Wnz43cZs.png)
 
-### [14.3.1 热门实时商品统计](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1431-%E7%83%AD%E9%97%A8%E5%AE%9E%E6%97%B6%E5%95%86%E5%93%81%E7%BB%9F%E8%AE%A1)
+### [14.3.1 热门实时商品统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1431-%e7%83%ad%e9%97%a8%e5%ae%9e%e6%97%b6%e5%95%86%e5%93%81%e7%bb%9f%e8%ae%a1)
 
-!\[image\](images/20200602183513841.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraBT6vkBWQjjpnM6KXfXKqv3fO1suIANLhe7kpScSSKKI.png)
 
-!\[image\](images/20200602183537531.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraG1h6fyDGAjFX7LJ07yO7Eb7VoCjWExcjEGBGijPoQoQ.png)
 
 * 按照商品id进行分区
 
-!\[image\](images/20200602183613384.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorayqakVKVqgadxzMk8_60SRe8mhriXCAwRDV1-8DESJ0w.png)
 
 * 设置窗口时间
 
-!\[image\](images/20200602183637249.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraDjzheDWrHECIKGA81bLNAbqXQh8o7pcUj2v4FpI-bZQ.png)
 
 * 时间窗口（timeWindow）区间为左闭右开
 * 同一份数据会被分发到不同的窗口
 
-!\[image\](images/20200602183733756.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoracTXfcnehkP_SqWoW-Xd8ZlZDUyCMsH9wr9tWZHOowGE.png)
 
 * 窗口聚合
 
-!\[image\](images/20200602183749122.png)
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraoiUGuEdKUmgYenrLTmlQgUXFa0cid1j5nPZmCpl7fW4.png)
 
 * 窗口聚合策略——没出现一条记录就加一
 * 实现AggregateFunction接口
@@ -7600,12 +7601,7 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 interface AggregateFunction<IN, ACC, OUT>
 ```
 
-* 定义输出结构——
-
-```Plain Text
-ItemViewCount(itemId,windowEnd,count)
-```
-
+* 定义输出结构——`ItemViewCount(itemId,windowEnd,count)`
 * 实现WindowFunction接口
 
 ```Plain Text
@@ -7613,22 +7609,9 @@ interface WindowFunction<IN,OUT,KEY,W extends Window>
 ```
 
 * IN：输入为累加器的类型，Long
-* OUT：窗口累加以后输出的类型为
-
-```Plain Text
-ItemViewCount(itemId: Long,windowEnd: Long,count: Long)
-```
-
-，windowEnd为窗口的结束时间，也是窗口的唯一标识
-
+* OUT：窗口累加以后输出的类型为`ItemViewCount(itemId: Long,windowEnd: Long,count: Long)`，windowEnd为窗口的结束时间，也是窗口的唯一标识
 * KEY：Tuple泛型，在这里是itemId，窗口根据itemId聚合
-* W：聚合的窗口，
-
-```Plain Text
-w.getEnd
-```
-
-就能拿到窗口的结束时间
+* W：聚合的窗口，`w.getEnd`就能拿到窗口的结束时间
 
 ```Plain Text
 public void apply(Tuple tuple, TimeWindow window,
@@ -7668,7 +7651,7 @@ public void apply(Tuple tuple, TimeWindow window,
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorapa6G_N9u3d3YwXandihsdPWA8U9UVgCVSHjDgoOliAQ.png)
 
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo)
 
 需要生成get/set、无参/有参构造函数、toString
 
@@ -7690,7 +7673,7 @@ private String behavior;
 private Long timestamp;
 ```
 
-#### [代码1-文件](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-%E6%96%87%E4%BB%B6)
+#### [代码1-文件](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e6%96%87%e4%bb%b6)
 
 * 父pom依赖
 
@@ -7982,7 +7965,7 @@ NO 5: 商品ID = 2364679 热门度 = 12
 ...
 ```
 
-#### [代码2-kafka](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-kafka)
+#### [代码2-kafka](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-kafka)
 
 * java代码
 
@@ -8048,7 +8031,7 @@ NO 3: 商品ID = 3611281 热门度 = 1
 ===============================
 ```
 
-#### [代码3-kafka批量数据测试](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%813-kafka%E6%89%B9%E9%87%8F%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95)
+#### [代码3-kafka批量数据测试](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-kafka%e6%89%b9%e9%87%8f%e6%95%b0%e6%8d%ae%e6%b5%8b%e8%af%95)
 
 * java代码
 
@@ -8098,7 +8081,7 @@ public class KafkaProducerUtil {
 * 启动kafka服务
 * 运行该java程序，之后就可以直接启动HotItems程序，读取本地已有的kafka数据了
 
-#### [代码4-Flink-SQL实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%814-flink-sql%E5%AE%9E%E7%8E%B0)
+#### [代码4-Flink-SQL实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%814-flink-sql%e5%ae%9e%e7%8e%b0)
 
 * java代码
 
@@ -8222,7 +8205,7 @@ public class HotItemsWithSql {
 ....
 ```
 
-### [14.3.2 实时流量统计——热门页面](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1432-%E5%AE%9E%E6%97%B6%E6%B5%81%E9%87%8F%E7%BB%9F%E8%AE%A1%E7%83%AD%E9%97%A8%E9%A1%B5%E9%9D%A2)
+### [14.3.2 实时流量统计——热门页面](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1432-%e5%ae%9e%e6%97%b6%e6%b5%81%e9%87%8f%e7%bb%9f%e8%ae%a1%e7%83%ad%e9%97%a8%e9%a1%b5%e9%9d%a2)
 
 * 基本需求
 * 从web服务器的日志中，统计实时的热门访问页面
@@ -8230,7 +8213,7 @@ public class HotItemsWithSql {
 * 将apache服务器日志中的时间，转换为时间戳，作为Event Time
 * 构建滑动窗口，窗口长度为1分钟，滑动距离为5秒
 
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-1)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-1)
 
 * ApacheLogEvent
 
@@ -8250,7 +8233,7 @@ private Long windowEnd;
 private Long count;
 ```
 
-#### [代码1-文件](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-%E6%96%87%E4%BB%B6-1)
+#### [代码1-文件](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e6%96%87%e4%bb%b6-1)
 
 * Java代码
 
@@ -8446,7 +8429,7 @@ NO 3: 页面URL = /blog/geekery/eventdb-ideas.html 浏览量 = 1
 ....
 ```
 
-#### [代码2-乱序数据测试](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-%E4%B9%B1%E5%BA%8F%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95)
+#### [代码2-乱序数据测试](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e4%b9%b1%e5%ba%8f%e6%95%b0%e6%8d%ae%e6%b5%8b%e8%af%95)
 
 * java代码
 
@@ -8659,7 +8642,7 @@ nc -lk 7777
 
 * 输出
 
-*由于****onTimer****简单粗暴直接\*\*pageViewCountListState.clear();\*\*导致前面几次排名信息中丢失第一名以外的数据 => 下面代码3-乱序数据代码改进 中解决问题*
+*由于**onTimer**简单粗暴直接**pageViewCountListState.clear();**导致前面几次排名信息中丢失第一名以外的数据 => 下面代码3-乱序数据代码改进 中解决问题*
 
 ```Plain Text
 data> ApacheLogEvent{ip='83.149.9.216', userId='-', timestamp=1431829549000, method='GET', url='/presentations/'}
@@ -8695,7 +8678,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 ===============================
 ```
 
-#### [代码3-乱序数据-代码改进](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%813-%E4%B9%B1%E5%BA%8F%E6%95%B0%E6%8D%AE-%E4%BB%A3%E7%A0%81%E6%94%B9%E8%BF%9B)
+#### [代码3-乱序数据-代码改进](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-%e4%b9%b1%e5%ba%8f%e6%95%b0%e6%8d%ae-%e4%bb%a3%e7%a0%81%e6%94%b9%e8%bf%9b)
 
 **一个数据只有不属于任何窗口了，才会被丢进侧输出流！**
 
@@ -8956,7 +8939,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 ===============================
 ```
 
-### [14.3.3 实时流量统计——PV和UV](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1433-%E5%AE%9E%E6%97%B6%E6%B5%81%E9%87%8F%E7%BB%9F%E8%AE%A1pv%E5%92%8Cuv)
+### [14.3.3 实时流量统计——PV和UV](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1433-%e5%ae%9e%e6%97%b6%e6%b5%81%e9%87%8f%e7%bb%9f%e8%ae%a1pv%e5%92%8cuv)
 
 * 基本需求
 * 从埋点日志中，统计实时的PV和UV
@@ -8964,7 +8947,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 * 统计埋点日志中的pv行为，利用Set数据结构进行去重
 * **对于超大规模的数据，可以考虑用布隆过滤器进行去重**
 
-#### [代码1-PV统计-基本实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-pv%E7%BB%9F%E8%AE%A1-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0)
+#### [代码1-PV统计-基本实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-pv%e7%bb%9f%e8%ae%a1-%e5%9f%ba%e6%9c%ac%e5%ae%9e%e7%8e%b0)
 
 * java代码
 
@@ -9050,7 +9033,7 @@ public class PageView {
 (pv,13)
 ```
 
-#### [代码2 PV统计-并行和数据倾斜优化](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-pv%E7%BB%9F%E8%AE%A1-%E5%B9%B6%E8%A1%8C%E5%92%8C%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C%E4%BC%98%E5%8C%96)
+#### [代码2 PV统计-并行和数据倾斜优化](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-pv%e7%bb%9f%e8%ae%a1-%e5%b9%b6%e8%a1%8c%e5%92%8c%e6%95%b0%e6%8d%ae%e5%80%be%e6%96%9c%e4%bc%98%e5%8c%96)
 
 * java代码
 
@@ -9228,7 +9211,7 @@ public class PageView {
 3> PageViewCount{url='pv', windowEnd=1511694000000, count=13}
 ```
 
-#### [代码3-UV统计-Set去重](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%813-uv%E7%BB%9F%E8%AE%A1-set%E5%8E%BB%E9%87%8D)
+#### [代码3-UV统计-Set去重](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-uv%e7%bb%9f%e8%ae%a1-set%e5%8e%bb%e9%87%8d)
 
 * java代码
 
@@ -9318,7 +9301,7 @@ PageViewCount{url='uv', windowEnd=1511690400000, count=32356}
 PageViewCount{url='uv', windowEnd=1511694000000, count=13}
 ```
 
-#### [代码4-UV统计-布隆过滤器](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%814-uv%E7%BB%9F%E8%AE%A1-%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8)
+#### [代码4-UV统计-布隆过滤器](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%814-uv%e7%bb%9f%e8%ae%a1-%e5%b8%83%e9%9a%86%e8%bf%87%e6%bb%a4%e5%99%a8)
 
 * pom依赖
 
@@ -9505,7 +9488,7 @@ PageViewCount{url='uv', windowEnd=1511661600000, count=7474}
 ...
 ```
 
-### [14.3.4 市场营销分析——APP市场推广统计](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1434-%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%88%86%E6%9E%90app%E5%B8%82%E5%9C%BA%E6%8E%A8%E5%B9%BF%E7%BB%9F%E8%AE%A1)
+### [14.3.4 市场营销分析——APP市场推广统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1434-%e5%b8%82%e5%9c%ba%e8%90%a5%e9%94%80%e5%88%86%e6%9e%90app%e5%b8%82%e5%9c%ba%e6%8e%a8%e5%b9%bf%e7%bb%9f%e8%ae%a1)
 
 * 基本需求
 * 从埋点日志中，统计APP市场推广的数据指标
@@ -9513,7 +9496,7 @@ PageViewCount{url='uv', windowEnd=1511661600000, count=7474}
 * 通过过滤日志中的用户行为，按照不同的渠道进行统计
 * 可以用process function处理，得到自定义的输出数据信息
 
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-2)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-2)
 
 * MarketingUserBehavior
 
@@ -9533,7 +9516,7 @@ private String windowEnd;
 private Long count;
 ```
 
-#### [代码1-自定义测试数据源](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E6%BA%90)
+#### [代码1-自定义测试数据源](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e8%87%aa%e5%ae%9a%e4%b9%89%e6%b5%8b%e8%af%95%e6%95%b0%e6%8d%ae%e6%ba%90)
 
 * java代码
 
@@ -9596,7 +9579,7 @@ public class AppMarketingByChannel {
 }
 ```
 
-#### [代码2-具体实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0)
+#### [代码2-具体实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0)
 
 * java代码
 
@@ -9753,7 +9736,7 @@ beans.ChannelPromotionCount{channel='app store', behavior='CLICK', windowEnd='20
 .....
 ```
 
-#### [代码3-不分渠道代码实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%813-%E4%B8%8D%E5%88%86%E6%B8%A0%E9%81%93%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
+#### [代码3-不分渠道代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-%e4%b8%8d%e5%88%86%e6%b8%a0%e9%81%93%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
 
 * java代码
 
@@ -9899,21 +9882,15 @@ beans.ChannelPromotionCount{channel='total', behavior='total', windowEnd='2021-0
 ....
 ```
 
-### [14.3.5 市场营销分析——页面广告统计](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1435-%E5%B8%82%E5%9C%BA%E8%90%A5%E9%94%80%E5%88%86%E6%9E%90%E9%A1%B5%E9%9D%A2%E5%B9%BF%E5%91%8A%E7%BB%9F%E8%AE%A1)
+### [14.3.5 市场营销分析——页面广告统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1435-%e5%b8%82%e5%9c%ba%e8%90%a5%e9%94%80%e5%88%86%e6%9e%90%e9%a1%b5%e9%9d%a2%e5%b9%bf%e5%91%8a%e7%bb%9f%e8%ae%a1)
 
 * 基本需求
 * 从埋点日志中，统计每小时页面广告的点击量，5秒刷新一次，并按照不同省份进行划分
 * 对于"刷单"式的频繁点击行为进行过滤，并将该用户加入黑名单\* 解决思路
 * 根据省份进行分组，创建长度为1小时、滑动距离为5秒的时间窗口进行统计
-* 可以用
+* 可以用`process function`进行黑名单过滤，检测用户对同一广告的点击量，如果超过上限则将用户信息以侧输出流输出到黑名单中
 
-```Plain Text
-process function
-```
-
-进行黑名单过滤，检测用户对同一广告的点击量，如果超过上限则将用户信息以侧输出流输出到黑名单中
-
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-3)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-3)
 
 * AdClickEvent
 
@@ -9933,7 +9910,7 @@ private Long adId;
 private String warningMsg;
 ```
 
-#### [代码1-基本实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0)
+#### [代码1-基本实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e5%9f%ba%e6%9c%ac%e5%ae%9e%e7%8e%b0)
 
 * java代码
 
@@ -10047,7 +10024,7 @@ beans.AdCountViewByProvince{province='shanghai', windowEnd='2017-11-26 09:20:00.
 ....
 ```
 
-#### [代码2-点击异常行为黑名单过滤](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-%E7%82%B9%E5%87%BB%E5%BC%82%E5%B8%B8%E8%A1%8C%E4%B8%BA%E9%BB%91%E5%90%8D%E5%8D%95%E8%BF%87%E6%BB%A4)
+#### [代码2-点击异常行为黑名单过滤](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e7%82%b9%e5%87%bb%e5%bc%82%e5%b8%b8%e8%a1%8c%e4%b8%ba%e9%bb%91%e5%90%8d%e5%8d%95%e8%bf%87%e6%bb%a4)
 
 * java代码
 
@@ -10257,7 +10234,7 @@ beans.AdCountViewByProvince{province='guangdong', windowEnd='2017-11-26 09:20:00
 ....
 ```
 
-### [14.3.6 恶意登录监控](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1436-%E6%81%B6%E6%84%8F%E7%99%BB%E5%BD%95%E7%9B%91%E6%8E%A7)
+### [14.3.6 恶意登录监控](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1436-%e6%81%b6%e6%84%8f%e7%99%bb%e5%bd%95%e7%9b%91%e6%8e%a7)
 
 * 基本需求
 * 用户在短时间内频繁登录失败，有程序恶意攻击的可能
@@ -10265,7 +10242,7 @@ beans.AdCountViewByProvince{province='guangdong', windowEnd='2017-11-26 09:20:00
 * 将用户的登录失败行为存入ListState，设定定时器2秒后出发，查看ListState中有几次失败登录
 * 更加精确的检测，可以使用CEP库实现事件流的模式匹配
 
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-4)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-4)
 
 * LoginEvent
 
@@ -10285,7 +10262,7 @@ private Long lastFailTime;
 private String warningMsg;
 ```
 
-#### [代码1-简单代码实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-%E7%AE%80%E5%8D%95%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
+#### [代码1-简单代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e7%ae%80%e5%8d%95%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
 
 * java代码
 
@@ -10417,7 +10394,7 @@ LoginFailWarning{userId=76456, firstFailTime=1558430859, lastFailTime=1558430859
 LoginFailWarning{userId=23565, firstFailTime=1558430862, lastFailTime=1558430862, warningMsg='login fail in 2s for 1 times'}
 ```
 
-#### [代码2-代码实效性改进](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%95%88%E6%80%A7%E6%94%B9%E8%BF%9B)
+#### [代码2-代码实效性改进](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e4%bb%a3%e7%a0%81%e5%ae%9e%e6%95%88%e6%80%a7%e6%94%b9%e8%bf%9b)
 
 * java代码
 
@@ -10596,7 +10573,7 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430843,
 LoginFailWarning{userId=1035, firstFailTime=1558430843, lastFailTime=1558430844, warningMsg='login fail 2 times in 2s'}
 ```
 
-#### [代码3-CEP代码实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%813-cep%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
+#### [代码3-CEP代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-cep%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
 
 * pom依赖
 
@@ -10708,7 +10685,7 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430843,
 LoginFailWarning{userId=1035, firstFailTime=1558430843, lastFailTime=1558430844, warningMsg='login fail 2 times'}
 ```
 
-#### [代码4-CEP利用循环模式优化](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%814-cep%E5%88%A9%E7%94%A8%E5%BE%AA%E7%8E%AF%E6%A8%A1%E5%BC%8F%E4%BC%98%E5%8C%96)
+#### [代码4-CEP利用循环模式优化](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%814-cep%e5%88%a9%e7%94%a8%e5%be%aa%e7%8e%af%e6%a8%a1%e5%bc%8f%e4%bc%98%e5%8c%96)
 
 * java代码
 
@@ -10798,7 +10775,7 @@ public class LoginFailWithCep {
 LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430844, warningMsg='login fail 3 times'}
 ```
 
-### [14.3.7 订单支付实时监控](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1437-%E8%AE%A2%E5%8D%95%E6%94%AF%E4%BB%98%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7)
+### [14.3.7 订单支付实时监控](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1437-%e8%ae%a2%e5%8d%95%e6%94%af%e4%bb%98%e5%ae%9e%e6%97%b6%e7%9b%91%e6%8e%a7)
 
 * 基本需求
 * 用户下单之后，应设置订单失效事件，以提高用户支付的意愿，并降低系统风险
@@ -10806,7 +10783,7 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430844,
 * 利用CEP库进行事件流的模式匹配，并设定匹配的时间间隔
 * 也可以利用状态编程，用process function实现处理逻辑
 
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-5)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-5)
 
 * OrderEvent
 
@@ -10832,7 +10809,7 @@ private String payChannel;
 private Long timestamp;
 ```
 
-#### [代码1-CEP代码实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-cep%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
+#### [代码1-CEP代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-cep%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
 
 * pom依赖
 
@@ -10994,7 +10971,7 @@ payed normally> OrderResult{orderId=34731, resultState='payed'}
 payed normally> OrderResult{orderId=34730, resultState='payed'}
 ```
 
-#### [代码2-ProcessFunction实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-processfunction%E5%AE%9E%E7%8E%B0)
+#### [代码2-ProcessFunction实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-processfunction%e5%ae%9e%e7%8e%b0)
 
 CEP虽然更加简洁，但是ProcessFunction能控制的细节操作更多。
 
@@ -11193,7 +11170,7 @@ timeout> OrderResult{orderId=34768, resultState='payed but not found created log
 timeout> OrderResult{orderId=34756, resultState='timeout'}
 ```
 
-### [14.3.8 订单支付实时对帐](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1438-%E8%AE%A2%E5%8D%95%E6%94%AF%E4%BB%98%E5%AE%9E%E6%97%B6%E5%AF%B9%E5%B8%90)
+### [14.3.8 订单支付实时对帐](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1438-%e8%ae%a2%e5%8d%95%e6%94%af%e4%bb%98%e5%ae%9e%e6%97%b6%e5%af%b9%e5%b8%90)
 
 * 基本需求
 * 用户下单并支付之后，应查询到账信息，进行实时对帐
@@ -11201,7 +11178,7 @@ timeout> OrderResult{orderId=34756, resultState='timeout'}
 * 从两条流中分别读取订单支付信息和到账信息，合并处理
 * 用connect连接合并两条流，用coProcessFunction做匹配处理
 
-#### [POJO](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-6)
+#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-6)
 
 * ReceiptEvent
 
@@ -11211,7 +11188,7 @@ private String payChannel;
 private Long timestamp;
 ```
 
-#### [代码1-具体实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%811-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0)
+#### [代码1-具体实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0)
 
 * java代码实现
 
@@ -11407,7 +11384,7 @@ unmatched-receipts> ReceiptEvent{txId='9032n4fd2', payChannel='wechat', timestam
 unmatched-pays> OrderEvent{orderId=34768, eventType='pay', txId='88snrn932', timestamp=1558430950}
 ```
 
-#### [代码2-Join实现](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%A3%E7%A0%812-join%E5%AE%9E%E7%8E%B0)
+#### [代码2-Join实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-join%e5%ae%9e%e7%8e%b0)
 
 **这种方法的缺陷，只能获得正常匹配的结果，不能获得未匹配成功的记录。**
 

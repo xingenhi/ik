@@ -1,3 +1,4 @@
+# InfluxDB
 # 01-InfluxDB
 
 InfluxDB是一个用Go语言编写的时间序列数据库，旨在处理高写入和查询负载。它是TICK堆栈的组成部分 。InfluxDB旨在用作涉及大量带时间戳数据的任何用例的后备存储，包括DevOps监控，应用程序指标，物联网传感器数据和实时分析。同时influxdb也是一个开源分布式时序、事件和指标数据库，无需外部依赖。类似的数据库有kdb、Graphite、es等。

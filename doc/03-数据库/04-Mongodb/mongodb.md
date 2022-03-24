@@ -1,6 +1,5 @@
-# 01Mongodb简介
-
 # Mongodb
+# 01Mongodb简介
 
 点赞、评论这两块可能操作起来比较频繁，并且，这两块的内容不怎么重要，因此可以用MongoDB
 
@@ -71,8 +70,6 @@ null：用于表示空值或者不存在的字段，{“x”:null}
 代码：查询和文档中可以包括任何JavaScript代码，{“x”:function(){/…/}}
 
 # 02常用命令
-
-# 常用命令
 
 ## 选择和创建数据库
 
@@ -188,8 +185,6 @@ Db.集合名称.update({\_id:1}, {\$inc:{readNum:NumberInt(2)}})
 
 # 03Java操作MongoDB
 
-# Java操作MongoDB
-
 SpringDataMongoDB：SpringData家族成员之一，使用jpa语法，非常方便的就可以操作MongoDB。
 
 环境搭建：
@@ -216,8 +211,6 @@ JPA语法
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.6194545816232591.png)
 
 # 04SpringDataMongoDB提高
-
-# SpringDataMongoDB提高
 
 SpringDataMongoDB在使用Jpa规范的时候，虽然已经很强大，但是依然有不能做的事情
 
