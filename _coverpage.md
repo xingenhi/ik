@@ -1,6 +1,6 @@
-[//]: # (![logo]&#40;_media/icon.svg&#41;)
+![logo](img/logo.png)
 
-# Xingenhi的个人知识库
+# Balloon Knowledge Base
 
 > 苦逼程序员的修炼历程
 
