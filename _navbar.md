@@ -1,3 +1,3 @@
 * [首页](/)
-* [我的](/doc/README.md)
+* [我的🎈](/README.md)
 * [链接](/link/README.md)
