@@ -36,7 +36,8 @@
     auto2top: true, //切换页面后是否自动跳转到页面顶部
     search: {
       //maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-      paths: "auto",
+      // 这个数组是执行脚本得到的，不需要人工修改，具体请查看 gulpfile.js
+      /*gulp*/paths: ["/README.md","/_coverpage.md","/_navbar.md","/link/README.md","/doc/03-数据库/01-Mybatis.md","/doc/03-数据库/02-MybatisPlus.md","/doc/03-数据库/03-MyCat.md","/doc/03-数据库/04-Oracle.md","/doc/03-数据库/05-Redis.md","/doc/03-数据库/06-mongoDB.md","/doc/03-数据库/07-InfluxDB.md","/doc/03-数据库/08-Zookeeper.md","/doc/04-分布式中间件/01-Dubbo.md","/doc/04-分布式中间件/02-ActiveMQ.md","/doc/04-分布式中间件/04-FastDFS.md","/doc/04-分布式中间件/03-Solr.md","/doc/07-大数据/01-Linux.md","/doc/07-大数据/02-Flink.md"],
       placeholder: "搜索",
       noData: "找不到结果",
       // 搜索标题的最大程级, 1 - 6
@@ -49,13 +50,20 @@
       bottom: 15,
       offset: 500
     },
+    // 字数统计
+    count: {
+      countable: true,
+      fontsize: "0.9em",
+      color: "rgb(90,90,90)",
+      language: "chinese",
+    },
   }
 </script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 <!--表情-->
 <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
 <!--搜索-->
-<script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+<script src="https://cdn.bootcss.com/docsify/4.5.9/plugins/search.min.js"></script>
 <!--图片缩放-->
 <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
 <!--代码复制-->
@@ -64,5 +72,7 @@
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/components/prism-java.min.js"></script>
 <!--返回顶部-->
 <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+<!-- 字数统计 -->
+<script src="//unpkg.com/docsify-count/dist/countable.js"></script>
 </body>
 </html>
