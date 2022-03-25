@@ -32,18 +32,18 @@ pom依赖
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-​
+
     <groupId>org.example</groupId>
     <artifactId>Flink_Tutorial</artifactId>
     <version>1.0-SNAPSHOT</version>
-​
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <flink.version>1.12.1</flink.version>
         <scala.binary.version>2.12</scala.binary.version>
     </properties>
-​
+
     <dependencies>
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -61,7 +61,7 @@ pom依赖
             <version>${flink.version}</version>
         </dependency>
     </dependencies>
-​
+
 </project>
 ```
 
@@ -73,7 +73,7 @@ import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
-​
+
 /**
  * @author : Ashiamd email: ashiamd@foxmail.com
  * @date : 2021/1/29 10:46 PM
@@ -83,24 +83,24 @@ public class WordCount {
   public static void main(String[] args) throws Exception {
     // 创建执行环境
     ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-​
+
     // 从文件中读取数据
     String inputPath = "/tmp/Flink_Tutorial/src/main/resources/hello.txt";
     DataSet<String> inputDataSet = env.readTextFile(inputPath);
-​
+
     // 对数据集进行处理，按空格分词展开，转换成(word, 1)二元组进行统计
     // 按照第一个位置的word分组
     // 按照第二个位置上的数据求和
     DataSet<Tuple2<String, Integer>> resultSet = inputDataSet.flatMap(new MyFlatMapper())
       .groupBy(0)
       .sum(1);
-​
+
     resultSet.print();
   }
-​
+
   // 自定义类，实现FlatMapFunction接口
   public static class MyFlatMapper implements FlatMapFunction<String, Tuple2<String, Integer>> {
-​
+
     @Override
     public void flatMap(String s, Collector<Tuple2<String, Integer>> out) throws Exception {
       // 按空格分词
@@ -111,7 +111,7 @@ public class WordCount {
       }
     }
   }
-​
+
 }
 ```
 
@@ -145,37 +145,37 @@ public class WordCount {
 
 ```Plain Text
 package wc;
-​
+
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.client.program.StreamContextEnvironment;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-​
+
 /**
  * @author : Ashiamd email: ashiamd@foxmail.com
  * @date : 2021/1/29 11:13 PM
  */
 public class StreamWordCount {
-​
+
     public static void main(String[] args) throws Exception {
-​
+
         // 创建流处理执行环境
         StreamExecutionEnvironment env = StreamContextEnvironment.getExecutionEnvironment();
-​
+
           // 设置并行度，默认值 = 当前计算机的CPU逻辑核数（设置成1即单线程处理）
         // env.setMaxParallelism(32);
-​
+
         // 从文件中读取数据
         String inputPath = "/tmp/Flink_Tutorial/src/main/resources/hello.txt";
         DataStream<String> inputDataStream = env.readTextFile(inputPath);
-​
+
         // 基于数据流进行转换计算
         DataStream<Tuple2<String,Integer>> resultStream = inputDataStream.flatMap(new WordCount.MyFlatMapper())
                 .keyBy(item->item.f0)
                 .sum(1);
-​
+
         resultStream.print();
-​
+
         // 执行任务
         env.execute();
     }
@@ -1795,7 +1795,7 @@ public class TransformTest4_MultipleStreams {
 
  在Storm中，我们常常用Bolt的层级关系来表示各个数据的流向关系，组成一个拓扑。
 
- 在Flink中，**Transformation算子就是将一个或多个DataStream转换为新的DataStream**，可以将多个转换组合成复杂的数据流拓扑。 ​ 如下图所示，DataStream会由不同的Transformation操作，转换、过滤、聚合成其他不同的流，从而完成我们的业务要求。
+ 在Flink中，**Transformation算子就是将一个或多个DataStream转换为新的DataStream**，可以将多个转换组合成复杂的数据流拓扑。  如下图所示，DataStream会由不同的Transformation操作，转换、过滤、聚合成其他不同的流，从而完成我们的业务要求。
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraqg3jmz3YWsKhr26mmmM3e8RyEbJAMIoq4UVwudXT8ew.png)
 
@@ -2984,18 +2984,18 @@ as indicated by the triangles.
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
-​
+
 ...
-​
+
 DataStream<Integer> orangeStream = ...
 DataStream<Integer> greenStream = ...
-​
+
 orangeStream
     .keyBy(<KeySelector>)
     .intervalJoin(greenStream.keyBy(<KeySelector>))
     .between(Time.milliseconds(-2), Time.milliseconds(1))
     .process (new ProcessJoinFunction<Integer, Integer, String(){
-​
+
         @Override
         public void processElement(Integer left, Integer right, Context ctx, Collector<String> out) {
             out.collect(first + "," + second);
@@ -3589,7 +3589,7 @@ result> 9.5
 // 3. 其他可选API
 OutputTag<SensorReading> outputTag = new OutputTag<SensorReading>("late") {
 };
-​
+
 SingleOutputStreamOperator<SensorReading> sumStream = dataStream.keyBy("id")
   .timeWindow(Time.seconds(15))
   //                .trigger() // 触发器，一般不使用 
@@ -3597,7 +3597,7 @@ SingleOutputStreamOperator<SensorReading> sumStream = dataStream.keyBy("id")
   .allowedLateness(Time.minutes(1)) // 允许1分钟内的迟到数据<=比如数据产生时间在窗口范围内，但是要处理的时候已经超过窗口时间了
   .sideOutputLateData(outputTag) // 侧输出流，迟到超过1分钟的数据，收集于此
   .sum("temperature"); // 侧输出流 对 温度信息 求和。
-​
+
 // 之后可以再用别的程序，把侧输出流的信息和前面窗口的信息聚合。（可以把侧输出流理解为用来批处理来补救处理超时数据）
 ```
 
@@ -4560,7 +4560,7 @@ jobmanager.execution.failover-strategy: region
 
 ```Plain Text
 package apitest.state;
-​
+
 import apitest.beans.SensorReading;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.time.Time;
@@ -4570,7 +4570,7 @@ import org.apache.flink.runtime.state.memory.MemoryStateBackend;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-​
+
 /**
  * @author : Ashiamd email: ashiamd@foxmail.com
  * @date : 2021/2/2 11:35 PM
@@ -4579,22 +4579,22 @@ public class StateTest4_FaultTolerance {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
-​
+
         // 1. 状态后端配置
         env.setStateBackend(new MemoryStateBackend());
         env.setStateBackend(new FsStateBackend("checkpointDataUri"));
         // 这个需要另外导入依赖
         env.setStateBackend(new RocksDBStateBackend("checkpointDataUri"));
-​
+
         // socket文本流
         DataStream<String> inputStream = env.socketTextStream("localhost", 7777);
-​
+
         // 转换成SensorReading类型
         DataStream<SensorReading> dataStream = inputStream.map(line -> {
             String[] fields = line.split(",");
             return new SensorReading(fields[0], new Long(fields[1]), new Double(fields[2]));
         });
-​
+
         dataStream.print();
         env.execute();
     }
@@ -6832,7 +6832,7 @@ WINDOW w AS (
 
 java代码
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 import apitest.beans.SensorReading;
@@ -6968,13 +6968,13 @@ sql> (true,sensor_1,2019-01-17T09:43:32,3,35.4)
 
 ```Plain Text
 public static class HashCode extends ScalarFunction {
-​
+
   private int factor = 13;
-​
+
   public HashCode(int factor) {
     this.factor = factor;
   }
-​
+
   public int eval(String id) {
     return id.hashCode() * 13;
   }
@@ -6985,7 +6985,7 @@ public static class HashCode extends ScalarFunction {
 
 ```Plain Text
 package apitest.tableapi.udf;
-​
+
 import apitest.beans.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -6993,7 +6993,7 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
-​
+
 /**
  * @author : Ashiamd email: ashiamd@foxmail.com
  * @date : 2021/2/4 3:28 AM
@@ -7004,49 +7004,49 @@ public class UdfTest1_ScalarFunction {
     StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
     // 并行度设置为1
     env.setParallelism(1);
-​
+
     // 创建Table执行环境
     StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);
-​
+
     // 1. 读取数据
     DataStream<String> inputStream = env.readTextFile("/tmp/Flink_Tutorial/src/main/resources/sensor.txt");
-​
+
     // 2. 转换成POJO
     DataStream<SensorReading> dataStream = inputStream.map(line -> {
       String[] fields = line.split(",");
       return new SensorReading(fields[0], new Long(fields[1]), new Double(fields[2]));
     });
-​
+
     // 3. 将流转换为表
     Table sensorTable = tableEnv.fromDataStream(dataStream, "id,timestamp as ts,temperature");
-​
+
     // 4. 自定义标量函数，实现求id的hash值
     HashCode hashCode = new HashCode(23);
     // 注册UDF
     tableEnv.registerFunction("hashCode", hashCode);
-​
+
     // 4.1 table API
     Table resultTable = sensorTable.select("id, ts, hashCode(id)");
-​
+
     // 4.2 SQL
     tableEnv.createTemporaryView("sensor", sensorTable);
     Table resultSqlTable = tableEnv.sqlQuery("select id, ts, hashCode(id) from sensor");
-​
+
     // 打印输出
     tableEnv.toAppendStream(resultTable, Row.class).print();
     tableEnv.toAppendStream(resultSqlTable, Row.class).print();
-​
+
     env.execute();
   }
-​
+
   public static class HashCode extends ScalarFunction {
-​
+
     private int factor = 13;
-​
+
     public HashCode(int factor) {
       this.factor = factor;
     }
-​
+
     public int eval(String id) {
       return id.hashCode() * 13;
     }
@@ -7406,21 +7406,21 @@ import org.apache.flink.table.api.scala._
 import org.apache.flink.table.functions.TableAggregateFunction
 import org.apache.flink.types.Row
 import org.apache.flink.util.Collector
-​
+
 object TableAggregateFunctionTest {
   def main(args: Array[String]): Unit = {
-​
+
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
-​
+
     // 开启事件时间语义
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
-​
+
     // 创建表环境
     val tableEnv: StreamTableEnvironment = StreamTableEnvironment.create(env)
-​
+
     val inputDStream: DataStream[String] = env.readTextFile("D:\\MyWork\\WorkSpaceIDEA\\flink-tutorial\\src\\main\\resources\\SensorReading.txt")
-​
+
     val dataDStream: DataStream[SensorReading] = inputDStream.map(
       data => {
         val dataArray: Array[String] = data.split(",")
@@ -7430,26 +7430,26 @@ object TableAggregateFunctionTest {
                                    ( Time.seconds(1) ) {
                                      override def extractTimestamp(element: SensorReading): Long = element.timestamp * 1000L
                                    } )
-​
+
     // 用proctime定义处理时间
     val dataTable: Table = tableEnv
     .fromDataStream(dataDStream, 'id, 'temperature, 'timestamp.rowtime as 'ts)
-​
+
     // 使用自定义的hash函数，求id的哈希值
     val myAggTabTemp = MyAggTabTemp()
-​
+
     // 查询 Table API 方式
     val resultTable: Table = dataTable
     .groupBy('id)
     .flatAggregate( myAggTabTemp('temperature) as ('temp, 'rank) )
     .select('id, 'temp, 'rank)
-​
-​
+
+
     // SQL调用方式，首先要注册表
     tableEnv.createTemporaryView("dataTable", dataTable)
     // 注册函数
     tableEnv.registerFunction("myAggTabTemp", myAggTabTemp)
-​
+
     /*
     val resultSqlTable: Table = tableEnv.sqlQuery(
       """
@@ -7458,28 +7458,28 @@ object TableAggregateFunctionTest {
         |group by id
         |""".stripMargin)
 */
-​
-​
+
+
     // 测试输出
     resultTable.toRetractStream[ Row ].print( "scalar" )
     //resultSqlTable.toAppendStream[ Row ].print( "scalar_sql" )
     // 查看表结构
     dataTable.printSchema()
-​
+
     env.execute(" table ProcessingTime test job")
   }
 }
-​
+
 // 自定义状态类
 case class AggTabTempAcc() {
   var highestTemp: Double = Double.MinValue
   var secondHighestTemp: Double = Double.MinValue
 }
-​
+
 case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTempAcc]{
   // 初始化状态
   override def createAccumulator(): AggTabTempAcc = new AggTabTempAcc()
-​
+
   // 每来一个数据后，聚合计算的操作
   def accumulate( acc: AggTabTempAcc, temp: Double ): Unit ={
     // 将当前温度值，跟状态中的最高温和第二高温比较，如果大的话就替换
@@ -7491,7 +7491,7 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
       acc.secondHighestTemp = temp
     }
   }
-​
+
   // 实现一个输出数据的方法，写入结果表中
   def emitValue( acc: AggTabTempAcc, out: Collector[(Double, Int)] ): Unit ={
     out.collect((acc.highestTemp, 1))
@@ -11721,7 +11721,7 @@ public OUT select(Map<String, List<IN>> pattern) throws Exception {
 ```Plain Text
 PatternStream<Event> patternStream = CEP.pattern(input, pattern);
 OutputTag<String> outputTag = new OutputTag<String>("side-output"){};
-​
+
 SingleOutputStreamOperator<ComplexEvent> flatResult = 
   patternStream.flatSelect(
   outputTag,
