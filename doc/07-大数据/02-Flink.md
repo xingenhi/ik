@@ -6328,14 +6328,14 @@ System.out.println(explaination);
 
 * **这个proctime属性只能通过附加逻辑字段，来扩展物理schema。因此，只能在schema定义的末尾定义它**
 
-```Plain Text
+```java
 Table sensorTable = tableEnv.fromDataStream(dataStream,
                                            "id, temperature, pt.proctime");
 ```
 
 ### [定义Table Schema时指定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%AE%9A%E4%B9%89table-schema%E6%97%B6%E6%8C%87%E5%AE%9A)
 
-```Plain Text
+```java
 .withSchema(new Schema()
             .field("id", DataTypes.STRING())
             .field("timestamp",DataTypes.BIGINT())
@@ -6347,7 +6347,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
 
 ### [创建表的DDL中定义](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84ddl%E4%B8%AD%E5%AE%9A%E4%B9%89)
 
-```Plain Text
+```java
 String sinkDDL = 
   "create table dataTable (" +
   " id varchar(20) not null, " +
@@ -6363,7 +6363,7 @@ tableEnv.sqlUpdate(sinkDDL);
 
 ### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-6)
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 import apitest.beans.SensorReading;
@@ -6442,7 +6442,7 @@ sensor_1,1547718212,37.1,2021-02-03T16:50:58.051
 * 由DataStream转换成表时指定（推荐）
 * 在DataStream转换成Table，使用`.rowtime`可以定义事件事件属性
 
-```Plain Text
+```java
 // 将DataStream转换为Table，并指定时间字段
 Table sensorTable = tableEnv.fromDataStream(dataStream,
                                            "id, timestamp.rowtime, temperature");
@@ -6453,7 +6453,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
 
 ### [定义Table Schema时指定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%AE%9A%E4%B9%89table-schema%E6%97%B6%E6%8C%87%E5%AE%9A-1)
 
-```Plain Text
+```java
 .withSchema(new Schema()
             .field("id", DataTypes.STRING())
             .field("timestamp",DataTypes.BIGINT())
@@ -6468,7 +6468,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
 
 ### [创建表的DDL中定义](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84ddl%E4%B8%AD%E5%AE%9A%E4%B9%89-1)
 
-```Plain Text
+```java
 String sinkDDL = 
   "create table dataTable (" +
   " id varchar(20) not null, " +
@@ -6485,7 +6485,7 @@ tableEnv.sqlUpdate(sinkDDL);
 
 ### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-7)
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 import apitest.beans.SensorReading;
@@ -6575,7 +6575,7 @@ sensor_1,1547718212,37.1,2019-01-17T09:43:32
 * Group Windows 是使用 window（w:GroupWindow）子句定义的，并且**必须由as子句指定一个别名**。
 * 为了按窗口对表进行分组，窗口的别名必须在 group by 子句中，像常规的分组字段一样引用
 
-```Plain Text
+```java
 Table table = input
 .window([w:GroupWindow] as "w") // 定义窗口，别名为w
 .groupBy("w, a") // 按照字段 a和窗口 w分组
@@ -6584,15 +6584,16 @@ Table table = input
 
 * Table API 提供了一组具有特定语义的预定义 Window 类，这些类会被转换为底层 DataStream 或 DataSet 的窗口操作
 * 分组窗口分为三种：
-* 滚动窗口
-* 滑动窗口
-* 会话窗口
+  * 滚动窗口
+  * 滑动窗口
+  * 会话窗口
+
 
 #### [滚动窗口(Tumbling windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3tumbling-windows-1)
 
 * 滚动窗口（Tumbling windows）要用Tumble类来定义
 
-```Plain Text
+```java
 // Tumbling Event-time Window（事件时间字段rowtime）
 .window(Tumble.over("10.minutes").on("rowtime").as("w"))
 
@@ -6611,7 +6612,7 @@ Table table = input
 
 * 滑动窗口（Sliding windows）要用Slide类来定义
 
-```Plain Text
+```java
 // Sliding Event-time Window
 .window(Slide.over("10.minutes").every("5.minutes").on("rowtime").as("w"))
 
@@ -6631,7 +6632,7 @@ Table table = input
 
 * 会话窗口（Session windows）要用Session类来定义
 
-```Plain Text
+```java
 // Session Event-time Window
 .window(Session.withGap("10.minutes").on("rowtime").as("w"))
 
@@ -6648,13 +6649,18 @@ Table table = input
 Group Windows定义在SQL查询的Group By子句中
 
 * TUMBLE(time\_attr, interval)
-* 定义一个滚动窗口，每一个参数是时间字段，第二个参数是窗口长度\* HOP(time\_attr，interval，interval)
-* 定义一个滑动窗口，第一个参数是时间字段，**第二个参数是窗口滑动步长，第三个是窗口长度**\* SESSION(time\_attr，interval)
-* 定义一个绘画窗口，第一个参数是时间字段，第二个参数是窗口间隔
+  * 定义一个滚动窗口，每一个参数是时间字段，第二个参数是窗口长度
+
+* HOP(time\_attr，interval，interval)
+  * 定义一个滑动窗口，第一个参数是时间字段，**第二个参数是窗口滑动步长，第三个是窗口长度**
+
+* SESSION(time\_attr，interval)
+  * 定义一个绘画窗口，第一个参数是时间字段，第二个参数是窗口间隔
+
 
 #### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-8)
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 import apitest.beans.SensorReading;
@@ -6759,7 +6765,7 @@ sql> (true,sensor_1,1,37.1,2019-01-17T09:43:40)
 * Over window 聚合，会**针对每个输入行**，计算相邻行范围内的聚合
 * Over windows 使用 window（w:overwindows\*）子句定义，并在 select（）方法中通过**别名**来引用
 
-```Plain Text
+```java
 Table table = input
 .window([w: OverWindow] as "w")
 .select("a, b.sum over w, c.min over w");
@@ -6772,7 +6778,7 @@ Table table = input
 * 可以在事件时间或处理时间，以及指定为时间间隔、或行计数的范围内，定义 Over windows
 * 无界的 over window 是使用常量指定的
 
-```Plain Text
+```java
 // 无界的事件时间over window (时间字段 "rowtime")
 .window(Over.partitionBy("a").orderBy("rowtime").preceding(UNBOUNDED_RANGE).as("w"))
 
@@ -6792,7 +6798,7 @@ Table table = input
 
 * 有界的over window是用间隔的大小指定的
 
-```Plain Text
+```java
 // 有界的事件时间over window (时间字段 "rowtime"，之前1分钟)
 .window(Over.partitionBy("a").orderBy("rowtime").preceding("1.minutes").as("w"))
 
@@ -6812,7 +6818,7 @@ Table table = input
 * 目前仅支持在当前行范围之前的窗口
 * ORDER BY 必须在单一的时间属性上指定
 
-```Plain Text
+```sql
 SELECT COUNT(amount) OVER (
   PARTITION BY user
   ORDER BY proctime
