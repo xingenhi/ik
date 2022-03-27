@@ -6949,7 +6949,7 @@ sql> (true,sensor_1,2019-01-17T09:43:32,3,35.4)
 
 * 用户定义函数（User-defined Functions，UDF）是一个重要的特性，它们显著地扩展了查询的表达能力
 
-*一些系统内置函数无法解决的需求，我们可以用UDF来自定义实现*
+​	*一些系统内置函数无法解决的需求，我们可以用UDF来自定义实现*
 
 * **在大多数情况下，用户定义的函数必须先注册，然后才能在查询中使用**
 * 函数通过调用 `registerFunction()`方法在 TableEnvironment 中注册。当用户定义的函数被注册时，它被插入到 TableEnvironment 的函数目录中，这样Table API 或 SQL 解析器就可以识别并正确地解释它
@@ -6964,9 +6964,9 @@ sql> (true,sensor_1,2019-01-17T09:43:32,3,35.4)
 
 * 用户定义的标量函数，可以将0、1或多个标量值，映射到新的标量值
 * 为了定义标量函数，必须在 org.apache.flink.table.functions 中扩展基类Scalar Function，并实现（一个或多个）求值（eval）方法
-* **标量函数的行为由求值方法决定，求值方法必须public公开声明并命名为 eval**
+* **标量函数的行为由求值方法决定，求值方法必须public公开声明并命名为 `eval`**
 
-```Plain Text
+```java
 public static class HashCode extends ScalarFunction {
 
   private int factor = 13;
@@ -6983,7 +6983,7 @@ public static class HashCode extends ScalarFunction {
 
 #### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-10)
 
-```Plain Text
+```java
 package apitest.tableapi.udf;
 
 import apitest.beans.SensorReading;
@@ -7228,48 +7228,24 @@ sql> sensor_1,1547718212,1,1
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraAv9ITeh3L4NDqVxdnb8EoFR14IIgBdGDnTy-UFrCY6k.png)
 
-* AggregationFunction要求必须实现的方法
+* AggregationFunction要求必须实现的方法：
+  * `createAccumulator()`
+  *  `accumulate() `
+  * `getValue()`
 
-```Plain Text
-createAccumulator()
-```
-
-```Plain Text
-accumulate()
-```
-
-```Plain Text
-getValue()
-```
 
 * AggregateFunction 的工作原理如下：
-* 首先，它需要一个累加器（Accumulator），用来保存聚合中间结果的数据结构；可以通过调用 
 
-```Plain Text
-createAccumulator()
-```
+  * 首先，它需要一个累加器（Accumulator），用来保存聚合中间结果的数据结构；可以通过调用 `createAccumulator()`方法创建空累加器
 
- 方法创建空累加器
+  * 随后，对每个输入行调用函数的 `accumulate()`方法来更新累加器
 
-* 随后，对每个输入行调用函数的 
+  * 处理完所有行后，将调用函数的 `getValue()`方法来计算并返回最终结果
 
-```Plain Text
-accumulate()
-```
-
- 方法来更新累加器
-
-* 处理完所有行后，将调用函数的 
-
-```Plain Text
-getValue()
-```
-
- 方法来计算并返回最终结果
 
 #### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-12)
 
-```Plain Text
+```java
 package apitest.tableapi.udf;
 
 import apitest.beans.SensorReading;
@@ -7382,20 +7358,26 @@ sql> (true,sensor_1,35.5)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora87uEyp7NFAThZ5iHxSGKgca9iX56Uq4x5ALo2kkjdds.png)
 
-* AggregationFunction 要求必须实现的方法：`createAccumulator()` 、`accumulate()`、`emitValue()`
+* AggregationFunction 要求必须实现的方法：
+  * `createAccumulator()` 
+
+  * `accumulate()`
+
+  * `emitValue()`
 
 * TableAggregateFunction 的工作原理如下：
-* 首先，它同样需要一个累加器（Accumulator），它是保存聚合中间结果的数据结构。通过调用 `createAccumulator()`方法可以创建空累加器。
+  * 首先，它同样需要一个累加器（Accumulator），它是保存聚合中间结果的数据结构。通过调用 `createAccumulator()`方法可以创建空累加器。
 
-* 随后，对每个输入行调用函数的`accumulate()`方法来更新累加器。
+  * 随后，对每个输入行调用函数的`accumulate()`方法来更新累加器。
 
-* 处理完所有行后，将调用函数的`emitValue()`方法来计算并返回最终结果。
+  * 处理完所有行后，将调用函数的`emitValue()`方法来计算并返回最终结果。
+
 
 #### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-13)
 
 > [Flink-函数 | 用户自定义函数（UDF）标量函数 | 表函数 | 聚合函数 | 表聚合函数](https://blog.csdn.net/qq_40180229/article/details/106482550)
 
-```Plain Text
+```java
 import com.atguigu.bean.SensorReading
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
@@ -7509,6 +7491,8 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * 数据源解析
 * 项目模块划分
 
+![image-20220326142835492](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraimage-20220326142835492.png)
+
 ## [14.1 批处理和流处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_141-%e6%89%b9%e5%a4%84%e7%90%86%e5%92%8c%e6%b5%81%e5%a4%84%e7%90%86)
 
 ### [批处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%89%b9%e5%a4%84%e7%90%86)
@@ -7540,12 +7524,17 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorayD2LhRzChwozk2gRMmbI0ytPHoNVcTUmAze9Eq1-CKM.png)
 
 * 统计分析
-* 点击、浏览
-* 热门商品、近期热门商品、分类热门商品，流量统计\* 偏好统计
-* 收藏、喜欢、评分、打标签
-* 用户画像，推荐列表（结合特征工程和机器学习算法）\* 风险控制
-* 下订单、支付、登录
-* 刷单监控，订单失效监控，恶意登录（短时间内频繁登录失败）监控
+  * 点击、浏览
+  * 热门商品、近期热门商品、分类热门商品，流量统计
+
+* 偏好统计
+  * 收藏、喜欢、评分、打标签
+  * 用户画像，推荐列表（结合特征工程和机器学习算法）
+
+* 风险控制
+  * 下订单、支付、登录
+  * 刷单监控，订单失效监控，恶意登录（短时间内频繁登录失败）监控
+
 
 ### [项目模块设计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e9%a1%b9%e7%9b%ae%e6%a8%a1%e5%9d%97%e8%ae%be%e8%ae%a1)
 
@@ -7636,18 +7625,20 @@ public void apply(Tuple tuple, TimeWindow window,
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora6kp_2Zx3Se88tmj-kgGqyCRPanTPOfYAyOekV998Wt8.png)
 
 * **最终排序输出——keyedProcessFunction**
-* 针对有状态流的底层API
-* KeyedProcessFunction会对分区后的每一条子流进行处理
-* 以windowEnd作为key，保证分流以后每一条流的数据都在一个时间窗口内
-* 从ListState中读取当前流的状态，存储数据进行排序输出
+  * 针对有状态流的底层API
+  * KeyedProcessFunction会对分区后的每一条子流进行处理
+  * 以windowEnd作为key，保证分流以后每一条流的数据都在一个时间窗口内
+  * 从ListState中读取当前流的状态，存储数据进行排序输出
+
 
 ---
 
 * 用ProcessFunction定义KeyedStream的处理逻辑
 * 分区之后，每个KeyedStream都有其自己的生命周期
-* open：初始化，在这里可以获取当前流的状态
-* processElement：处理流中每一个元素时调用
-* onTimer：定时调用，注册定时器Timer并触发之后的回调操作
+  * open：初始化，在这里可以获取当前流的状态
+  * processElement：处理流中每一个元素时调用
+  * onTimer：定时调用，注册定时器Timer并触发之后的回调操作
+
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorapa6G_N9u3d3YwXandihsdPWA8U9UVgCVSHjDgoOliAQ.png)
 
@@ -7677,7 +7668,7 @@ private Long timestamp;
 
 * 父pom依赖
 
-```Plain Text
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7751,7 +7742,7 @@ private Long timestamp;
 
 * java代码
 
-```Plain Text
+```java
 import beans.ItemViewCount;
 import beans.UserBehavior;
 import org.apache.commons.compress.utils.Lists;
@@ -7969,7 +7960,7 @@ NO 5: 商品ID = 2364679 热门度 = 12
 
 * java代码
 
-```Plain Text
+```java
 // 仅修改 获取数据源的部分
 
 // 2. 从csv文件中获取数据
@@ -8035,7 +8026,7 @@ NO 3: 商品ID = 3611281 热门度 = 1
 
 * java代码
 
-```Plain Text
+```java
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -8087,7 +8078,7 @@ public class KafkaProducerUtil {
 
 **下面用最新的Expression写法实现<=新版本推荐的写法**
 
-```Plain Text
+```java
 import beans.UserBehavior;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -8208,16 +8199,19 @@ public class HotItemsWithSql {
 ### [14.3.2 实时流量统计——热门页面](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1432-%e5%ae%9e%e6%97%b6%e6%b5%81%e9%87%8f%e7%bb%9f%e8%ae%a1%e7%83%ad%e9%97%a8%e9%a1%b5%e9%9d%a2)
 
 * 基本需求
-* 从web服务器的日志中，统计实时的热门访问页面
-* 统计每分钟的ip访问量，取出访问量最大的5个地址，每5秒更新一次\* 解决思路1
-* 将apache服务器日志中的时间，转换为时间戳，作为Event Time
-* 构建滑动窗口，窗口长度为1分钟，滑动距离为5秒
+  * 从web服务器的日志中，统计实时的热门访问页面
+  * 统计每分钟的ip访问量，取出访问量最大的5个地址，每5秒更新一次
+
+* 解决思路
+  * 将apache服务器日志中的时间，转换为时间戳，作为Event Time
+  * 构建滑动窗口，窗口长度为1分钟，滑动距离为5秒
+
 
 #### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-1)
 
 * ApacheLogEvent
 
-```Plain Text
+```java
 private String ip;
 private String userId;
 private Long timestamp;
@@ -8227,7 +8221,7 @@ private String url;
 
 * PageViewCount
 
-```Plain Text
+```java
 private String url;
 private Long windowEnd;
 private Long count;
@@ -8237,7 +8231,7 @@ private Long count;
 
 * Java代码
 
-```Plain Text
+```java
 import beans.ApacheLogEvent;
 import beans.PageViewCount;
 import org.apache.commons.compress.utils.Lists;
@@ -8433,7 +8427,7 @@ NO 3: 页面URL = /blog/geekery/eventdb-ideas.html 浏览量 = 1
 
 * java代码
 
-```Plain Text
+```java
 import beans.ApacheLogEvent;
 import beans.PageViewCount;
 import org.apache.commons.compress.utils.Lists;
@@ -8945,7 +8939,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 * 从埋点日志中，统计实时的PV和UV
 * 统计每小时的访问量（PV），并且对用户进行去重（UV）\* 解决思路
 * 统计埋点日志中的pv行为，利用Set数据结构进行去重
-* **对于超大规模的数据，可以考虑用布隆过滤器进行去重**
+* 对于超大规模的数据，可以考虑用**布隆过滤器**进行去重
 
 #### [代码1-PV统计-基本实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-pv%e7%bb%9f%e8%ae%a1-%e5%9f%ba%e6%9c%ac%e5%ae%9e%e7%8e%b0)
 
@@ -9491,10 +9485,13 @@ PageViewCount{url='uv', windowEnd=1511661600000, count=7474}
 ### [14.3.4 市场营销分析——APP市场推广统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1434-%e5%b8%82%e5%9c%ba%e8%90%a5%e9%94%80%e5%88%86%e6%9e%90app%e5%b8%82%e5%9c%ba%e6%8e%a8%e5%b9%bf%e7%bb%9f%e8%ae%a1)
 
 * 基本需求
-* 从埋点日志中，统计APP市场推广的数据指标
-* 按照不同的推广渠道，分别统计数据\* 解决思路
-* 通过过滤日志中的用户行为，按照不同的渠道进行统计
-* 可以用process function处理，得到自定义的输出数据信息
+  * 从埋点日志中，统计APP市场推广的数据指标
+  * 按照不同的推广渠道，分别统计数据
+
+* 解决思路
+  * 通过过滤日志中的用户行为，按照不同的渠道进行统计
+  * 可以用process function处理，得到自定义的输出数据信息
+
 
 #### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-2)
 
@@ -9885,10 +9882,13 @@ beans.ChannelPromotionCount{channel='total', behavior='total', windowEnd='2021-0
 ### [14.3.5 市场营销分析——页面广告统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1435-%e5%b8%82%e5%9c%ba%e8%90%a5%e9%94%80%e5%88%86%e6%9e%90%e9%a1%b5%e9%9d%a2%e5%b9%bf%e5%91%8a%e7%bb%9f%e8%ae%a1)
 
 * 基本需求
-* 从埋点日志中，统计每小时页面广告的点击量，5秒刷新一次，并按照不同省份进行划分
-* 对于"刷单"式的频繁点击行为进行过滤，并将该用户加入黑名单\* 解决思路
-* 根据省份进行分组，创建长度为1小时、滑动距离为5秒的时间窗口进行统计
-* 可以用`process function`进行黑名单过滤，检测用户对同一广告的点击量，如果超过上限则将用户信息以侧输出流输出到黑名单中
+  * 从埋点日志中，统计每小时页面广告的点击量，5秒刷新一次，并按照不同省份进行划分
+  * 对于"刷单"式的频繁点击行为进行过滤，并将该用户加入黑名单
+
+* 解决思路
+  * 根据省份进行分组，创建长度为1小时、滑动距离为5秒的时间窗口进行统计
+  * 可以用`process function`进行黑名单过滤，检测用户对同一广告的点击量，如果超过上限则将用户信息以侧输出流输出到黑名单中
+
 
 #### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-3)
 
@@ -10237,10 +10237,13 @@ beans.AdCountViewByProvince{province='guangdong', windowEnd='2017-11-26 09:20:00
 ### [14.3.6 恶意登录监控](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1436-%e6%81%b6%e6%84%8f%e7%99%bb%e5%bd%95%e7%9b%91%e6%8e%a7)
 
 * 基本需求
-* 用户在短时间内频繁登录失败，有程序恶意攻击的可能
-* 同一用户（可以是不同IP）在2秒内连续两次登录失败，需要报警\* 解决思路
-* 将用户的登录失败行为存入ListState，设定定时器2秒后出发，查看ListState中有几次失败登录
-* 更加精确的检测，可以使用CEP库实现事件流的模式匹配
+  * 用户在短时间内频繁登录失败，有程序恶意攻击的可能
+  * 同一用户（可以是不同IP）在2秒内连续两次登录失败，需要报警
+
+* 解决思路
+  * 将用户的登录失败行为存入ListState，设定定时器2秒后出发，查看ListState中有几次失败登录
+  * 更加精确的检测，可以使用CEP库实现事件流的模式匹配
+
 
 #### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-4)
 
@@ -10778,10 +10781,13 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430844,
 ### [14.3.7 订单支付实时监控](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1437-%e8%ae%a2%e5%8d%95%e6%94%af%e4%bb%98%e5%ae%9e%e6%97%b6%e7%9b%91%e6%8e%a7)
 
 * 基本需求
-* 用户下单之后，应设置订单失效事件，以提高用户支付的意愿，并降低系统风险
-* 用户下单后15分钟未支付，则输出监控信息\* 解决思路
-* 利用CEP库进行事件流的模式匹配，并设定匹配的时间间隔
-* 也可以利用状态编程，用process function实现处理逻辑
+  * 用户下单之后，应设置订单失效事件，以提高用户支付的意愿，并降低系统风险
+  * 用户下单后15分钟未支付，则输出监控信息
+
+* 解决思路
+  * 利用CEP库进行事件流的模式匹配，并设定匹配的时间间隔
+  * 也可以利用状态编程，用process function实现处理逻辑
+
 
 #### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-5)
 
@@ -11173,10 +11179,13 @@ timeout> OrderResult{orderId=34756, resultState='timeout'}
 ### [14.3.8 订单支付实时对帐](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1438-%e8%ae%a2%e5%8d%95%e6%94%af%e4%bb%98%e5%ae%9e%e6%97%b6%e5%af%b9%e5%b8%90)
 
 * 基本需求
-* 用户下单并支付之后，应查询到账信息，进行实时对帐
-* 如果有不匹配的支付信息或者到账信息，输出提示信息\* 解决思路
-* 从两条流中分别读取订单支付信息和到账信息，合并处理
-* 用connect连接合并两条流，用coProcessFunction做匹配处理
+  * 用户下单并支付之后，应查询到账信息，进行实时对帐
+  * 如果有不匹配的支付信息或者到账信息，输出提示信息
+
+* 解决思路
+  * 从两条流中分别读取订单支付信息和到账信息，合并处理
+  * 用connect连接合并两条流，用coProcessFunction做匹配处理
+
 
 #### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-6)
 
@@ -11503,7 +11512,7 @@ public class TxPayMatchByJoin {
 
 ### [15.1.2 CEP特点](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1512-cep%E7%89%B9%E7%82%B9)
 
-![image](C:/Users/18364/Downloads/images/cLYxP0Go7mR8d8Vrs0rXpJ8261LoQTK8TOxgJsishYU.jpeg)
+![img](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorav2-1c7057bda8a3ba077a3b8059f35d9bc4_1440w.jpg)
 
 * 目标：从有序的简单事件流中发现一些高阶特征
 * 输入：一个或多个由简单事件构成的事件流
@@ -11560,13 +11569,14 @@ start.timesOrMore(2),optional.greedy
 ```
 
 * 条件（Condition）
-* **每个模式都需要指定触发条件**，作为模式是否接受事件进入的判断依据
-* CEP中的个体模式主要通过调用`.where()`，`.or()`和`.until()`来指定条件
+  * **每个模式都需要指定触发条件**，作为模式是否接受事件进入的判断依据
+  * CEP中的个体模式主要通过调用`.where()`，`.or()`和`.until()`来指定条件
 
-* 按不同的调用方式，可以分成以下几类
-* 简单条件（Simple Condition）
+  * 按不同的调用方式，可以分成以下几类
+    * 简单条件（Simple Condition）
 
-通过`.where()`方法对事件中的字段进行判断筛选，决定是否接受该事件
+
+​				通过`.where()`方法对事件中的字段进行判断筛选，决定是否接受该事件
 
 ```Plain Text
 start.where(new SimpleCondition<Event>){
@@ -11579,13 +11589,7 @@ start.where(new SimpleCondition<Event>){
 
 * 组合条件（Combining Condition）
 
-将简单条件进行合并；
-
-```Plain Text
-.or()
-```
-
-方法表示或逻辑相连，where的直接组合就是AND
+将简单条件进行合并；`.or()`方法表示或逻辑相连，where的直接组合就是AND
 
 ```Plain Text
 pattern.where(event => ... /* some condition */).or(event => ... /* or condition */)
@@ -11612,60 +11616,40 @@ pattern.where(event => ... /* some condition */).or(event => ... /* or condition
 Pattern<Event, Event> start = Pattern.<Event>begin("start")
 ```
 
-![image](C:/Users/18364/Downloads/images/aSSDcvCLM8Txe2ViDaLvuEQqBVrLiUhasgA78CZ0Qfg.png)
+![在这里插入图片描述](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora20200526221919332.png)
 
 * 严格近邻(Strict Contiguity)
-* **所有事件按照严格的顺序出现**，中间没有任何不匹配的事件，由
 
-```Plain Text
-.next()
-```
+  * **所有事件按照严格的顺序出现**，中间没有任何不匹配的事件，由`.next()`指定
 
-指定
+  * 例如对于模式"a next b",事件序列\[a,c,b1,b2\]没有匹配
 
-* 例如对于模式"a next b",事件序列\[a,c,b1,b2\]没有匹配\* 宽松近邻(Relaxed Contiguity)
-* 允许中间出现不匹配的事件,由
+* 宽松近邻(Relaxed Contiguity)
 
-```Plain Text
-.followedBy()
-```
+  * 允许中间出现不匹配的事件,由`.followedBy()`指定
 
-指定
+  * 例如对于模式"a followedBy b",事件序列\[a,c,b1,b2\]匹配为\[a,b1\]
 
-* 例如对于模式"a followedBy b",事件序列\[a,c,b1,b2\]匹配为\[a,b1\]\* 非确定性宽松近邻(Non-Deterministic Relaxed Contiguity)
-* 进一步放宽条件,之前已经匹配过的事件也可以再次使用，由
+* 非确定性宽松近邻(Non-Deterministic Relaxed Contiguity)
 
-```Plain Text
-.followByAny()
-```
+  * 进一步放宽条件,之前已经匹配过的事件也可以再次使用，由`.followByAny()`指定
 
-指定
+  * 例如对于模式"a followedAny b",事件序列\[a,c,b1,b2\]匹配为{a,b1},{a,b2}
 
-* 例如对于模式"a followedAny b",事件序列\[a,c,b1,b2\]匹配为{a,b1},{a,b2}\* 除了以上模式序列外,还可以定义"不希望出现某种近邻关系":
+* 除了以上模式序列外,还可以定义"不希望出现某种近邻关系":
 
-```Plain Text
-.notNext()
-```
+  *  `.notNext()`不严格近邻
+  * `.notFollowedBy()`不在两个事件之间发生
 
-不严格近邻
 
-```Plain Text
-.notFollowedBy()
-```
-
-不在两个事件之间发生
-
-（eg，a not FollowedBy c，a Followed By b，a希望之后出现b，且不希望ab之间出现c）
+​			（eg，a not FollowedBy c，a Followed By b，a希望之后出现b，且不希望ab之间出现c）
 
 * 需要注意：
-* **所有模式序列必须以\***\*.begin()开始\*\*
-* **模式序列不能以\***\*.notFollowedBy()结束\*\*
-* **"not "类型的模式不能被optional 所修饰**
-* 此外,还可以为模式指定事件约束，用来要求在多长时间内匹配有效:
+  * **所有模式序列必须以\***\*.begin()开始\*\*
+  * **模式序列不能以\***\*.notFollowedBy()结束\*\*
+  * **"not "类型的模式不能被optional 所修饰**
+  * 此外,还可以为模式指定事件约束，用来要求在多长时间内匹配有效:  `next.within(Time.seconds(10))`
 
-```Plain Text
-next.within(Time.seconds(10))
-```
 
 ### [模式组(Groups of patterns)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%A8%A1%E5%BC%8F%E7%BB%84groups-of-patterns)
 
@@ -11674,13 +11658,7 @@ next.within(Time.seconds(10))
 ## [15.3 模式的检测](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_153-%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%A3%80%E6%B5%8B)
 
 * 指定要查找的模式序列后，就可以将其应用于输入流以检测潜在匹配
-* 调用
-
-```Plain Text
-CEP.pattern()
-```
-
-，给定输入流和模式，就能得到一个PatternStream
+* 调用`CEP.pattern()`，给定输入流和模式，就能得到一个PatternStream
 
 ```Plain Text
 DataStream<Event> input = ...
@@ -11692,18 +11670,8 @@ PatternStream<Event> patternStream = CEP.pattern(input, pattern);
 ## [15.4 匹配事件的提取](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_154-%E5%8C%B9%E9%85%8D%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%8F%90%E5%8F%96)
 
 * 创建PatternStrean之后，就可以应用select或者flatselect方法，从检测到的事件序列中提取事件了
-
-```Plain Text
-select()
-```
-
-方法需要输入一个select function作为参数,每个成功匹配的事件序列都会调用它
-
-```Plain Text
-select()
-```
-
-以一个Map<String，List<IN\]>> 来接收匹配到的事件序列，其中Key就是每个模式的名称，而value就是所有接收到的事件的List类型
+* `select()`方法需要输入一个select function作为参数,每个成功匹配的事件序列都会调用它
+* `select()`以一个Map<String，List<IN\]>> 来接收匹配到的事件序列，其中Key就是每个模式的名称，而value就是所有接收到的事件的List类型
 
 ```Plain Text
 public OUT select(Map<String, List<IN>> pattern) throws Exception {
