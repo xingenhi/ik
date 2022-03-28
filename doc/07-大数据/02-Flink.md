@@ -547,7 +547,7 @@ taskmanager.numberOfTaskSlots: 4
 yarn application --kill application_1577588252906_0001
 ```
 
-### [3.2.3 Per Job Cluster](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_323-per-job-cluster)
+### 3.2.3 Per Job Cluster
 
 1. 启动\_hadoop\_集群（略）
 2. 不启动**yarn-session**，直接执行\_job\_
@@ -556,7 +556,7 @@ yarn application --kill application_1577588252906_0001
 ./flink run –m yarn-cluster -c com.atguigu.wc.StreamWordCount FlinkTutorial-1.0-SNAPSHOT-jar-with-dependencies.jar --host lcoalhost –port 7777
 ```
 
-## [3.3 Kubernetes部署](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_33-kubernetes%E9%83%A8%E7%BD%B2)
+## 3.3 Kubernetes部署
 
  容器化部署时目前业界很流行的一项技术，基于Docker镜像运行能够让用户更加方便地对应用进行管理和运维。容器管理工具中最为流行的就是Kubernetes（k8s），而Flink也在最近的版本中支持了k8s部署模式。
 
@@ -1096,7 +1096,7 @@ sensor_1,1547718199,35.8
 sensor_6,1547718201,15.4
 ```
 
-### [5.2.4 自定义Source](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_524-%E8%87%AA%E5%AE%9A%E4%B9%89source)
+### 5.2.4 自定义Source
 
 java代码：
 
