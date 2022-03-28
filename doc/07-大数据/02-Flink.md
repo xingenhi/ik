@@ -5876,16 +5876,21 @@ sensor_6,34.5
 * 对于流式查询，需要声明如何在表和外部连接器之间执行转换
 * 与外部系统交换的消息类型，由更新模式（Uadate Mode）指定
 * 追加（Append）模式
-* 表只做插入操作，和外部连接器只交换插入（Insert）消息\* 撤回（Retract）模式
-* 表和外部连接器交换添加（Add）和撤回（Retract）消息
-* 插入操作（Insert）编码为Add消息；删除（Delete）编码为Retract消息；**更新（Update）编码为上一条的Retract和下一条的Add消息** 更新插入（Upsert）模式
-* 更新和插入都被编码为Upsert消息；删除编码为Delete消息
+  * 表只做插入操作，和外部连接器只交换插入（Insert）消息
+
+* 撤回（Retract）模式
+  * 表和外部连接器交换添加（Add）和撤回（Retract）消息
+  * 插入操作（Insert）编码为Add消息；删除（Delete）编码为Retract消息；**更新（Update）编码为上一条的Retract和下一条的Add消息**
+
+* 更新插入（Upsert）模式
+  * 更新和插入都被编码为Upsert消息；删除编码为Delete消息
+
 
 ### 11.3.6 输出到ES
 
 * 可以创建Table来描述ES中的数据，作为输出的TableSink
 
-```Plain Text
+```java
 tableEnv.connect(
   new Elasticsearch()
   .version("6")
@@ -5909,9 +5914,19 @@ aggResultTable.insertInto("esOutputTable");
 
 Flink专门为Table API的jdbc连接提供了flink-jdbc连接器，需要先引入依赖
 
+```xml
+<!-- https://mvnrepository.com/artifact/org.apache.flink/flink-jdbc -->
+<dependency>
+    <groupId>org.apache.flink</groupId>
+    <artifactId>flink-jdbc_2.12</artifactId>
+    <version>1.10.3</version>
+    <scope>provided</scope>
+</dependency>
+```
+
 * 可以创建Table来描述MySql中的数据，作为输入和输出
 
-```Plain Text
+```java
 String sinkDDL = 
   "create table jdbcOutputTable (" +
   " id varchar(20) not null, " +
@@ -5938,17 +5953,19 @@ aggResultSqlTable.insertInto("jdbcOutputTable");
 * 表作为流式查询的结果，是动态更新的
 * 转换有两种转换模式：追加（Appende）模式和撤回（Retract）模式
 * 追加模式
-* 用于表只会被插入（Insert）操作更改的场景
+  * 用于表只会被插入（Insert）操作更改的场景
+
 
 ```Plain Text
 DataStream<Row> resultStream = tableEnv.toAppendStream(resultTable,Row.class);
 ```
 
 * 撤回模式
-* 用于任何场景。有些类似于更新模式中Retract模式，它只有Insert和Delete两类操作。
-* **得到的数据会增加一个Boolean类型的标识位（返回的第一个字段），用它来表示到底是新增的数据（Insert），还是被删除的数据（Delete）**。
+  * 用于任何场景。有些类似于更新模式中Retract模式，它只有Insert和Delete两类操作。
+  * **得到的数据会增加一个Boolean类型的标识位（返回的第一个字段），用它来表示到底是新增的数据（Insert），还是被删除的数据（Delete）**。
 
-*(更新数据，会先删除旧数据，再插入新数据)*
+
+​		*(更新数据，会先删除旧数据，再插入新数据)*
 
 ### 11.4.2 将DataStream转换成表
 
@@ -5987,10 +6004,10 @@ tableEnv.createTemporaryView("sensorView", sensorTable);
 
 * Table API 提供了一种机制来解释计算表的逻辑和优化查询计划
 * 查看执行计划，可以通过`TableEnvironment.explain(table)`方法或`TableEnvironment.explain()`方法完成，返回一个字符串，描述三个计划
+  * 优化的逻辑查询计划
+  * 优化后的逻辑查询计划
+  * 实际执行计划
 
-* 优化的逻辑查询计划
-* 优化后的逻辑查询计划
-* 实际执行计划
 
 ```Plain Text
 String explaination = tableEnv.explain(resultTable);
@@ -6018,9 +6035,10 @@ System.out.println(explaination);
 * 动态表是 Flink 对流数据的 Table API 和 SQL 支持的核心概念
 * 与表示批处理数据的静态表不同，动态表是随时间变化的
 * 持续查询(Continuous Query)
-* 动态表可以像静态的批处理表一样进行查询，查询一个动态表会产生**持续查询（Continuous Query）**
-* **连续查询永远不会终止，并会生成另一个动态表**
-* 查询（Query）会不断更新其动态结果表，以反映其动态输入表上的更改。
+  * 动态表可以像静态的批处理表一样进行查询，查询一个动态表会产生**持续查询（Continuous Query）**
+  * **连续查询永远不会终止，并会生成另一个动态表**
+  * 查询（Query）会不断更新其动态结果表，以反映其动态输入表上的更改。
+
 
 ### 11.6.2 动态表和持续查询
 
@@ -6037,9 +6055,9 @@ System.out.println(explaination);
 * 为了处理带有关系查询的流，必须先将其转换为表
 * 从概念上讲，流的每个数据记录，都被解释为对结果表的插入（Insert）修改操作
 
-*本质上，我们其实是从一个、只有插入操作的changelog（更新日志）流，来构建一个表*
+​	*本质上，我们其实是从一个、只有插入操作的changelog（更新日志）流，来构建一个表*
 
-*来一条数据插入一条数据*
+​	*来一条数据插入一条数据*
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraDEbNPXihXZx4Ji_bSo8teqXfzTAGn0ARr9SEe6YaDYw.png)
 
@@ -6047,9 +6065,9 @@ System.out.println(explaination);
 
 * 持续查询，会在动态表上做计算处理，并作为结果生成新的动态表。
 
-*与批处理查询不同，连续查询从不终止，并根据输入表上的更新更新其结果表。*
+​	*与批处理查询不同，连续查询从不终止，并根据输入表上的更新更新其结果表。*
 
-*在任何时间点，连续查询的结果在语义上，等同于在输入表的快照上，以批处理模式执行的同一查询的结果。*
+​	*在任何时间点，连续查询的结果在语义上，等同于在输入表的快照上，以批处理模式执行的同一查询的结果。*
 
  下图为一个点击事件流的持续查询，是一个分组聚合做count统计的查询。
 
@@ -6063,15 +6081,19 @@ System.out.println(explaination);
 ---
 
 * 仅追加（Append-only）流
-* 仅通过插入（Insert）更改来修改的动态表，可以直接转换为仅追加流\* 撤回（Retract）流
-* 撤回流是包含两类消息的流：添加（Add）消息和撤回（Retract）消息
+  * 仅通过插入（Insert）更改来修改的动态表，可以直接转换为仅追加流
 
-*动态表通过将INSERT 编码为add消息、DELETE 编码为retract消息、UPDATE编码为被更改行（前一行）的retract消息和更新后行（新行）的add消息，转换为retract流。*
+* 撤回（Retract）流
+  * 撤回流是包含两类消息的流：添加（Add）消息和撤回（Retract）消息
+
+
+​			*动态表通过将INSERT 编码为add消息、DELETE 编码为retract消息、UPDATE编码为被更改行（前一行）的retract消息和更新后行（新行）的add消息，转换为retract流。*
 
 * Upsert（更新插入流）
-* Upsert流也包含两种类型的消息：Upsert消息和删除（Delete）消息
+  * Upsert流也包含两种类型的消息：Upsert消息和删除（Delete）消息
 
-*通过将INSERT和UPDATE更改编码为upsert消息，将DELETE更改编码为DELETE消息，就可以将具有唯一键（Unique Key）的动态表转换为流。*
+
+​			*通过将INSERT和UPDATE更改编码为upsert消息，将DELETE更改编码为DELETE消息，就可以将具有唯一键（Unique Key）的动态表转换为流。*
 
 ### 11.6.5 将动态表转换成DataStream
 
@@ -6201,9 +6223,10 @@ sensor_1,1547718212,37.1,2021-02-03T16:50:58.051
 * 事件时间语义，允许表处理程序根据每个记录中包含的时间生成结果。这样即使在有乱序事件或者延迟事件时，也可以获得正确的结果。
 * **为了处理无序事件，并区分流中的准时和迟到事件；Flink需要从事件数据中，提取时间戳，并用来推送事件时间的进展**
 * 定义事件事件，同样有三种方法：
-* 由DataStream转换成表时指定
-* 定义Table Schema时指定
-* 在创建表的DDL中定义
+  * 由DataStream转换成表时指定
+  * 定义Table Schema时指定
+  * 在创建表的DDL中定义
+
 
 ### 由DataStream转换成表时指定
 
@@ -6334,9 +6357,12 @@ sensor_1,1547718212,37.1,2019-01-17T09:43:32
 
 * 时间语义，要配合窗口操作才能发挥作用。
 * 在Table API和SQL中，主要有两种窗口
-* Group Windows（分组窗口）
-* **根据时间戳或行计数间隔，将行聚合到有限的组（Group）中，并对每个组的数据执行一次聚合函数**\* Over Windows
-* 针对每个输入行，计算相邻行范围内的聚合
+  * Group Windows（分组窗口）
+    * **根据时间戳或行计数间隔，将行聚合到有限的组（Group）中，并对每个组的数据执行一次聚合函数**
+
+  * Over Windows
+    * 针对每个输入行，计算相邻行范围内的聚合
+
 
 ### 12.4.1 Group Windows
 
@@ -6416,14 +6442,14 @@ Table table = input
 
 Group Windows定义在SQL查询的Group By子句中
 
-* TUMBLE(time\_attr, interval)
+* `TUMBLE(time_attr, interval)`
   * 定义一个滚动窗口，每一个参数是时间字段，第二个参数是窗口长度
 
-* HOP(time\_attr，interval，interval)
+* `HOP(time_attr，interval，interval)`
   * 定义一个滑动窗口，第一个参数是时间字段，**第二个参数是窗口滑动步长，第三个是窗口长度**
 
-* SESSION(time\_attr，interval)
-  * 定义一个绘画窗口，第一个参数是时间字段，第二个参数是窗口间隔
+* `SESSION(time_attr，interval)`
+  * 定义一个会话窗口，第一个参数是时间字段，第二个参数是窗口间隔
 
 
 #### 测试代码
@@ -6531,7 +6557,7 @@ sql> (true,sensor_1,1,37.1,2019-01-17T09:43:40)
 
 * **Over window 聚合是标准 SQL 中已有的（over 子句），可以在查询的 SELECT 子句中定义**
 * Over window 聚合，会**针对每个输入行**，计算相邻行范围内的聚合
-* Over windows 使用 window（w:overwindows\*）子句定义，并在 select（）方法中通过**别名**来引用
+* Over windows 使用 window（w:overwindows）子句定义，并在 select（）方法中通过**别名**来引用
 
 ```java
 Table table = input
