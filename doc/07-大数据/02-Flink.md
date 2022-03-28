@@ -1,4 +1,6 @@
 # Fink
+[TOC]
+
 # 01-Flink的特点
 
 * 事件驱动（Event-driven）
@@ -10,7 +12,7 @@
 * 越顶层越抽象，表达含义越简明，使用越方便
 * 越底层越具体，表达能力越丰富，使用越灵活
 
-## [1.1 Flink vs Spark Streaming](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_11-flink-vs-spark-streaming)
+## 1.1 Flink vs Spark Streaming
 
 * 数据模型
 * Spark采用RDD模型，spark streaming的DStream实际上也就是一组组小批数据RDD的集合
@@ -20,7 +22,7 @@
 
 # 02-快速上手
 
-## [2.1 批处理实现WordCount](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_21-%E6%89%B9%E5%A4%84%E7%90%86%E5%AE%9E%E7%8E%B0wordcount)
+## 2.1 批处理实现WordCount
 
 > *flink-streaming-scala\_2.12 => org.apache.flink:flink-runtime\_2.12:1.12.1 => com.typesafe.akka:akka-actor\_2.12:2.5.21，akka就是用scala实现的。即使这里我们用java语言，还是用到了scala实现的包*
 
@@ -133,7 +135,7 @@ public class WordCount {
 
 > [解决 Flink 升级1.11 报错 No ExecutorFactory found to execute the application](https://blog.csdn.net/qq_41398614/article/details/107553604)
 
-## [2.2 流处理实现WordCount](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_22-%E6%B5%81%E5%A4%84%E7%90%86%E5%AE%9E%E7%8E%B0wordcount)
+## 2.2 流处理实现WordCount
 
 在2.1批处理的基础上，新建一个类进行改动。
 
@@ -219,7 +221,7 @@ env.execute()
 
 后，Flink才把前面的代码片段当作一个任务整体（每个线程根据这个任务操作，并行处理流数据）。
 
-## [2.3 流式数据源测试](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_23-%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E6%BA%90%E6%B5%8B%E8%AF%95)
+## 2.3 流式数据源测试
 
 1. 通过
 
@@ -283,7 +285,7 @@ public class StreamWordCount {
 
 # 03-Flink部署
 
-## [3.1 Standalone模式](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_31-standalone%E6%A8%A1%E5%BC%8F)
+## 3.1 Standalone模式
 
 > [Flink任务调度原理之TaskManager 与Slots](https://blog.csdn.net/qq_39657909/article/details/105823127) <= 下面内容出自该博文
 
@@ -339,7 +341,7 @@ Flink Managed MEM
 
 是两个分开的值。
 
-### [3.1.1 Web UI提交job](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_311-web-ui%E6%8F%90%E4%BA%A4job)
+### 3.1.1 Web UI提交job
 
 > [Flink Savepoint简单介绍](https://blog.csdn.net/qq_37142346/article/details/91385333)
 
@@ -422,7 +424,7 @@ hello world, and thank you!
 2> (hello,1)
 ```
 
-### [3.1.2 命令行提交job](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_312-%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8F%90%E4%BA%A4job)
+### 3.1.2 命令行提交job
 
 1. 查看已提交的所有job
 
@@ -481,7 +483,7 @@ taskmanager.numberOfTaskSlots: 4
 
 ，实际Job运行时总Tasks显示9，但是里面具体4个任务步骤分别需求（1，3，3，2）数量的Tasks，4>3，满足最大的Parallelism即可运行成功。
 
-## [3.2 yarn模式](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_32-yarn%E6%A8%A1%E5%BC%8F)
+## 3.2 yarn模式
 
 > [4.6 Flink-流处理框架-Flink On Yarn（Session-cluster+Per-Job-Cluster）](https://blog.csdn.net/suyebiubiu/article/details/111874245) <= 下面内容出自此处，主要方便索引图片URL
 
@@ -489,11 +491,11 @@ taskmanager.numberOfTaskSlots: 4
  以Yarn模式部署Flink任务时，要求Flink是有 Hadoop 支持的版本，Hadoop 环境需要保证版本在 2.2 以上，并且集群中安装有 HDFS 服务。
 ```
 
-### [3.2.1 Flink on Yarn](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_321-flink-on-yarn)
+### 3.2.1 Flink on Yarn
 
  Flink提供了两种在yarn上运行的模式，分别为Session-Cluster和Per-Job-Cluster模式。
 
-#### [1\. Sesstion Cluster模式](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1-sesstion-cluster%E6%A8%A1%E5%BC%8F)
+#### 1\. Sesstion Cluster模式
 
  Session-Cluster 模式需要先启动集群，然后再提交作业，接着会向 yarn 申请一块空间后，**资源永远保持不变**。如果资源满了，下一个作业就无法提交，只能等到 yarn 中的其中一个作业执行完成后，释放了资源，下个作业才会正常提交。**所有作业共享 Dispatcher 和 ResourceManager**；**共享资源；适合规模小执行时间短的作业。**
 
@@ -501,7 +503,7 @@ taskmanager.numberOfTaskSlots: 4
 
  **在 yarn 中初始化一个 flink 集群，开辟指定的资源，以后提交任务都向这里提交。这个 flink 集群会常驻在 yarn 集群中，除非手工停止。**
 
-#### [2\. Per Job Cluster 模式](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_2-per-job-cluster-%E6%A8%A1%E5%BC%8F)
+#### 2\. Per Job Cluster 模式
 
  一个 Job 会对应一个集群，每提交一个作业会根据自身的情况，都会单独向 yarn 申请资源，直到作业执行完成，一个作业的失败与否并不会影响下一个作业的正常提交和运行。**独享 Dispatcher 和 ResourceManager**，按需接受资源申请；适合规模大长时间运行的作业。
 
@@ -509,7 +511,7 @@ taskmanager.numberOfTaskSlots: 4
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraMsjwGcZkMjUD3gVa94fjw4wLNC_VR5fm-l2ijfixiZo.png)
 
-### [3.2.2 Session Cluster](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_322-session-cluster)
+### 3.2.2 Session Cluster
 
 1. 启动\_hadoop\_集群（略）
 2. 启动\_yarn-session\_
@@ -520,44 +522,14 @@ taskmanager.numberOfTaskSlots: 4
 
 其中：
 
-* \`\`\`
+* \-n(--container)：TaskManager的数量。
+* -s(--slots)：每个TaskManager的slot数量，默认一个slot一个core，默认每个taskmanager的slot的个数为1，有时可以多一些taskmanager，做冗余。
 
-\-n(--container)
+* \-jm：JobManager的内存（单位MB)。
+* -tm：每个taskmanager的内存（单位MB)。
 
-```Plain Text
-：TaskManager的数量。
-
-* ```
--s(--slots)
-```
-
-：每个TaskManager的slot数量，默认一个slot一个core，默认每个taskmanager的slot的个数为1，有时可以多一些taskmanager，做冗余。
-
-* \`\`\`
-
-\-jm
-
-```Plain Text
-：JobManager的内存（单位MB)。
-
-* ```
--tm
-```
-
-：每个taskmanager的内存（单位MB)。
-
-* \`\`\`
-
-\-nm
-
-```Plain Text
-：yarn 的appName(现在yarn的ui上的名字)。
-
-* ```
--d
-```
-
-：后台执行。
+* \-nm：yarn 的appName(现在yarn的ui上的名字)。
+* -d：后台执行。
 
 3. 执行任务
 
@@ -616,7 +588,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
 [Flink-运行时架构中的四大组件|任务提交流程|任务调度原理|Slots和并行度中间的关系|数据流|执行图|数据得传输形式|任务链](https://blog.csdn.net/qq_40180229/article/details/106321149)
 
-## [4.1 Flink运行时的组件](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_41-flink%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E7%BB%84%E4%BB%B6)
+## 4.1 Flink运行时的组件
 
  Flink运行时架构主要包括四个不同的组件，它们会在运行流处理应用程序时协同工作：
 
@@ -627,7 +599,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
  因为Flink是用Java和Scala实现的，所以所有组件都会运行在Java虚拟机上。每个组件的职责如下：
 
-### [作业管理器（JobManager）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BD%9C%E4%B8%9A%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88jobmanager%EF%BC%89)
+### 作业管理器（JobManager）
 
  控制一个应用程序执行的主进程，也就是说，每个应用程序都会被一个不同的JobManager所控制执行。
 
@@ -643,7 +615,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
  在运行过程中，JobManager会负责所有需要中央协调的操作，比如说检查点（checkpoints）的协调。
 
-### [资源管理器（ResourceManager）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88resourcemanager%EF%BC%89)
+### 资源管理器（ResourceManager）
 
  主要负责管理任务管理器（TaskManager）的插槽（slot），TaskManger插槽是Flink中定义的处理资源单元。
 
@@ -653,7 +625,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
  另外，**ResourceManager还负责终止空闲的TaskManager，释放计算资源**。
 
-### [任务管理器（TaskManager）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8%EF%BC%88taskmanager%EF%BC%89)
+### 任务管理器（TaskManager）
 
  Flink中的工作进程。通常在Flink中会有多个TaskManager运行，每一个TaskManager都包含了一定数量的插槽（slots）。**插槽的数量限制了TaskManager能够执行的任务数量**。
 
@@ -661,7 +633,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
  **在执行过程中，一个TaskManager可以跟其它运行同一应用程序的TaskManager交换数据**。
 
-### [分发器（Dispatcher）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%86%E5%8F%91%E5%99%A8%EF%BC%88dispatcher%EF%BC%89)
+### 分发器（Dispatcher）
 
  可以跨作业运行，它为应用提交提供了REST接口。
 
@@ -669,7 +641,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
  *Dispatcher在架构中可能并不是必需的，这取决于应用提交运行的方式。*
 
-## [4.2 任务提交流程](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_42-%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4%E6%B5%81%E7%A8%8B)
+## 4.2 任务提交流程
 
  我们来看看当一个应用提交执行时，Flink的各个组件是如何交互协作的：
 
@@ -691,7 +663,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 4. Yarn ResourceManager分配Container资源后，由ApplicationMaster通知资源所在节点的NodeManager启动TaskManager
 5. NodeManager加载Flink的Jar包和配置构建环境并启动TaskManager，TaskManager启动后向JobManager发送心跳包，并等待JobManager向其分配任务。
 
-## [4.3 任务调度原理](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_43-%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%8E%9F%E7%90%86)
+## 4.3 任务调度原理
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraQFGssPFQ1wXSrepzHM5UE6iGG1AyrQIUMZeggjz5llM.png)
 
@@ -703,7 +675,7 @@ http://{JobManagerHost:Port}/api/v1/namespaces/default/services/flink-jobmanager
 
 *注：如果一个Slot中启动多个线程，那么这几个线程类似CPU调度一样共用同一个slot*
 
-### [4.3.1 TaskManger与Slots](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_431-taskmanger%E4%B8%8Eslots)
+### 4.3.1 TaskManger与Slots
 
 要点：
 
@@ -752,7 +724,7 @@ taskmanager.numberOfTaskSlots
 
  通过调整task slot的数量，允许用户定义subtask之间如何互相隔离。如果一个TaskManager一个slot，那将意味着每个task group运行在独立的JVM中（该JVM可能是通过一个特定的容器启动的），而一个TaskManager多个slot意味着更多的subtask可以共享同一个JVM。而在同一个JVM进程中的task将共享TCP连接（基于多路复用）和心跳消息。它们也可能共享数据集和数据结构，因此这减少了每个task的负载。
 
-### [4.3.2 Slot和并行度](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_432-slot%E5%92%8C%E5%B9%B6%E8%A1%8C%E5%BA%A6)
+### 4.3.2 Slot和并行度
 
 1. **一个特定算子的 子任务（subtask）的个数被称之为其并行度（parallelism）**，我们可以对单独的每个算子进行设置并行度，也可以直接用env设置全局的并行度，更可以在页面中去指定并行度。
 2. 最后，由于并行度是实际Task Manager处理task 的能力，而一般情况下，**一个 stream 的并行度，可以认为就是其所有算子中最大的并行度**，则可以得出**在设置Slot时，在所有设置中的最大设置的并行度大小则就是所需要设置的Slot的数量。**（如果Slot分组，则需要为每组Slot并行度最大值的和）
@@ -773,7 +745,7 @@ parallelism.default=1
 
  *ps：上图最后一个因为是输出到文件，避免多个Slot（多线程）里的算子都输出到同一个文件互相覆盖等混乱问题，直接设置sink的并行度为1。*
 
-### [4.3.3 程序和数据流（DataFlow）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_433-%E7%A8%8B%E5%BA%8F%E5%92%8C%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%88dataflow%EF%BC%89)
+### 4.3.3 程序和数据流（DataFlow）
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraEPLzlIQA8U-cMzWs3U70Skl9vm696mtegPDz4K5s3rk.png)
 
@@ -786,7 +758,7 @@ parallelism.default=1
 * 每一个dataflow以一个或多个sources开始以一个或多个sinks结束。dataflow类似于任意的有向无环图（DAG）
 * 在大部分情况下，程序中的转换运算（transformations）跟dataflow中的算子（operator）是一一对应的关系
 
-### [4.3.4 执行图（](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_434-%E6%89%A7%E8%A1%8C%E5%9B%BE%EF%BC%88executiongraph%EF%BC%89)**ExecutionGraph**[）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_434-%E6%89%A7%E8%A1%8C%E5%9B%BE%EF%BC%88executiongraph%EF%BC%89)
+### 4.3.4 执行图【ExecutionGraph】
 
  由Flink程序直接映射成的数据流图是StreamGraph，也被称为**逻辑流图**，因为它们表示的是计算逻辑的高级视图。为了执行一个流处理程序，Flink需要将**逻辑流图**转换为**物理数据流图**（也叫**执行图**），详细说明程序的执行方式。
 
@@ -798,14 +770,14 @@ parallelism.default=1
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorarDoH1RXr6t-ErSQmNKbCmVfOkK6JMLgm1weaLIfRAH4.png)
 
-### [4.3.5 数据传输形式](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_435-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%BD%A2%E5%BC%8F)
+### 4.3.5 数据传输形式
 
 * 一个程序中，不同的算子可能具有不同的并行度
 * 算子之间传输数据的形式可以是 one-to-one (forwarding) 的模式也可以是redistributing 的模式，具体是哪一种形式，取决于算子的种类
 * **One-to-one**：stream维护着分区以及元素的顺序（比如source和map之间）。这意味着map 算子的子任务看到的元素的个数以及顺序跟 source 算子的子任务生产的元素的个数、顺序相同。**map、fliter、flatMap等算子都是one-to-one的对应关系**。
 * **Redistributing**：stream的分区会发生改变。每一个算子的子任务依据所选择的transformation发送数据到不同的目标任务。例如，keyBy 基于 hashCode 重分区、而 broadcast 和 rebalance 会随机重新分区，这些算子都会引起redistribute过程，而 redistribute 过程就类似于 Spark 中的 shuffle 过程。
 
-### [4.3.6 任务链（OperatorChains）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_436-%E4%BB%BB%E5%8A%A1%E9%93%BE%EF%BC%88operatorchains%EF%BC%89)
+### 4.3.6 任务链（OperatorChains）
 
  Flink 采用了一种称为任务链的优化技术，可以在特定条件下减少本地通信的开销。为了满足任务链的要求，必须将两个或多个算子设为**相同的并行度**，并通过本地转发（local forward）的方式进行连接
 
@@ -833,11 +805,9 @@ parallelism.default=1
 
 # 05-Flink流处理API
 
-## [5.1 Environment](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_51-environment)
+## 5.1 Environment![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorabACd-9xi2DPH3EDDtvG3Lq9TGIXq3EJsQA27Cm16P0Y.png)
 
-![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorabACd-9xi2DPH3EDDtvG3Lq9TGIXq3EJsQA27Cm16P0Y.png)
-
-### [5.1.1 getExecutionEnvironment](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_511-getexecutionenvironment)
+### 5.1.1 getExecutionEnvironment
 
  创建一个执行环境，表示当前执行程序的上下文。如果程序是独立调用的，则此方法返回本地执行环境；如果从命令行客户端调用程序以提交到集群，则此方法返回此集群的执行环境，也就是说，getExecutionEnvironment会根据查询运行的方式决定返回什么样的运行环境，是最常用的一种创建执行环境的方式。
 
@@ -853,7 +823,7 @@ StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironm
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraVyjktC9a5A3tsErCywAqz-5tNKj5hr4MZeWmIFyqHoY.png)
 
-### [5.1.2 createLocalEnvironment](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_512-createlocalenvironment)
+### 5.1.2 createLocalEnvironment
 
  返回本地执行环境，需要在调用时指定默认的并行度。
 
@@ -861,7 +831,7 @@ StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironm
 LocalStreamEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1);
 ```
 
-### [5.1.3 createRemoteEnvironment](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_513-createremoteenvironment)
+### 5.1.3 createRemoteEnvironment
 
  返回集群执行环境，将Jar提交到远程服务器。需要在调用时指定JobManager的IP和端口号，并指定要在集群中运行的Jar包。
 
@@ -869,11 +839,11 @@ LocalStreamEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1
 StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment(1);
 ```
 
-## [5.2 Source](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_52-source)
+## 5.2 Source
 
 > [Flink-Environment的三种方式和Source的四种读取方式-从集合中、从kafka中、从文件中、自定义](https://blog.csdn.net/qq_40180229/article/details/106335725)
 
-### [5.2.1 从集合读取数据](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_521-%E4%BB%8E%E9%9B%86%E5%90%88%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE)
+### 5.2.1 从集合读取数据
 
 java代码：
 
@@ -941,7 +911,7 @@ INT> 8
 INT> 9
 ```
 
-### [5.2.2 从文件读取数据](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_522-%E4%BB%8E%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE)
+### 5.2.2 从文件读取数据
 
 java代码如下：
 
@@ -999,11 +969,11 @@ sensor_1,1547718209,32.8
 sensor_1,1547718212,37.1
 ```
 
-### [5.2.3 从Kafka读取数据](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_523-%E4%BB%8Ekafka%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE)
+### 5.2.3 从Kafka读取数据
 
 1. pom依赖
 
-```Plain Text
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -1068,7 +1038,7 @@ $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic sensor
 
 5. 编写java代码
 
-```Plain Text
+```java
 package apitest.source;
 
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -1130,7 +1100,7 @@ sensor_6,1547718201,15.4
 
 java代码：
 
-```Plain Text
+```java
 package apitest.source;
 
 import apitest.beans.SensorReading;
@@ -1214,17 +1184,17 @@ public class SourceTest4_UDF {
 ....
 ```
 
-## [5.3 Transform](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_53-transform)
+## 5.3 Transform
 
 map、flatMap、filter通常被统一称为**基本转换算子**（**简单转换算子**）。
 
-### [5.3.1 基本转换算子(map/flatMap/filter)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_531-%E5%9F%BA%E6%9C%AC%E8%BD%AC%E6%8D%A2%E7%AE%97%E5%AD%90mapflatmapfilter)
+### 5.3.1 基本转换算子(map/flatMap/filter)
 
 > [到处是map、flatMap，啥意思？](https://zhuanlan.zhihu.com/p/66196174)
 
 java代码：
 
-```Plain Text
+```java
 package apitest.transform;
 
 import org.apache.flink.api.common.functions.FilterFunction;
@@ -1325,7 +1295,7 @@ flatMap> 37.1
 filter> sensor_1,1547718212,37.1
 ```
 
-### [5.3.2 聚合操作算子](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_532-%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%E7%AE%97%E5%AD%90)
+### 5.3.2 聚合操作算子
 
 > [Flink\_Trasform算子](https://blog.csdn.net/dongkang123456/article/details/108361376)
 
@@ -1342,7 +1312,7 @@ filter> sensor_1,1547718212,37.1
 
 ---
 
-#### [keyBy](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=keyby)
+#### keyBy
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraCjlt_aD1SRBuQ40CLCIsiThFCRXzXuwn8jOIj7WWkP8.png)
 
@@ -1352,7 +1322,7 @@ filter> sensor_1,1547718212,37.1
 
 2、不同的key有可能分到一起，因为是通过hash原理实现的；
 
-#### [Rolling Aggregation](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=rolling-aggregation)
+#### Rolling Aggregation
 
 这些算子可以针对KeyedStream的每一个支流做聚合。
 
@@ -1366,7 +1336,7 @@ filter> sensor_1,1547718212,37.1
 
 测试maxBy的java代码一
 
-```Plain Text
+```java
 package apitest.transform;
 
 import apitest.beans.SensorReading;
@@ -1448,7 +1418,7 @@ result> SensorReading{id='sensor_1', timestamp=1547718207, temperature=36.3}
 result> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 ```
 
-#### [reduce](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=reduce)
+#### reduce
 
  **Reduce适用于更加一般化的聚合操作场景**。java中需要实现
 
@@ -1464,7 +1434,7 @@ ReduceFunction
 
 java代码如下：
 
-```Plain Text
+```java
 package apitest.transform;
 
 import apitest.beans.SensorReading;
@@ -1538,7 +1508,7 @@ result> SensorReading{id='sensor_1', timestamp=1547718209, temperature=36.3}
 result> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 ```
 
-### [5.3.3 多流转换算子](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_533-%E5%A4%9A%E6%B5%81%E8%BD%AC%E6%8D%A2%E7%AE%97%E5%AD%90)
+### 5.3.3 多流转换算子
 
 > [Flink\_Trasform算子](https://blog.csdn.net/dongkang123456/article/details/108361376)
 
@@ -1548,11 +1518,11 @@ result> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 * Connect和CoMap
 * Union
 
-#### [Split和Select](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=split%E5%92%8Cselect)
+#### Split和Select
 
 **注：新版Flink已经不存在Split和Select这两个API了（至少Flink1.12.1没有！）**
 
-##### [Split](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=split)
+##### Split
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora6UXap6Vpw68JVJhNt1rVhSAB2OG1-mrL_t_-JQo5XtY.png)
 
@@ -1560,7 +1530,7 @@ result> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 
 **SplitStream虽然看起来像是两个Stream，但是其实它是一个特殊的Stream**;
 
-##### [Select](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=select)
+##### Select
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoragWcGaOw2BcG-OJlLAkSGMTMwBE_KiRwtkHGNpmP2aIU.png)
 
@@ -1576,7 +1546,7 @@ result> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 
 这里直接附上教程代码（Flink1.10.1）
 
-```Plain Text
+```java
 package com.atguigu.apitest.transform;/**
  * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
  * <p>
@@ -1652,15 +1622,15 @@ all > SensorReading{id='sensor_6', timestamp=1547718201, temperature=15.4}
 ...
 ```
 
-#### [Connect和CoMap](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=connect%E5%92%8Ccomap)
+#### Connect和CoMap
 
-##### [Connect](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=connect)
+##### Connect
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraSqsLIA4mE1At4EQMwDQXBoUpRbIUnB3kDGJtR60lxQA.png)
 
  **DataStream,DataStream -> ConnectedStreams**: 连接两个保持他们类型的数据流，两个数据流被Connect 之后，只是被放在了一个流中，内部依然保持各自的数据和形式不发生任何变化，两个流相互独立。
 
-##### [CoMap](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=comap)
+##### CoMap
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora1sruPw2pDgIzcD-1KW4RRriicZWDRDHn0o21nDVW9RA.png)
 
@@ -1670,7 +1640,7 @@ all > SensorReading{id='sensor_6', timestamp=1547718201, temperature=15.4}
 
 虽然Flink1.12.1的DataStream有connect和map方法，但是教程基于前面的split和select编写，所以这里直接附上教程的代码：
 
-```Plain Text
+```java
 package com.atguigu.apitest.transform;/**
  * Copyright (c) 2018-2028 尚硅谷 All Rights Reserved
  * <p>
@@ -1772,7 +1742,7 @@ public class TransformTest4_MultipleStreams {
 (sensor_1,37.1,high temp warning)
 ```
 
-#### [Union](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=union)
+#### Union
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoranWcq-yOKi20LKwJEyziAvVYw61_NS1onu-bh3f7cnik.png)
 
@@ -1789,7 +1759,7 @@ public class TransformTest4_MultipleStreams {
         highTempStream.union(lowTempStream, allTempStream);
 ```
 
-### [5.3.4 算子转换](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_534-%E7%AE%97%E5%AD%90%E8%BD%AC%E6%8D%A2)
+### 5.3.4 算子转换
 
 > [Flink常用算子Transformation（转换）](https://blog.csdn.net/a_drjiaoda/article/details/89357916)
 
@@ -1799,7 +1769,7 @@ public class TransformTest4_MultipleStreams {
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraqg3jmz3YWsKhr26mmmM3e8RyEbJAMIoq4UVwudXT8ew.png)
 
-## [5.4 支持的数据类型](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_54-%E6%94%AF%E6%8C%81%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
+## 5.4 支持的数据类型
 
  Flink流应用程序处理的是以数据对象表示的事件流。所以在Flink内部，我们需要能够处理这些对象。它们**需要被序列化和反序列化**，以便通过网络传送它们；或者从状态后端、检查点和保存点读取它们。为了有效地做到这一点，Flink需要明确知道应用程序所处理的数据类型。Flink使用类型信息的概念来表示数据类型，并为每个数据类型生成特定的序列化器、反序列化器和比较器。
 
@@ -1807,7 +1777,7 @@ public class TransformTest4_MultipleStreams {
 
  Flink支持Java和Scala中所有常见数据类型。使用最广泛的类型有以下几种。
 
-### [5.4.1 基础数据类型](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_541-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
+### 5.4.1 基础数据类型
 
  Flink支持所有的Java和Scala基础数据类型，Int, Double, Long, String, …
 
@@ -1816,7 +1786,7 @@ DataStream<Integer> numberStream = env.fromElements(1, 2, 3, 4);
 numberStream.map(data -> data * 2);
 ```
 
-### [5.4.2 Java和Scala元组(Tuples)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_542-java%E5%92%8Cscala%E5%85%83%E7%BB%84tuples)
+### 5.4.2 Java和Scala元组(Tuples)
 
 java不像Scala天生支持元组Tuple类型，java的元组类型由Flink的包提供，默认提供Tuple0\~Tuple25
 
@@ -1828,7 +1798,7 @@ DataStream<Tuple2<String, Integer>> personStream = env.fromElements(
 personStream.filter(p -> p.f1 > 18);
 ```
 
-### [5.4.3 Scala样例类(case classes)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_543-scala%E6%A0%B7%E4%BE%8B%E7%B1%BBcase-classes)
+### 5.4.3 Scala样例类(case classes)
 
 ```Plain Text
 case class Person(name:String,age:Int)
@@ -1839,7 +1809,7 @@ val numbers: DataStream[(String,Integer)] = env.fromElements(
 )
 ```
 
-### [5.4.4 Java简单对象(POJO)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_544-java%E7%AE%80%E5%8D%95%E5%AF%B9%E8%B1%A1pojo)
+### 5.4.4 Java简单对象(POJO)
 
 java的POJO这里要求必须提供无参构造函数
 
@@ -1861,13 +1831,13 @@ DataStream Pe rson > persons = env.fromElements(
 );
 ```
 
-### [5.4.5 其他(Arrays, Lists, Maps, Enums,等等)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_545-%E5%85%B6%E4%BB%96arrays-lists-maps-enums%E7%AD%89%E7%AD%89)
+### 5.4.5 其他(Arrays, Lists, Maps, Enums,等等)
 
 Flink对Java和Scala中的一些特殊目的的类型也都是支持的，比如Java的ArrayList，HashMap，Enum等等。
 
-## [5.5 实现UDF函数——更细粒度的控制流](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_55-%E5%AE%9E%E7%8E%B0udf%E5%87%BD%E6%95%B0%E6%9B%B4%E7%BB%86%E7%B2%92%E5%BA%A6%E7%9A%84%E6%8E%A7%E5%88%B6%E6%B5%81)
+## 5.5 实现UDF函数——更细粒度的控制流
 
-### [5.5.1 函数类(Function Classes)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_551-%E5%87%BD%E6%95%B0%E7%B1%BBfunction-classes)
+### 5.5.1 函数类(Function Classes)
 
  Flink暴露了所有UDF函数的接口(实现方式为接口或者抽象类)。例如MapFunction, FilterFunction, ProcessFunction等等。
 
@@ -1912,14 +1882,14 @@ public static class KeyWordFilter implements FilterFunction<String> {
 }
 ```
 
-### [5.5.2 匿名函数(Lambda Functions)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_552-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0lambda-functions)
+### 5.5.2 匿名函数(Lambda Functions)
 
 ```Plain Text
 DataStream<String> tweets = env.readTextFile("INPUT_FILE"); 
 DataStream<String> flinkTweets = tweets.filter( tweet -> tweet.contains("flink") );
 ```
 
-### [5.5.3 富函数(Rich Functions)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_553-%E5%AF%8C%E5%87%BD%E6%95%B0rich-functions)
+### 5.5.3 富函数(Rich Functions)
 
  “富函数”是DataStream API提供的一个函数类的接口，所有Flink函数类都有其Rich版本。
 
@@ -1957,7 +1927,7 @@ public static class MyMapFunction extends RichMapFunction<SensorReading, Tuple2<
 
 测试代码：
 
-```Plain Text
+```java
 package apitest.transform;
 
 import apitest.beans.SensorReading;
@@ -2047,7 +2017,7 @@ close
 close
 ```
 
-## [5.6 数据重分区操作](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_56-%E6%95%B0%E6%8D%AE%E9%87%8D%E5%88%86%E5%8C%BA%E6%93%8D%E4%BD%9C)
+## 5.6 数据重分区操作
 
 重分区操作，在DataStream类中可以看到很多`Partitioner`字眼的类。
 
@@ -2055,7 +2025,7 @@ close
 
 java代码：
 
-```Plain Text
+```java
 package apitest.transform;
 
 import apitest.beans.SensorReading;
@@ -2135,7 +2105,7 @@ keyBy:3> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 global:1> SensorReading{id='sensor_1', timestamp=1547718212, temperature=37.1}
 ```
 
-## [5.7 Sink](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_57-sink)
+## 5.7 Sink
 
 > [Flink之流处理API之Sink](https://blog.csdn.net/lixinkuan328/article/details/104116894)
 
@@ -2149,11 +2119,11 @@ stream.addSink(new MySink(xxxx))
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraQxcAwt5ROy5nx8iOBc81syTX-e6VcEXN5riTU_xYCls.png)
 
-### [5.7.1 Kafka](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_571-kafka)
+### 5.7.1 Kafka
 
 1. pom依赖
 
-```Plain Text
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -2201,7 +2171,7 @@ stream.addSink(new MySink(xxxx))
 
 2. 编写java代码
 
-```Plain Text
+```java
 package apitest.sink;
 
 import apitest.beans.SensorReading;
@@ -2291,7 +2261,7 @@ SensorReading{id='sensor_6', timestamp=1547718201, temperature=15.4}
 
 这里Flink的作用相当于pipeline了。
 
-### [5.7.2 Redis](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_572-redis)
+### 5.7.2 Redis
 
 > [flink-connector-redis](https://mvnrepository.com/search?q=flink-connector-redis)
 
@@ -2309,7 +2279,7 @@ flink-connector-
 
 2. 编写java代码
 
-```Plain Text
+```java
 package apitest.sink;
 
 import apitest.beans.SensorReading;
@@ -2392,14 +2362,14 @@ localhost:0>hgetall sensor_temp
 8) "38.1"
 ```
 
-### [5.7.3 Elasticsearch](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_573-elasticsearch)
+### 5.7.3 Elasticsearch
 
 > [Flink 1.12.1 ElasticSearch连接 Sink](https://blog.csdn.net/weixin_42066446/article/details/113243977)
 
 1. pom依赖
 2. 编写java代码
 
-```Plain Text
+```java
 package apitest.sink;
 
 import apitest.beans.SensorReading;
@@ -2569,7 +2539,7 @@ $ curl "localhost:9200/sensor/_search?pretty"
 }
 ```
 
-### [5.7.4 JDBC自定义sink](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_574-jdbc%E8%87%AA%E5%AE%9A%E4%B9%89sink)
+### 5.7.4 JDBC自定义sink
 
 > [Flink之Mysql数据CDC](https://www.cnblogs.com/ywjfx/p/14263718.html)
 
@@ -2596,7 +2566,7 @@ CREATE TABLE `sensor_temp` (
 
 5. 编写java代码
 
-```Plain Text
+```java
 package apitest.sink;
 
 import apitest.beans.SensorReading;
@@ -2716,11 +2686,11 @@ mysql> SELECT * FROM sensor_temp;
 10 rows in set (0.00 sec)
 ```
 
-## [5.8 Joining](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_58-joining)
+## 5.8 Joining
 
 > [Joining](https://ci.apache.org/projects/flink/flink-docs-release-1.12/zh/dev/stream/operators/joining.html)
 
-### [5.8.1 Window Join](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_581-window-join)
+### 5.8.1 Window Join
 
  A window join joins the elements of two streams that share a common key and lie in the same window. These windows can be defined by using a [window assigner](https://ci.apache.org/projects/flink/flink-docs-release-1.12/zh/dev/stream/operators/windows.html#window-assigners) and are evaluated on elements from both of the streams.
 
@@ -2748,7 +2718,7 @@ stream.join(otherStream)
     .apply(<JoinFunction>)
 ```
 
-#### [Tumbling Window Join](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=tumbling-window-join)
+#### Tumbling Window Join
 
  When performing a tumbling window join, all elements with a common key and a common tumbling window are joined as pairwise combinations and passed on to a 
 
@@ -2766,27 +2736,9 @@ FlatJoinFunction
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora4Ja3jiT-k-U_yxVTz5FnAC1i2JthvgzTQwyxIdlau_Y.svg)
 
- As illustrated in the figure, we define a tumbling window with the size of 2 milliseconds, which results in windows of the form 
+ As illustrated in the figure, we define a tumbling window with the size of 2 milliseconds, which results in windows of the form `[0,1], [2,3], ...`. The image shows the pairwise combinations of all elements in each window which will be passed on to the `JoinFunction` . Note that in the tumbling window `[6,7]` nothing is emitted because no elements exist in the green stream to be joined with the orange elements ⑥ and ⑦.
 
-```Plain Text
-[0,1], [2,3], ...
-```
-
-. The image shows the pairwise combinations of all elements in each window which will be passed on to the 
-
-```Plain Text
-JoinFunction
-```
-
-. Note that in the tumbling window 
-
-```Plain Text
-[6,7]
-```
-
- nothing is emitted because no elements exist in the green stream to be joined with the orange elements ⑥ and ⑦.
-
-```Plain Text
+```java
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
@@ -2808,51 +2760,15 @@ orangeStream.join(greenStream)
     });
 ```
 
-#### [Sliding Window Join](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=sliding-window-join)
+#### Sliding Window Join
 
- When performing a sliding window join, all elements with a common key and common sliding window are joined as pairwise combinations and passed on to the 
-
-```Plain Text
-JoinFunction
-```
-
- or 
-
-```Plain Text
-FlatJoinFunction
-```
-
-. Elements of one stream that do not have elements from the other stream in the current sliding window are not emitted! Note that some elements might be joined in one sliding window but not in another!
+ When performing a sliding window join, all elements with a common key and common sliding window are joined as pairwise combinations and passed on to the `JoinFunction` or  `FlatJoinFunction`. Elements of one stream that do not have elements from the other stream in the current sliding window are not emitted! Note that some elements might be joined in one sliding window but not in another!
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraLcC1aqE-D0rskTdujtlP-LMss6V9KcHz1sbDK053GFU.svg)
 
- In this example we are using sliding windows with a size of two milliseconds and slide them by one millisecond, resulting in the sliding windows 
+ In this example we are using sliding windows with a size of two milliseconds and slide them by one millisecond, resulting in the sliding windows `[-1, 0],[0,1],[1,2],[2,3], …` . The joined elements below the x-axis are the ones that are passed to the `JoinFunction`  for each sliding window. Here you can also see how for example the orange ② is joined with the green ③ in the window `[2,3]` , but is not joined with anything in the window `[1,2]` .
 
-```Plain Text
-[-1, 0],[0,1],[1,2],[2,3], …
-```
-
-. The joined elements below the x-axis are the ones that are passed to the 
-
-```Plain Text
-JoinFunction
-```
-
- for each sliding window. Here you can also see how for example the orange ② is joined with the green ③ in the window 
-
-```Plain Text
-[2,3]
-```
-
-, but is not joined with anything in the window 
-
-```Plain Text
-[1,2]
-```
-
-.
-
-```Plain Text
+```java
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
@@ -2874,33 +2790,15 @@ orangeStream.join(greenStream)
     });
 ```
 
-#### [Session Window Join](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=session-window-join)
+#### Session Window Join
 
- When performing a session window join, all elements with the same key that when *“combined”* fulfill the session criteria are joined in pairwise combinations and passed on to the 
-
-```Plain Text
-JoinFunction
-```
-
- or 
-
-```Plain Text
-FlatJoinFunction
-```
-
-. Again this performs an inner join, so if there is a session window that only contains elements from one stream, no output will be emitted!
+ When performing a session window join, all elements with the same key that when *“combined”* fulfill the session criteria are joined in pairwise combinations and passed on to the `JoinFunction` or `FlatJoinFunction` . Again this performs an inner join, so if there is a session window that only contains elements from one stream, no output will be emitted!
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora6eDBMEwq6-ENq_MRJFveLIQLbVir4LpTZfb8Gs12XEQ.svg)
 
- Here we define a session window join where each session is divided by a gap of at least 1ms. There are three sessions, and in the first two sessions the joined elements from both streams are passed to the 
+ Here we define a session window join where each session is divided by a gap of at least 1ms. There are three sessions, and in the first two sessions the joined elements from both streams are passed to the `JoinFunction`  . In the third session there are no elements in the green stream, so ⑧ and ⑨ are not joined!
 
-```Plain Text
-JoinFunction
-```
-
-. In the third session there are no elements in the green stream, so ⑧ and ⑨ are not joined!
-
-```Plain Text
+```java
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
@@ -2922,55 +2820,19 @@ orangeStream.join(greenStream)
     });
 ```
 
-### [5.8.2 Interval Join](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_582-interval-join)
+### 5.8.2 Interval Join
 
 The interval join joins elements of two streams (we’ll call them A & B for now) with a common key and where elements of stream B have timestamps that lie in a relative time interval to timestamps of elements in stream A.
 
-This can also be expressed more formally as 
+This can also be expressed more formally as `b.timestamp ∈ [a.timestamp + lowerBound; a.timestamp + upperBound]`  or  `a.timestamp + lowerBound <= b.timestamp <= a.timestamp + upperBound`  where a and b are elements of A and B that share a common key. Both the lower and upper bound can be either negative or positive as long as as the lower bound is always smaller or equal to the upper bound. The interval join currently only performs inner joins.
 
-```Plain Text
-b.timestamp ∈ [a.timestamp + lowerBound; a.timestamp + upperBound]
-```
-
- or 
-
-```Plain Text
-a.timestamp + lowerBound <= b.timestamp <= a.timestamp + upperBound
-```
-
-where a and b are elements of A and B that share a common key. Both the lower and upper bound can be either negative or positive as long as as the lower bound is always smaller or equal to the upper bound. The interval join currently only performs inner joins.
-
-When a pair of elements are passed to the 
-
-```Plain Text
-ProcessJoinFunction
-```
-
-, they will be assigned with the larger timestamp (which can be accessed via the 
-
-```Plain Text
-ProcessJoinFunction.Context
-```
-
-) of the two elements.
+When a pair of elements are passed to the `ProcessJoinFunction` , they will be assigned with the larger timestamp (which can be accessed via the `ProcessJoinFunction.Context` ) of the two elements.
 
 **Note** The interval join currently only supports event time.
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora5sJ-ERv0Wi08TzzBDYYorXWR9kjoBsM-wnubrnlvWdc.svg)
 
-In the example above, we join two streams ‘orange’ and ‘green’ with a lower bound of -2 milliseconds and an upper bound of +1 millisecond. Be default, these boundaries are inclusive, but 
-
-```Plain Text
-.lowerBoundExclusive()
-```
-
- and 
-
-```Plain Text
-.upperBoundExclusive
-```
-
- can be applied to change the behaviour.
+In the example above, we join two streams ‘orange’ and ‘green’ with a lower bound of -2 milliseconds and an upper bound of +1 millisecond. Be default, these boundaries are inclusive, but `.lowerBoundExclusive()` and `.upperBoundExclusive`  can be applied to change the behaviour.
 
 Using the more formal notation again this will translate to
 
@@ -3005,11 +2867,11 @@ orangeStream
 
 # 06-Flink的Window
 
-## [6.1 Window](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_61-window)
+## 6.1 Window
 
 > [Flink\_Window](https://blog.csdn.net/dongkang123456/article/details/108374799)
 
-### [6.1.1 概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_611-%E6%A6%82%E8%BF%B0)
+### 6.1.1 概述
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraM63rjuUR48yi5E_KRPyBc5HfbQbsg2iybK77PQ91RCM.png)
 
@@ -3019,7 +2881,7 @@ orangeStream
 
 *举例子：假设按照时间段划分桶，接收到的数据马上能判断放到哪个桶，且多个桶的数据能并行被处理。（迟到的数据也可判断是原本属于哪个桶的）*
 
-### [6.1.2 Window类型](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_612-window%E7%B1%BB%E5%9E%8B)
+### 6.1.2 Window类型
 
 * 时间窗口（Time Window）
   * 滚动时间窗口
@@ -3035,14 +2897,14 @@ orangeStream
 
 ---
 
-#### [滚动窗口(Tumbling Windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3tumbling-windows)
+#### 滚动窗口(Tumbling Windows)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraoF37uYf7QOxlDp9HWx1uLHZr-dVgEgI9AoSf9AKvWAo.png)
 
 * 依据**固定的窗口长度**对数据进行切分
 * 时间对齐，窗口长度固定，没有重叠
 
-#### [滑动窗口(Sliding Windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3sliding-windows)
+#### 滑动窗口(Sliding Windows)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraCg9DBgQs8AgWEoUN2j5zkOoVBRk7D3Cuw7O4o6xrIrQ.png)
 
@@ -3051,16 +2913,16 @@ orangeStream
 * 可以有重叠(是否重叠和滑动距离有关系)
 * 滑动窗口是固定窗口的更广义的一种形式，滚动窗口可以看做是滑动窗口的一种特殊情况（即窗口大小和滑动间隔相等）
 
-#### [会话窗口(Session Windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BC%9A%E8%AF%9D%E7%AA%97%E5%8F%A3session-windows)
+#### 会话窗口(Session Windows)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora5WeL18j1laS7Ww0lRMVBvewKGMQFIUsyTeKmwufS-pw.png)
 
 * 由一系列事件组合一个指定时间长度的timeout间隙组成，也就是一段时间没有接收到新数据就会生成新的窗口
 * 特点：时间无对齐
 
-## [6.2 Window API](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_62-window-api)
+## 6.2 Window API
 
-### [6.2.1 概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_621-%E6%A6%82%E8%BF%B0)
+### 6.2.1 概述
 
 * 窗口分配器——`window()`方法
 
@@ -3079,7 +2941,7 @@ DataStream<Tuple2<String,Double>> minTempPerWindowStream =
   .minBy(1);
 ```
 
-#### [窗口分配器(window assigner)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%AA%97%E5%8F%A3%E5%88%86%E9%85%8D%E5%99%A8window-assigner)
+#### 窗口分配器(window assigner)
 
 `window()`方法接收的输入参数是一个WindowAssigner
 
@@ -3090,7 +2952,7 @@ DataStream<Tuple2<String,Double>> minTempPerWindowStream =
 * 会话窗口（session window）
 * **全局窗口（global window）**
 
-#### [创建不同类型的窗口](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%9B%E5%BB%BA%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%AA%97%E5%8F%A3)
+#### 创建不同类型的窗口
 
 * 滚动时间窗口（tumbling time window）
 
@@ -3124,11 +2986,11 @@ DataStream<Tuple2<String,Double>> minTempPerWindowStream =
 
 *DataStream的windowAll()类似分区的global操作，这个操作是non-parallel的(并行度强行为1)，所有的数据都会被传递到同一个算子operator上，官方建议如果非必要就不要用这个API*
 
-### [6.2.2 TimeWindow](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_622-timewindow)
+### 6.2.2 TimeWindow
 
  TimeWindow将指定时间范围内的所有数据组成一个window，一次对一个window里面的所有数据进行计算。
 
-#### [滚动窗口](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3)
+#### 滚动窗口
 
  Flink默认的时间窗口根据ProcessingTime进行窗口的划分，将Flink获取到的数据根据进入Flink的时间划分到不同的窗口中。
 
@@ -3147,7 +3009,7 @@ DataStream<Tuple2<String, Double>> minTempPerWindowStream = dataStream
 
  时间间隔可以通过`Time.milliseconds(x)`，`Time.seconds(x)`，`Time.minutes(x)`等其中的一个来指定。
 
-#### [滑动窗口](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3)
+#### 滑动窗口
 
  滑动窗口和滚动窗口的函数名是完全一致的，只是在传参数时需要传入两个参数，一个是window\_size，一个是sliding\_size。
 
@@ -3162,13 +3024,13 @@ DataStream<SensorReading> minTempPerWindowStream = dataStream
 
  时间间隔可以通过`Time.milliseconds(x)`，`Time.seconds(x)`，`Time.minutes(x)`等其中的一个来指定。
 
-### [6.2.3 CountWindow](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_623-countwindow)
+### 6.2.3 CountWindow
 
  CountWindow根据窗口中相同key元素的数量来触发执行，执行时只计算元素数量达到窗口大小的key对应的结果。
 
  **注意：CountWindow的window\_size指的是相同Key的元素的个数，不是输入的所有元素的总数。**
 
-#### [滚动窗口](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3-1)
+#### 滚动窗口
 
  默认的CountWindow是一个滚动窗口，只需要指定窗口大小即可，**当元素数量达到窗口大小时，就会触发窗口的执行**。
 
@@ -3179,7 +3041,7 @@ DataStream<SensorReading> minTempPerWindowStream = dataStream
   .minBy("temperature");
 ```
 
-#### [滑动窗口](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3-1)
+#### 滑动窗口
 
  滑动窗口和滚动窗口的函数名是完全一致的，只是在传参数时需要传入两个参数，一个是window\_size，一个是sliding\_size。
 
@@ -3192,24 +3054,24 @@ DataStream<SensorReading> minTempPerWindowStream = dataStream
   .minBy("temperature");
 ```
 
-### [6.2.4 window function](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_624-window-function)
+### 6.2.4 window function
 
 window function 定义了要对窗口中收集的数据做的计算操作，主要可以分为两类：
 
 * 增量聚合函数（incremental aggregation functions）
 * 全窗口函数（full window functions）
 
-#### [增量聚合函数](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%A2%9E%E9%87%8F%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0)
+#### 增量聚合函数
 
 * **每条数据到来就进行计算**，保持一个简单的状态。（来一条处理一条，但是不输出，到窗口临界位置才输出）
 * 典型的增量聚合函数有ReduceFunction, AggregateFunction。
 
-#### [全窗口函数](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%85%A8%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0)
+#### 全窗口函数
 
 * **先把窗口所有数据收集起来，等到计算的时候会遍历所有数据**。（来一个放一个，窗口临界位置才遍历且计算、输出）
 * ProcessWindowFunction，WindowFunction。
 
-### [6.2.5 其它可选API](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_625-%E5%85%B6%E5%AE%83%E5%8F%AF%E9%80%89api)
+### 6.2.5 其它可选API
 
 > [Flink-Window概述 | Window类型 | TimeWindow、CountWindow、SessionWindow、WindowFunction](https://blog.csdn.net/qq_40180229/article/details/106359443)
 
@@ -3221,7 +3083,7 @@ window function 定义了要对窗口中收集的数据做的计算操作，主�
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoralBtpLgXSxs_jMlf_8afkiV0-4fN3grmf3dEu4nSjpyM.png)
 
-### [6.2.6 代码测试](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_626-%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95)
+### 6.2.6 代码测试
 
 > [Flink之Window的使用（2）：时间窗口](https://www.cnblogs.com/yangshibiao/p/14133628.html)
 
@@ -3351,7 +3213,7 @@ result> 1
 
 * 编写java测试代码
 
-```Plain Text
+```java
 package apitest.window;
 
 import apitest.beans.SensorReading;
@@ -3457,7 +3319,7 @@ eg：窗口大小10，步长2，那么前5次输出时，窗口内的元素个�
 
 这里获取每个窗口里的温度平均值
 
-```Plain Text
+```java
 package apitest.window;
 
 import apitest.beans.SensorReading;
@@ -3605,7 +3467,7 @@ SingleOutputStreamOperator<SensorReading> sumStream = dataStream.keyBy("id")
 
 [Flink\_Window](https://blog.csdn.net/dongkang123456/article/details/108374799)
 
-## [7.1 Flink中的时间语义](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_71-flink%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E8%AF%AD%E4%B9%89)
+## 7.1 Flink中的时间语义
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorapEGqul3DVkK6RLubH4sBEfI9tCN-jiDWIRONHoeQ0TU.png)
 
@@ -3636,7 +3498,7 @@ SingleOutputStreamOperator<SensorReading> sumStream = dataStream.keyBy("id")
 2017-11-02 18:27:15.624 INFO Fail over to rm
 ```
 
-## [7.2 EventTime的引入](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_72-eventtime%E7%9A%84%E5%BC%95%E5%85%A5)
+## 7.2 EventTime的引入
 
  **在Flink的流式处理中，绝大部分的业务都会使用eventTime**，一般只在eventTime无法使用时，才会被迫使用ProcessingTime或者IngestionTime。
 
@@ -3652,11 +3514,11 @@ env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
 **注：具体的时间，还需要从数据中提取时间戳。**
 
-## [7.3 Watermark](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_73-watermark)
+## 7.3 Watermark
 
 > [Flink流计算编程--watermark（水位线）简介](https://blog.csdn.net/lmalds/article/details/52704170) <= 不错的文章，建议阅读
 
-### [7.3.1 概念](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_731-%E6%A6%82%E5%BF%B5)
+### 7.3.1 概念
 
 * **Flink对于迟到数据有三层保障**，先来后到的保障顺序是：
 * WaterMark => 约等于放宽窗口标准
@@ -3724,7 +3586,7 @@ Watermark = maxEventTime-延迟时间t
 
  **只要没有达到水位那么不管现实中的时间推进了多久都不会触发关窗。**
 
-### [7.3.2 Watermark的特点](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_732-watermark%E7%9A%84%E7%89%B9%E7%82%B9)
+### 7.3.2 Watermark的特点
 
 > [Flink-时间语义与Wartmark及EventTime在Window中的使用](https://blog.csdn.net/qq_40180229/article/details/106363815)
 
@@ -3734,7 +3596,7 @@ Watermark = maxEventTime-延迟时间t
 * **watermark 必须单调递增**，以确保任务的事件时间时钟在向前推进，而不是在后退
 * watermark 与数据的时间戳相关
 
-### [7.3.3 Watermark的传递](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_733-watermark%E7%9A%84%E4%BC%A0%E9%80%92)
+### 7.3.3 Watermark的传递
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraRts8WgIO653RqFr5WXfpsdSlyqS-aJMbsIzE3kYrebU.png)
 
@@ -3743,7 +3605,7 @@ Watermark = maxEventTime-延迟时间t
 3. 图三，上游的Watermark虽然更新了，但是当前最小值还是3，所以不更新event-time clock，也不需要广播到下游
 4. 图四，和图二同理，更新本地event-time clock，同时向下游广播最新的Watermark=4
 
-### [7.3.4 Watermark的引入](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_734-watermark%E7%9A%84%E5%BC%95%E5%85%A5)
+### 7.3.4 Watermark的引入
 
  watermark的引入很简单，对于乱序数据，最常见的引用方式如下：
 
@@ -3773,9 +3635,9 @@ MyAssigner有两种类型
 
 以上两个接口都继承自TimestampAssigner。
 
-#### [TimestampAssigner](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=timestampassigner)
+#### TimestampAssigner
 
-##### [AssignerWithPeriodicWatermarks](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=assignerwithperiodicwatermarks)
+##### AssignerWithPeriodicWatermarks
 
 * 周期性的生成 watermark：系统会周期性的将 watermark 插入到流中
 * 默认周期是200毫秒，可以使用 
@@ -3788,11 +3650,11 @@ ExecutionConfig.setAutoWatermarkInterval()
 
 * **升序和前面乱序的处理 BoundedOutOfOrderness ，都是基于周期性 watermark 的**。
 
-##### [AssignerWithPunctuatedWatermarks](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=assignerwithpunctuatedwatermarks)
+##### AssignerWithPunctuatedWatermarks
 
 * 没有时间周期规律，可打断的生成 watermark（即可实现每次获取数据都更新watermark）
 
-### [7.3.5 Watermark的设定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_735-watermark%E7%9A%84%E8%AE%BE%E5%AE%9A)
+### 7.3.5 Watermark的设定
 
 * 在Flink中，Watermark由应用程序开发人员生成，这通常需要对相应的领域有一定的了解
 * 如果Watermark设置的延迟太久，收到结果的速度可能就会很慢，解决办法是在水位线到达之前输出一个近似结果
@@ -3804,7 +3666,7 @@ ExecutionConfig.setAutoWatermarkInterval()
 
 **注：一般认为Watermark的设置代码，在里Source步骤越近的地方越合适。**
 
-### [7.3.6 测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_736-%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81)
+### 7.3.6 测试代码
 
 测试Watermark和迟到数据
 
@@ -3866,11 +3728,11 @@ public class WindowTest3_EventTimeWindow {
 }
 ```
 
-#### [并行任务Watermark传递测试](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%B9%B6%E8%A1%8C%E4%BB%BB%E5%8A%A1watermark%E4%BC%A0%E9%80%92%E6%B5%8B%E8%AF%95)
+#### 并行任务Watermark传递测试
 
 在前面代码的基础上，修改执行环境并行度为4，进行测试
 
-```Plain Text
+```java
 public class WindowTest3_EventTimeWindow {
   public static void main(String[] args) throws Exception {
     StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -3947,39 +3809,11 @@ minTemp:4> SensorReading{id='sensor_7', timestamp=1547718202, temperature=6.7}
 minTemp:3> SensorReading{id='sensor_6', timestamp=1547718201, temperature=15.4}
 ```
 
-##### [分析](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%86%E6%9E%90)
+##### 分析
 
 1. **计算窗口起始位置Start和结束位置End**
 
-从
-
-```Plain Text
-TumblingProcessingTimeWindows
-```
-
-类里的
-
-```Plain Text
-assignWindows
-```
-
-方法，我们可以得知窗口的起点计算方法如下： \$ 窗口起点start = timestamp - (timestamp -offset+WindowSize) % WindowSize \$ 由于我们没有设置offset，所以这里
-
-```Plain Text
-start=第一个数据的时间戳1547718199-(1547718199-0+15)%15=1547718195
-```
-
-计算得到窗口初始位置为
-
-```Plain Text
-Start = 1547718195
-```
-
-，那么这个窗口理论上本应该在1547718195+15的位置关闭，也就是
-
-```Plain Text
-End=1547718210
-```
+从`TumblingProcessingTimeWindows` 类里的`assignWindows` 方法，我们可以得知窗口的起点计算方法如下： \$ 窗口起点start = timestamp - (timestamp -offset+WindowSize) % WindowSize \$ 由于我们没有设置offset，所以这里`start=第一个数据的时间戳1547718199-(1547718199-0+15)%15=1547718195` 计算得到窗口初始位置为`Start = 1547718195` ，那么这个窗口理论上本应该在1547718195+15的位置关闭，也就是`End=1547718210`
 
 ```Plain Text
 @Override
@@ -4004,13 +3838,7 @@ public static long getWindowStartWithOffset(long timestamp, long offset, long wi
 
 2. **计算修正后的Window输出结果的时间**
 
-测试代码中Watermark设置的
-
-```Plain Text
-maxOutOfOrderness
-```
-
-最大乱序程度是2s，所以实际获取到End+2s的时间戳数据时（达到Watermark），才认为Window需要输出计算的结果（不关闭，因为设置了允许迟到1min）
+测试代码中Watermark设置的`maxOutOfOrderness` 最大乱序程度是2s，所以实际获取到End+2s的时间戳数据时（达到Watermark），才认为Window需要输出计算的结果（不关闭，因为设置了允许迟到1min）
 
 **所以实际应该是1547718212的数据到来时才触发Window输出计算结果。**
 
@@ -4050,47 +3878,11 @@ public final Watermark getCurrentWatermark() {
 
 * **Watermark会向子任务广播**
 * 我们在map才设置Watermark，map根据Rebalance轮询方式分配数据。所以前4个输入分别到4个slot中，4个slot计算得出的Watermark不同（分别是1547718199-2，1547718201-2，1547718202-2，1547718205-2）\* **Watermark传递时，会选择当前接收到的最小一个作为自己的Watermark**
-* 前4次输入中，有些map子任务还没有接收到数据，所以其下游的keyBy后的slot里watermark就是
+* 前4次输入中，有些map子任务还没有接收到数据，所以其下游的keyBy后的slot里watermark就是`Long.MIN_VALUE` （因为4个上游的Watermark广播最小值就是默认的`Long.MIN_VALUE`）
 
-```Plain Text
-Long.MIN_VALUE
-```
+* 并行度4，在最后4个相同的输入，使得Rebalance到4个map子任务的数据的`currentMaxTimestamp` 都是1547718212，经过`getCurrentWatermark()`的计算（`currentMaxTimestamp-maxOutOfOrderness`），4个子任务都计算得到watermark=1547718210，4个map子任务向4个keyBy子任务广播`watermark=1547718210`，使得keyBy子任务们获取到4个上游的Watermark最小值就是1547718210，然后4个KeyBy子任务都更新自己的Watermark为1547718210。\* **根据Watermark的定义，我们认为>=Watermark的数据都已经到达。由于此时watermark >= 窗口End，所以Window输出计算结果（4个子任务，4个结果）。**
 
-（因为4个上游的Watermark广播最小值就是默认的
-
-```Plain Text
-Long.MIN_VALUE
-```
-
-）
-
-* 并行度4，在最后4个相同的输入，使得Rebalance到4个map子任务的数据的
-
-```Plain Text
-currentMaxTimestamp
-```
-
-都是1547718212，经过
-
-```Plain Text
-getCurrentWatermark()
-```
-
-的计算（
-
-```Plain Text
-currentMaxTimestamp-maxOutOfOrderness
-```
-
-），4个子任务都计算得到watermark=1547718210，4个map子任务向4个keyBy子任务广播
-
-```Plain Text
-watermark=1547718210
-```
-
-，使得keyBy子任务们获取到4个上游的Watermark最小值就是1547718210，然后4个KeyBy子任务都更新自己的Watermark为1547718210。\* **根据Watermark的定义，我们认为>=Watermark的数据都已经到达。由于此时watermark >= 窗口End，所以Window输出计算结果（4个子任务，4个结果）。**
-
-### [7.3.7 窗口起始点和偏移量](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_737-%E7%AA%97%E5%8F%A3%E8%B5%B7%E5%A7%8B%E7%82%B9%E5%92%8C%E5%81%8F%E7%A7%BB%E9%87%8F)
+### 7.3.7 窗口起始点和偏移量
 
 > [flink-Window Assingers(窗口分配器)中offset偏移量](https://juejin.cn/post/6844904110941011976)
 
@@ -4106,7 +3898,7 @@ watermark=1547718210
 * 键控状态（Keyed State）
 * 状态后端（State Backends）
 
-## [8.1 状态概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_81-%E7%8A%B6%E6%80%81%E6%A6%82%E8%BF%B0)
+## 8.1 状态概述
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraMLAUA97lW2NacmlQWWUKa8LhgcOGLdabfuVrzwN8sn8.png)
 
@@ -4126,7 +3918,7 @@ watermark=1547718210
 * **键控状态（Keyed State）**
   * 根据输入数据流中定义的键（key）来维护和访问
 
-## [8.2 算子状态 Operator State](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_82-%E7%AE%97%E5%AD%90%E7%8A%B6%E6%80%81-operator-state)
+## 8.2 算子状态 Operator State
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraBaT9FkVQ-yGnXoP91gfrIg6vjMAhw_XaRk_45Yp-Wzc.png)
 
@@ -4134,7 +3926,7 @@ watermark=1547718210
 * 状态对于**同一任务**而言是共享的。（**不能跨slot**）
 * 状态算子不能由相同或不同算子的另一个任务访问。
 
-### [算子状态数据结构](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%AE%97%E5%AD%90%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+### 算子状态数据结构
 
 * 列表状态(List state)
   * 将状态表示为一组数据的列表
@@ -4143,11 +3935,11 @@ watermark=1547718210
 * 广播状态(Broadcast state)
   * 如果一个算子有多项任务，而它的每项任务状态又都相同，那么这种特殊情况最适合应用广播状态
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81)
+### 测试代码
 
 实际一般用算子状态比较少，一般还是键控状态用得多一点。
 
-```Plain Text
+```java
 package apitest.state;
 
 import apitest.beans.SensorReading;
@@ -4233,7 +4025,7 @@ sensor_1,1547718199,35.8
 5
 ```
 
-## [8.3 键控状态 Keyed State](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_83-%E9%94%AE%E6%8E%A7%E7%8A%B6%E6%80%81-keyed-state)
+## 8.3 键控状态 Keyed State
 
 > [Flink\_Flink中的状态](https://blog.csdn.net/dongkang123456/article/details/108430338)
 
@@ -4243,7 +4035,7 @@ sensor_1,1547718199,35.8
 * **Flink 为每个key维护一个状态实例，并将具有相同键的所有数据，都分区到同一个算子任务中，这个任务会维护和处理这个key对应的状态。**
 * **当任务处理一条数据时，他会自动将状态的访问范围限定为当前数据的key**。
 
-### [键控状态数据结构](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E9%94%AE%E6%8E%A7%E7%8A%B6%E6%80%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+### 键控状态数据结构
 
 * 值状态(value state)
   * 将状态表示为单个的值
@@ -4254,7 +4046,7 @@ sensor_1,1547718199,35.8
 * **聚合状态(Reducing state & Aggregating State)**
   * 将状态表示为一个用于聚合操作的列表
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-1)
+### 测试代码
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoramQeRjXPl0s8Ia2QHI3Qw9d8X5v0iq1oEc-VQ29ek61s.png)
 
@@ -4262,7 +4054,7 @@ sensor_1,1547718199,35.8
 
 * java测试代码
 
-```Plain Text
+```java
 package apitest.state;
 
 import apitest.beans.SensorReading;
@@ -4355,13 +4147,13 @@ public class StateTest2_KeyedState {
 }
 ```
 
-### [场景测试](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%9C%BA%E6%99%AF%E6%B5%8B%E8%AF%95)
+### 场景测试
 
 假设做一个温度报警，如果一个传感器前后温差超过10度就报警。这里使用键控状态Keyed State + flatMap来实现
 
 * java代码
 
-```Plain Text
+```java
 package apitest.state;
 
 import apitest.beans.SensorReading;
@@ -4477,18 +4269,18 @@ sensor_7,1547718202,30
 (sensor_7,19.9,30.0)
 ```
 
-## [8.4 状态后端 State Backends](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_84-%E7%8A%B6%E6%80%81%E5%90%8E%E7%AB%AF-state-backends)
+## 8.4 状态后端 State Backends
 
 > [Flink\_Flink中的状态](https://blog.csdn.net/dongkang123456/article/details/108430338)
 
-### [8.4.1 概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_841-%E6%A6%82%E8%BF%B0)
+### 8.4.1 概述
 
 * 每传入一条数据，有状态的算子任务都会读取和更新状态。
 * 由于有效的状态访问对于处理数据的低延迟至关重要，因此每个并行任务都会在本地维护其状态，以确保快速的状态访问。
 * 状态的存储、访问以及维护，由一个可插入的组件决定，这个组件就叫做**状态后端( state backend)**
 * **状态后端主要负责两件事：本地状态管理，以及将检查点(checkPoint)状态写入远程存储**
 
-### [8.4.2 选择一个状态后端](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_842-%E9%80%89%E6%8B%A9%E4%B8%80%E4%B8%AA%E7%8A%B6%E6%80%81%E5%90%8E%E7%AB%AF)
+### 8.4.2 选择一个状态后端
 
 * MemoryStateBackend
   * 内存级的状态后端，会将键控状态作为内存中的对象进行管理，将它们存储在TaskManager的JVM堆上，而将checkpoint存储在JobManager的内存中
@@ -4499,7 +4291,7 @@ sensor_7,1547718202,30
 * RocksDBStateBackend
   * 将所有状态序列化后，存入本地的RocksDB中存储
 
-### [8.4.3 配置文件](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_843-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
+### 8.4.3 配置文件
 
 ```Plain Text
 flink-conf.yaml
@@ -4543,11 +4335,11 @@ jobmanager.execution.failover-strategy: region
 上面这个region指，多个并行度的任务要是有个挂掉了，只重启那个任务所属的region（可能含有多个子任务），而不需要重启整个Flink程序
 ```
 
-### [8.4.4 样例代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_844-%E6%A0%B7%E4%BE%8B%E4%BB%A3%E7%A0%81)
+### 8.4.4 样例代码
 
 * 其中使用RocksDBStateBackend需要另外加入pom依赖
 
-```go
+```xml
 <!-- RocksDBStateBackend -->
 <dependency>
   <groupId>org.apache.flink</groupId>
@@ -4558,7 +4350,7 @@ jobmanager.execution.failover-strategy: region
 
 * java代码
 
-```Plain Text
+```java
 package apitest.state;
 
 import apitest.beans.SensorReading;
@@ -4618,17 +4410,17 @@ Flink提供了8个Process Function：
 * ProcessWindowFunction
 * ProcessAllWindowFunction
 
-## [9.1 KeyedProcessFunction](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_91-keyedprocessfunction)
+## 9.1 KeyedProcessFunction
 
  这个是相对比较常用的ProcessFunction，根据名字就可以知道是用在keyedStream上的。
 
  KeyedProcessFunction用来操作KeyedStream。KeyedProcessFunction会处理流的每一个元素，输出为0个、1个或者多个元素。所有的Process Function都继承自RichFunction接口，所以都有`open()`、`close()`和`getRuntimeContext()`等方法。而`KeyedProcessFunction<K, I, O>`还额外提供了两个方法：`processElement(I value, Context ctx, Collector<O> out)`，流中的每一个元素都会调用这个方法，调用结果将会放在Collector数据类型中输出。Context可以访问元素的时间戳，元素的 key ，以及TimerService 时间服务。 Context 还可以将结果输出到别的流(side outputs)。`onTimer(long timestamp, OnTimerContext ctx, Collector<O> out)`，是一个回调函数。当之前注册的定时器触发时调用。参数timestamp 为定时器所设定的触发的时间戳。Collector 为输出结果的集合。OnTimerContext和processElement的Context 参数一样，提供了上下文的一些信息，例如定时器触发的时间信息(事件时间或者处理时间)。
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-2)
+### 测试代码
 
 设置一个获取数据后第5s给出提示信息的定时器。
 
-```Plain Text
+```java
 package processfunction;
 
 import apitest.beans.SensorReading;
@@ -4731,45 +4523,21 @@ sensor_1,1547718207,36.3
 1612283803911 定时器触发
 ```
 
-## [9.2 TimerService和定时器(Timers)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_92-timerservice%E5%92%8C%E5%AE%9A%E6%97%B6%E5%99%A8timers)
+## 9.2 TimerService和定时器(Timers)
 
  Context 和OnTimerContext 所持有的TimerService 对象拥有以下方法：
 
-```Plain Text
-long currentProcessingTime()
-```
+- `long currentProcessingTime()` 返回当前处理时间
+- `long currentWatermark()`返回当前watermark 的时间戳
+- `void registerProcessingTimeTimer( long timestamp)`会注册当前key的processing time的定时器。当processing time 到达定时时间时，触发timer。
 
-返回当前处理时间
-
-```Plain Text
-long currentWatermark()
-```
-
-返回当前watermark 的时间戳
-
-```Plain Text
-void registerProcessingTimeTimer( long timestamp)
-```
-
-会注册当前key的processing time的定时器。当processing time 到达定时时间时，触发timer。
-
-* **void registerEventTimeTimer(long timestamp)\***\* 会注册当前key 的event time 定时器。当Watermark水位线大于等于定时器注册的时间时，触发定时器执行回调函数。\*\*
-
-```Plain Text
-void deleteProcessingTimeTimer(long timestamp)
-```
-
-删除之前注册处理时间定时器。如果没有这个时间戳的定时器，则不执行。
-
-```Plain Text
-void deleteEventTimeTimer(long timestamp)
-```
-
-删除之前注册的事件时间定时器，如果没有此时间戳的定时器，则不执行。
+* `void registerEventTimeTimer(long timestamp)` 会注册当前key 的event time 定时器。当Watermark水位线大于等于定时器注册的时间时，触发定时器执行回调函数。
+* `void deleteProcessingTimeTimer(long timestamp)`删除之前注册处理时间定时器。如果没有这个时间戳的定时器，则不执行。
+* `void deleteEventTimeTimer(long timestamp)`删除之前注册的事件时间定时器，如果没有此时间戳的定时器，则不执行。
 
  **当定时器timer 触发时，会执行回调函数onTimer()。注意定时器timer 只能在keyed streams 上面使用。**
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-3)
+### 测试代码
 
 下面举个例子说明KeyedProcessFunction 如何操作KeyedStream。
 
@@ -4777,7 +4545,7 @@ void deleteEventTimeTimer(long timestamp)
 
 * java代码
 
-```Plain Text
+```java
 package processfunction;
 
 import apitest.beans.SensorReading;
@@ -4907,7 +4675,7 @@ sensor_7,1547718202,9.1
 传感器sensor_7温度值连续10000ms上升
 ```
 
-## [9.3 侧输出流（SideOutput）](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_93-%E4%BE%A7%E8%BE%93%E5%87%BA%E6%B5%81%EF%BC%88sideoutput%EF%BC%89)
+## 9.3 侧输出流（SideOutput）
 
 * **一个数据可以被多个window包含，只有其不被任何window包含的时候(包含该数据的所有window都关闭之后)，才会被丢到侧输出流。**
 * **简言之，如果一个数据被丢到侧输出流，那么所有包含该数据的window都由于已经超过了"允许的迟到时间"而关闭了，进而新来的迟到数据只能被丢到侧输出流！**
@@ -4919,13 +4687,13 @@ sensor_7,1547718202,9.1
 * 一个side output 可以定义为OutputTag\[X\]对象，X 是输出流的数据类型。
 * processfunction 可以通过Context 对象发射一个事件到一个或者多个side outputs。
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-4)
+### 测试代码
 
 场景：温度>=30放入高温流输出，反之放入低温流输出
 
 * java代码
 
-```Plain Text
+```java
 package processfunction;
 
 import apitest.beans.SensorReading;
@@ -4999,7 +4767,7 @@ low-temp> SensorReading{id='sensor_7', timestamp=1547718202, temperature=6.7}
 high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 ```
 
-## [9.4 CoProcessFunction](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_94-coprocessfunction)
+## 9.4 CoProcessFunction
 
 * 对于两条输入流，DataStream API 提供了CoProcessFunction 这样的low-level操作。CoProcessFunction 提供了操作每一个输入流的方法：`processElement1()`和`processElement2()`。
 
@@ -5010,7 +4778,7 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 
 [Flink-容错机制 | 一致性检查点 | 检查点到恢复状态过程 | Flink检查点算法(Chandy-Lamport) | 算法操作解析 | 保存点简介](https://blog.csdn.net/qq_40180229/article/details/106433621)
 
-## [10.1 一致性检查点(checkpoint)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_101-%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5%E7%82%B9checkpoint)
+## 10.1 一致性检查点(checkpoint)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraTVgwHaCI6cV6HZFc9Qm1_0tCzalwyxmZXjxpqO_5fwg.png)
 
@@ -5023,7 +4791,7 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 
 * 在JobManager中也有个Chechpoint的指针，指向了仓库的状态快照的一个拓扑图，为以后的数据故障恢复做准备
 
-## [10.2 从检查点恢复状态](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_102-%E4%BB%8E%E6%A3%80%E6%9F%A5%E7%82%B9%E6%81%A2%E5%A4%8D%E7%8A%B6%E6%80%81)
+## 10.2 从检查点恢复状态
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorahIM5pLw07snZq-s7SN_rsi9ACLTXNC9LK8izscsux74.png)
 
@@ -5053,9 +4821,9 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 
 *（这里要求source源也能记录状态，回退到读取数据7的状态，kafka有相应的偏移指针能完成该操作）*
 
-## [10.3 Flink检查点算法](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_103-flink%E6%A3%80%E6%9F%A5%E7%82%B9%E7%AE%97%E6%B3%95)
+## 10.3 Flink检查点算法
 
-### [概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%A6%82%E8%BF%B0)
+### 概述
 
 **checkpoint和Watermark一样，都会以广播的形式告诉所有下游。**
 
@@ -5075,7 +4843,7 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
   * Flink的检查点算法用到了一种称为分界线（barrier）的特殊数据形式，用来把一条流上数据按照不同的检查点分开
   * **分界线之前到来的数据导致的状态更改，都会被包含在当前分界线所属的检查点中；而基于分界线之后的数据导致的所有更改，就会被包含在之后的检查点中**
 
-### [具体讲解](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%85%B7%E4%BD%93%E8%AE%B2%E8%A7%A3)
+### 具体讲解
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorajga-AW31o-TdpVj2HG1nXvMOuAf6oMXlhuwvS7jL7oY.png)
 
@@ -5101,7 +4869,7 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 
  *可以看出在Source接受barrier时，数据流也在不断的处理，不会进行中断*
 
- *此时的偶数流已经处理完****蓝2****变成了4，但是还没处理到****黄4****，只是下游sink发送了一个数据4，而奇数流已经处理完****蓝3****变成了8（黄1+蓝1+黄3+蓝3），并向下游sink发送了8*
+ *此时的偶数流已经处理完**蓝2**变成了4，但是还没处理到**黄4**，只是下游sink发送了一个数据4，而奇数流已经处理完**蓝3**变成了8（黄1+蓝1+黄3+蓝3），并向下游sink发送了8*
 
  *此时检查点barrier都还未到Sum\_odd奇数流和Sum\_even偶数流*
 
@@ -5113,7 +4881,7 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 
  *此时蓝色流的barrier先一步抵达了偶数流，黄色的barrier还未到，但是因为数据的不中断一直处理，此时的先到的蓝色的barrier会将此时的偶数流的数据4进行缓存处理，流接着处理接下来的数据等待着黄色的barrier的到来，而黄色barrier之前的数据将会对缓存的数据相加*
 
- *这次处理的总结：分界线对齐：barrier 向下游传递，sum 任务会等待所有输入分区的 barrier 到达，对于barrier已经到达的分区，继续到达的数据会被缓存。而barrier尚未到达的分区，数据会被正常处理\*\**
+ *这次处理的总结：分界线对齐：barrier 向下游传递，sum 任务会等待所有输入分区的 barrier 到达，对于barrier已经到达的分区，继续到达的数据会被缓存。而barrier尚未到达的分区，数据会被正常处理*
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraJj2GXEbtTeZ1PqHBwYUNoi8yjwjZ2vht7R95OBrGb0Y.png)
 
@@ -5132,7 +4900,7 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 * **Sink 任务向 JobManager 确认状态保存到 checkpoint 完毕**
 * **当所有任务都确认已成功将状态保存到检查点时，检查点就真正完成了**
 
-## [10.4 保存点(Savepoints)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_104-%E4%BF%9D%E5%AD%98%E7%82%B9savepoints)
+## 10.4 保存点(Savepoints)
 
 **CheckPoint为自动保存，SavePoint为手动保存**
 
@@ -5141,11 +4909,11 @@ high-temp> SensorReading{id='sensor_10', timestamp=1547718205, temperature=38.1}
 * Flink不会自动创建保存点，因此用户（或者外部调度程序）必须明确地触发创建操作
 * 保存点是一个强大的功能。除了故障恢复外，保存点可以用于：有计划的手动备份、更新应用程序、版本迁移、暂停和重启程序，等等
 
-## [10.5 检查点和重启策略配置](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_105-%E6%A3%80%E6%9F%A5%E7%82%B9%E5%92%8C%E9%87%8D%E5%90%AF%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE)
+## 10.5 检查点和重启策略配置
 
 * java样例代码
 
-```Plain Text
+```java
 package apitest.state;
 
 import apitest.beans.SensorReading;
@@ -5210,11 +4978,11 @@ public class StateTest4_FaultTolerance {
 }
 ```
 
-## [10.6 状态一致性](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_106-%E7%8A%B6%E6%80%81%E4%B8%80%E8%87%B4%E6%80%A7)
+## 10.6 状态一致性
 
 > [Flink-状态一致性 | 状态一致性分类 | 端到端状态一致性 | 幂等写入 | 事务写入 | WAL | 2PC](https://blog.csdn.net/qq_40180229/article/details/106445029)
 
-### [10.6.1 概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1061-%E6%A6%82%E8%BF%B0)
+### 10.6.1 概述
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoradG8aJz10hYIYbnVPXvWYb1uVpaPvqfHnGiAwZM68Ta4.png)
 
@@ -5223,7 +4991,7 @@ public class StateTest4_FaultTolerance {
 * 一条数据不应该丢失，也不应该重复计算
 * 在遇到故障时可以恢复状态，恢复以后的重新计算，结果应该也是完全正确的。
 
-### [10.6.2 分类](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1062-%E5%88%86%E7%B1%BB)
+### 10.6.2 分类
 
  **Flink的一个重大价值在于，它既保证了exactly-once，也具有低延迟和高吞吐的处理能力。**
 
@@ -5239,19 +5007,19 @@ public class StateTest4_FaultTolerance {
 
 *这指的是系统保证在发生故障后得到的计数结果与正确值一致。*
 
-### [10.6.3 一致性检查点(Checkpoints)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1063-%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5%E7%82%B9checkpoints)
+### 10.6.3 一致性检查点(Checkpoints)
 
 * Flink使用了一种轻量级快照机制——检查点（checkpoint）来保证exactly-once语义
 * 有状态流应用的一致检查点，其实就是：所有任务的状态，在某个时间点的一份备份（一份快照）。而这个时间点，应该是所有任务都恰好处理完一个相同的输入数据的时间。
 * 应用状态的一致检查点，是Flink故障恢复机制的核心
 
-#### [端到端(end-to-end)状态一致性](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%AB%AF%E5%88%B0%E7%AB%AFend-to-end%E7%8A%B6%E6%80%81%E4%B8%80%E8%87%B4%E6%80%A7)
+#### 端到端(end-to-end)状态一致性
 
 * 目前我们看到的一致性保证都是由流处理器实现的，也就是说都是在Flink流处理器内部保证的；而在真实应用中，流处理应用除了流处理器以外还包含了数据源（例如Kafka）和输出到持久化系统
 * 端到端的一致性保证，意味着结果的正确性贯穿了整个流处理应用的始终；每一个组件都保证了它自己的一致性
 * **整个端到端的一致性级别取决于所有组件中一致性最弱的组件**
 
-#### [端到端 exactly-once](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%AB%AF%E5%88%B0%E7%AB%AF-exactly-once)
+#### 端到端 exactly-once
 
 * 内部保证——checkpoint
 * source端——可重设数据的读取位置
@@ -5259,7 +5027,7 @@ public class StateTest4_FaultTolerance {
   * 幂等写入
   * 事务写入
 
-##### [幂等写入](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%B9%82%E7%AD%89%E5%86%99%E5%85%A5)
+##### 幂等写入
 
 * 所谓幂等操作，是说一个操作，可以重复执行很多次，但只导致一次结果更改，也就是说，后面再重复执行就不起作用了。
 
@@ -5267,7 +5035,7 @@ public class StateTest4_FaultTolerance {
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoray1GdhcXEMzIF6QeOuvTkTsz3bRccR0e-GT6hClGc4c4.png)
 
-##### [事务写入](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BA%8B%E5%8A%A1%E5%86%99%E5%85%A5)
+##### 事务写入
 
 * 事务（Transaction）
   * 应用程序中一系列严密的操作，所有操作必须成功完成，否则在每个操作中所作的所有更改都会被撤销
@@ -5278,13 +5046,13 @@ public class StateTest4_FaultTolerance {
   * 预习日志
   * 两阶段提交
 
-###### [预写日志(Write-Ahead-Log，WAL)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E9%A2%84%E5%86%99%E6%97%A5%E5%BF%97write-ahead-log%EF%BC%8Cwal)
+###### 预写日志(Write-Ahead-Log，WAL)
 
 * 把结果数据先当成状态保存，然后在收到checkpoint完成的通知时，一次性写入sink系统
 * 简单易于实现，由于数据提前在状态后端中做了缓存，所以无论什么sink系统，都能用这种方式一批搞定
 * DataStream API提供了一个模版类：`GenericWriteAheadSink`，来实现这种事务性sink
 
-###### [两阶段提交(Two-Phase-Commit，2PC)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4two-phase-commit%EF%BC%8C2pc)
+###### 两阶段提交(Two-Phase-Commit，2PC)
 
 * 对于每个checkpoint，sink任务会启动一个事务，并将接下来所有接收到的数据添加到事务里
 * 然后将这些数据写入外部sink系统，但不提交它们——这时只是"预提交"
@@ -5298,11 +5066,11 @@ public class StateTest4_FaultTolerance {
 * sink任务必须能够在进程失败后恢复事务
 * 提交事务必须是幂等操作
 
-#### [不同Source和Sink的一致性保证](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%B8%8D%E5%90%8Csource%E5%92%8Csink%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E4%BF%9D%E8%AF%81)
+#### 不同Source和Sink的一致性保证
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraBcrFumJGr0PDqd0RJHiZB_Nmz7RMjI8Xo3WaU7rjeNQ.png)
 
-## [10.7 Flink+Kafka 端到端状态一致性的保证](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_107-flinkkafka-%E7%AB%AF%E5%88%B0%E7%AB%AF%E7%8A%B6%E6%80%81%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E4%BF%9D%E8%AF%81)
+## 10.7 Flink+Kafka 端到端状态一致性的保证
 
 > [Flink-状态一致性 | 状态一致性分类 | 端到端状态一致性 | 幂等写入 | 事务写入 | WAL | 2PC](https://blog.csdn.net/qq_40180229/article/details/106445029)
 
@@ -5310,7 +5078,7 @@ public class StateTest4_FaultTolerance {
 * source——kafka consumer作为source，可以将偏移量保存下来，如果后续任务出现了故障，恢复的时候可以由连接器重制偏移量，重新消费数据，保证一致性
 * sink——kafka producer作为sink，采用两阶段提交sink，需要实现一个`TwoPhaseCommitSinkFunction`
 
-### [Exactly-once 两阶段提交](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=exactly-once-%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4)
+### Exactly-once 两阶段提交
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraGRjMAL4_FN6ti7ZVI9QA-OBOkCUiORKJcTbw6GWr_0A.png)
 
@@ -5339,7 +5107,7 @@ public class StateTest4_FaultTolerance {
 * 当所有算子任务的快照完成，也就是这次的 checkpoint 完成时，JobManager 会向所有任务发通知，确认这次 checkpoint 完成
 * sink 任务收到确认通知，正式提交之前的事务，kafka 中未确认数据改为“已确认”
 
-### [Exactly-once 两阶段提交步骤总结](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=exactly-once-%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E6%AD%A5%E9%AA%A4%E6%80%BB%E7%BB%93)
+### Exactly-once 两阶段提交步骤总结
 
 1. 第一条数据来了之后，开启一个 kafka 的事务（transaction），正常写入 kafka 分区日志但标记为未提交，这就是“预提交”
 2. jobmanager 触发 checkpoint 操作，barrier 从 source 开始向下传递，遇到 barrier 的算子将状态存入状态后端，并通知 jobmanager
@@ -5354,7 +5122,7 @@ public class StateTest4_FaultTolerance {
 
 > [flink-Table&sql-碰到的几个问题记录](https://blog.csdn.net/weixin_41956627/article/details/110050094)
 
-## [11.1 概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_111-%E6%A6%82%E8%BF%B0)
+## 11.1 概述
 
 * Flink 对批处理和流处理，提供了统一的上层 API
 * Table API 是一套内嵌在 Java 和 Scala 语言中的查询API，它允许以非常直观的方式组合来自一些关系运算符的查询
@@ -5362,7 +5130,7 @@ public class StateTest4_FaultTolerance {
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraFUyCyW66O8pLuKpmiIhJfjJthUOmfSSgF16O1z4cPOY.png)
 
-### [使用样例](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BD%BF%E7%94%A8%E6%A0%B7%E4%BE%8B)
+### 使用样例
 
 * 导入pom依赖，1.11.X之后，推荐使用blink版本
 
@@ -5453,7 +5221,7 @@ result> sensor_1,37.1
 sql> sensor_1,37.1
 ```
 
-## [11.2 基本程序结构](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_112-%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84)
+## 11.2 基本程序结构
 
 * Table API和SQL的程序结构，与流式处理的程序结构十分类似
 
@@ -5476,13 +5244,13 @@ Table sqlResult = tableEnv.sqlQuery("SELECT ... FROM inputTable ...");
 result.insertInto("outputTable");
 ```
 
-## [11.3 Table API批处理和流处理](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_113-table-api%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E6%B5%81%E5%A4%84%E7%90%86)
+## 11.3 Table API批处理和流处理
 
 新版本blink，真正把批处理、流处理都以DataStream实现。
 
-### [创建环境-样例代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%9B%E5%BB%BA%E7%8E%AF%E5%A2%83-%E6%A0%B7%E4%BE%8B%E4%BB%A3%E7%A0%81)
+### 创建环境-样例代码
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 
@@ -5535,7 +5303,7 @@ public class TableTest2_CommonApi {
 }
 ```
 
-### [11.3.1 表(Table)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1131-%E8%A1%A8table)
+### 11.3.1 表(Table)
 
 * TableEnvironment可以注册目录Catalog，并可以基于Catalog注册表
 * **表(Table)是由一个"标示符"(identifier)来指定的，由3部分组成：Catalog名、数据库(database)名和对象名**
@@ -5543,7 +5311,7 @@ public class TableTest2_CommonApi {
 * 常规表(Table)一般可以用来描述外部数据，比如文件、数据库表或消息队列的数据，也可以直接从DataStream转换而来
 * 视图(View)可以从现有的表中创建，通常是table API或者SQL查询的一个结果集
 
-### [11.3.2 创建表](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1132-%E5%88%9B%E5%BB%BA%E8%A1%A8)
+### 11.3.2 创建表
 
 * TableEnvironment可以调用`connect()`方法，连接外部系统，并调用`.createTemporaryTable()`方法，在Catalog中注册表
 
@@ -5555,7 +5323,7 @@ tableEnv
   .createTemporaryTable("MyTable");    //    创建临时表
 ```
 
-### [11.3.3 创建TableEnvironment](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1133-%E5%88%9B%E5%BB%BAtableenvironment)
+### 11.3.3 创建TableEnvironment
 
 * 创建表的执行环境，需要将flink流处理的执行环境传入`StreamTableEnvironment tableEnv = StreamTableEnvironment.create(env);`
 
@@ -5565,11 +5333,11 @@ tableEnv
   * 执行SQL查询
   * 注册用户自定义函数（UDF）
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-5)
+#### 测试代码
 
 * pom依赖
 
-```Plain Text
+```xml
 <!-- Table API 和 Flink SQL -->
 <dependency>
   <groupId>org.apache.flink</groupId>
@@ -5587,7 +5355,7 @@ tableEnv
 
 * java代码
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 
@@ -5664,7 +5432,7 @@ sensor_1,1547718209,32.8
 sensor_1,1547718212,37.1
 ```
 
-### [11.3.4 表的查询](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1134-%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2)
+### 11.3.4 表的查询
 
 * Table API是集成在Scala和Java语言内的查询API
 * Table API基于代表"表"的Table类，并提供一整套操作处理的方法API；这些方法会返回一个新的Table对象，表示对输入表应用转换操作的结果
@@ -5677,11 +5445,11 @@ Table resultTable = sensorTable
   .filter("id = 'sensor_1'");
 ```
 
-#### [从文件获取数据](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BB%8E%E6%96%87%E4%BB%B6%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE)
+#### 从文件获取数据
 
 * java代码
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 
@@ -5778,7 +5546,7 @@ agg> (false,sensor_1,3,34.96666666666666)
 agg> (true,sensor_1,4,35.5)
 ```
 
-#### [数据写入到文件](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E5%88%B0%E6%96%87%E4%BB%B6)
+#### 数据写入到文件
 
 > [flink Sql 1.11 executeSql报No operators defined in streaming topology. Cannot generate StreamGraph.](https://blog.csdn.net/qq_26502245/article/details/107376528)
 
@@ -5786,7 +5554,7 @@ agg> (true,sensor_1,4,35.5)
 
 * java代码
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -5984,7 +5752,7 @@ Caused by: java.io.IOException: File or directory /Users/ashiamd/mydocs/docs/stu
         ... 3 more
 ```
 
-#### [读写Kafka](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E8%AF%BB%E5%86%99kafka)
+#### 读写Kafka
 
 Kafka作为消息队列，和文件系统类似的，只能往里追加数据，不能修改数据。
 
@@ -5992,7 +5760,7 @@ Kafka作为消息队列，和文件系统类似的，只能往里追加数据，
 
 *（我用的新版Flink和新版kafka连接器，所以version指定"universal"）*
 
-```Plain Text
+```java
 package apitest.tableapi;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -6103,17 +5871,17 @@ sensor_6,15.4
 sensor_6,34.5
 ```
 
-### [11.3.5 更新模式](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1135-%E6%9B%B4%E6%96%B0%E6%A8%A1%E5%BC%8F)
+### 11.3.5 更新模式
 
 * 对于流式查询，需要声明如何在表和外部连接器之间执行转换
 * 与外部系统交换的消息类型，由更新模式（Uadate Mode）指定
 * 追加（Append）模式
 * 表只做插入操作，和外部连接器只交换插入（Insert）消息\* 撤回（Retract）模式
 * 表和外部连接器交换添加（Add）和撤回（Retract）消息
-* 插入操作（Insert）编码为Add消息；删除（Delete）编码为Retract消息；**更新（Update）编码为上一条的Retract和下一条的Add消息**\* 更新插入（Upsert）模式
+* 插入操作（Insert）编码为Add消息；删除（Delete）编码为Retract消息；**更新（Update）编码为上一条的Retract和下一条的Add消息** 更新插入（Upsert）模式
 * 更新和插入都被编码为Upsert消息；删除编码为Delete消息
 
-### [11.3.6 输出到ES](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1136-%E8%BE%93%E5%87%BA%E5%88%B0es)
+### 11.3.6 输出到ES
 
 * 可以创建Table来描述ES中的数据，作为输出的TableSink
 
@@ -6135,7 +5903,7 @@ tableEnv.connect(
 aggResultTable.insertInto("esOutputTable");
 ```
 
-### [11.3.7 输出到MySQL](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1137-%E8%BE%93%E5%87%BA%E5%88%B0mysql)
+### 11.3.7 输出到MySQL
 
 * 需要的pom依赖
 
@@ -6159,11 +5927,11 @@ tableEnv.sqlUpdate(sinkDDL);    // 执行DDL创建表
 aggResultSqlTable.insertInto("jdbcOutputTable");
 ```
 
-## [11.4 表和流的转换](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_114-%E8%A1%A8%E5%92%8C%E6%B5%81%E7%9A%84%E8%BD%AC%E6%8D%A2)
+## 11.4 表和流的转换
 
 > [Flink- 将表转换成DataStream | 查看执行计划 | 流处理和关系代数的区别 | 动态表 | 流式持续查询的过程 | 将流转换成动态表 | 持续查询 | 将动态表转换成 DS](https://blog.csdn.net/qq_40180229/article/details/106479537)
 
-### [11.4.1 将Table转换成DataStream](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1141-%E5%B0%86table%E8%BD%AC%E6%8D%A2%E6%88%90datastream)
+### 11.4.1 将Table转换成DataStream
 
 * 表可以转换为 DataStream 或 DataSet ，这样自定义流处理或批处理程序就可以继续在 Table API 或 SQL 查询的结果上运行了
 * 将表转换为 DataStream 或 DataSet 时，需要指定生成的数据类型，即要将表的每一行转换成的数据类型
@@ -6182,7 +5950,7 @@ DataStream<Row> resultStream = tableEnv.toAppendStream(resultTable,Row.class);
 
 *(更新数据，会先删除旧数据，再插入新数据)*
 
-### [11.4.2 将DataStream转换成表](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1142-%E5%B0%86datastream%E8%BD%AC%E6%8D%A2%E6%88%90%E8%A1%A8)
+### 11.4.2 将DataStream转换成表
 
 * 对于一个DataStream，可以直接转换成Table，进而方便地调用Table API做转换操作
 
@@ -6199,7 +5967,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
                                            "id, timestamp as ts, temperature");
 ```
 
-### [11.4.3 创建临时视图(Temporary View)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1143-%E5%88%9B%E5%BB%BA%E4%B8%B4%E6%97%B6%E8%A7%86%E5%9B%BEtemporary-view)
+### 11.4.3 创建临时视图(Temporary View)
 
 * 基于DataStream创建临时视图
 
@@ -6215,7 +5983,7 @@ tableEnv.createTemporaryView("sensorView",
 tableEnv.createTemporaryView("sensorView", sensorTable);
 ```
 
-## [11.5 查看执行计划](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_115-%E6%9F%A5%E7%9C%8B%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92)
+## 11.5 查看执行计划
 
 * Table API 提供了一种机制来解释计算表的逻辑和优化查询计划
 * 查看执行计划，可以通过`TableEnvironment.explain(table)`方法或`TableEnvironment.explain()`方法完成，返回一个字符串，描述三个计划
@@ -6229,7 +5997,7 @@ String explaination = tableEnv.explain(resultTable);
 System.out.println(explaination);
 ```
 
-## [11.6 流处理和关系代数的区别](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_116-%E6%B5%81%E5%A4%84%E7%90%86%E5%92%8C%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB)
+## 11.6 流处理和关系代数的区别
 
 > [Flink- 将表转换成DataStream | 查看执行计划 | 流处理和关系代数的区别 | 动态表 | 流式持续查询的过程 | 将流转换成动态表 | 持续查询 | 将动态表转换成 DS](https://blog.csdn.net/qq_40180229/article/details/106479537)
 
@@ -6243,7 +6011,7 @@ System.out.println(explaination);
 | 查询（Query）对数据的访问 | 可以访问到完整的数据输入   | 无法访问所有数据，必须持续"等待"流式输入     |
 | 查询终止条件              | 生成固定大小的结果集后终止 | 永不停止，根据持续收到的数据不断更新查询结果 |
 
-### [11.6.1 动态表(Dynamic Tables)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1161-%E5%8A%A8%E6%80%81%E8%A1%A8dynamic-tables)
+### 11.6.1 动态表(Dynamic Tables)
 
  我们可以**随着新数据的到来，不停地在之前的基础上更新结果**。这样得到的表，在Flink Table API概念里，就叫做“动态表”（Dynamic Tables）。
 
@@ -6254,7 +6022,7 @@ System.out.println(explaination);
 * **连续查询永远不会终止，并会生成另一个动态表**
 * 查询（Query）会不断更新其动态结果表，以反映其动态输入表上的更改。
 
-### [11.6.2 动态表和持续查询](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1162-%E5%8A%A8%E6%80%81%E8%A1%A8%E5%92%8C%E6%8C%81%E7%BB%AD%E6%9F%A5%E8%AF%A2)
+### 11.6.2 动态表和持续查询
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorakfmbSG2D8BNG8KRA3CUgTxiPYVlmk47vQ-2bjFS1QOU.png)
 
@@ -6264,7 +6032,7 @@ System.out.println(explaination);
 2. 对动态表计算连续查询，生成新的动态表
 3. 生成的动态表被转换回流
 
-### [11.6.3 将流转换成动态表](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1163-%E5%B0%86%E6%B5%81%E8%BD%AC%E6%8D%A2%E6%88%90%E5%8A%A8%E6%80%81%E8%A1%A8)
+### 11.6.3 将流转换成动态表
 
 * 为了处理带有关系查询的流，必须先将其转换为表
 * 从概念上讲，流的每个数据记录，都被解释为对结果表的插入（Insert）修改操作
@@ -6275,7 +6043,7 @@ System.out.println(explaination);
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraDEbNPXihXZx4Ji_bSo8teqXfzTAGn0ARr9SEe6YaDYw.png)
 
-### [11.6.4 持续查询](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1164-%E6%8C%81%E7%BB%AD%E6%9F%A5%E8%AF%A2)
+### 11.6.4 持续查询
 
 * 持续查询，会在动态表上做计算处理，并作为结果生成新的动态表。
 
@@ -6287,7 +6055,7 @@ System.out.println(explaination);
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora3Ckm-jdD9jL84qHnZxXpToaRgCAWhvwWfT9D9JLuR3o.png)
 
-### [11.6.4 将动态表转换成 DataStream](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1164-%E5%B0%86%E5%8A%A8%E6%80%81%E8%A1%A8%E8%BD%AC%E6%8D%A2%E6%88%90-datastream)
+### 11.6.4 将动态表转换成 DataStream
 
 * 与常规的数据库表一样，动态表可以通过插入（Insert）、更新（Update）和删除（Delete）更改，进行持续的修改
 * **将动态表转换为流或将其写入外部系统时，需要对这些更改进行编码**
@@ -6305,24 +6073,24 @@ System.out.println(explaination);
 
 *通过将INSERT和UPDATE更改编码为upsert消息，将DELETE更改编码为DELETE消息，就可以将具有唯一键（Unique Key）的动态表转换为流。*
 
-### [11.6.5 将动态表转换成DataStream](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1165-%E5%B0%86%E5%8A%A8%E6%80%81%E8%A1%A8%E8%BD%AC%E6%8D%A2%E6%88%90datastream)
+### 11.6.5 将动态表转换成DataStream
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraaN-Spni8J82C9u7y3e5HKwCSTwSR7jJAiOixy99d_4U.png)
 
 # 12-时间特性(Time Attributes)
 
-## [12.1 概述](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_121-%E6%A6%82%E8%BF%B0)
+## 12.1 概述
 
 * 基于时间的操作（比如 Table API 和 SQL 中窗口操作），需要定义相关的时间语义和时间数据来源的信息
 * Table 可以提供一个逻辑上的时间字段，用于在表处理程序中，指示时间和访问相应的时间戳
 * **时间属性，可以是每个表schema的一部分。一旦定义了时间属性，它就可以作为一个字段引用，并且可以在基于时间的操作中使用**
 * 时间属性的行为类似于常规时间戳，可以访问，并且进行计算
 
-## [12.2 定义处理时间(Processing Time)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_122-%E5%AE%9A%E4%B9%89%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4processing-time)
+## 12.2 定义处理时间(Processing Time)
 
 * 处理时间语义下，允许表处理程序根据机器的本地时间生成结果。它是时间的最简单概念。它既不需要提取时间戳，也不需要生成 watermark
 
-### [由DataStream转换成表时指定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%94%B1datastream%E8%BD%AC%E6%8D%A2%E6%88%90%E8%A1%A8%E6%97%B6%E6%8C%87%E5%AE%9A)
+### 由DataStream转换成表时指定
 
 * 在定义 Table Schema 期间，可以使用`.proctime`，指定字段名定义处理时间字段
 
@@ -6333,7 +6101,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
                                            "id, temperature, pt.proctime");
 ```
 
-### [定义Table Schema时指定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%AE%9A%E4%B9%89table-schema%E6%97%B6%E6%8C%87%E5%AE%9A)
+### 定义Table Schema时指定
 
 ```java
 .withSchema(new Schema()
@@ -6345,7 +6113,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
            )
 ```
 
-### [创建表的DDL中定义](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84ddl%E4%B8%AD%E5%AE%9A%E4%B9%89)
+### 创建表的DDL中定义
 
 ```java
 String sinkDDL = 
@@ -6361,7 +6129,7 @@ String sinkDDL =
 tableEnv.sqlUpdate(sinkDDL);
 ```
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-6)
+### 测试代码
 
 ```java
 package apitest.tableapi;
@@ -6428,7 +6196,7 @@ sensor_1,1547718209,32.8,2021-02-03T16:50:58.051
 sensor_1,1547718212,37.1,2021-02-03T16:50:58.051
 ```
 
-## [12.3 定义事件事件(Event Time)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_123-%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6%E4%BA%8B%E4%BB%B6event-time)
+## 12.3 定义事件事件(Event Time)
 
 * 事件时间语义，允许表处理程序根据每个记录中包含的时间生成结果。这样即使在有乱序事件或者延迟事件时，也可以获得正确的结果。
 * **为了处理无序事件，并区分流中的准时和迟到事件；Flink需要从事件数据中，提取时间戳，并用来推送事件时间的进展**
@@ -6437,7 +6205,7 @@ sensor_1,1547718212,37.1,2021-02-03T16:50:58.051
 * 定义Table Schema时指定
 * 在创建表的DDL中定义
 
-### [由DataStream转换成表时指定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%94%B1datastream%E8%BD%AC%E6%8D%A2%E6%88%90%E8%A1%A8%E6%97%B6%E6%8C%87%E5%AE%9A-1)
+### 由DataStream转换成表时指定
 
 * 由DataStream转换成表时指定（推荐）
 * 在DataStream转换成Table，使用`.rowtime`可以定义事件事件属性
@@ -6451,7 +6219,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
                                           "id, temperature, timestamp, rt.rowtime");
 ```
 
-### [定义Table Schema时指定](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%AE%9A%E4%B9%89table-schema%E6%97%B6%E6%8C%87%E5%AE%9A-1)
+### 定义Table Schema时指定
 
 ```java
 .withSchema(new Schema()
@@ -6466,7 +6234,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
            )
 ```
 
-### [创建表的DDL中定义](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E5%88%9B%E5%BB%BA%E8%A1%A8%E7%9A%84ddl%E4%B8%AD%E5%AE%9A%E4%B9%89-1)
+### 创建表的DDL中定义
 
 ```java
 String sinkDDL = 
@@ -6483,7 +6251,7 @@ String sinkDDL =
 tableEnv.sqlUpdate(sinkDDL);
 ```
 
-### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-7)
+### 测试代码
 
 ```java
 package apitest.tableapi;
@@ -6560,7 +6328,7 @@ sensor_1,1547718209,32.8,2019-01-17T09:43:29
 sensor_1,1547718212,37.1,2019-01-17T09:43:32
 ```
 
-## [12.4 窗口](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_124-%E7%AA%97%E5%8F%A3)
+## 12.4 窗口
 
 > [Flink-分组窗口 | Over Windows | SQL 中的 Group Windows | SQL 中的 Over Windows](https://blog.csdn.net/qq_40180229/article/details/106482095)
 
@@ -6570,7 +6338,7 @@ sensor_1,1547718212,37.1,2019-01-17T09:43:32
 * **根据时间戳或行计数间隔，将行聚合到有限的组（Group）中，并对每个组的数据执行一次聚合函数**\* Over Windows
 * 针对每个输入行，计算相邻行范围内的聚合
 
-### [12.4.1 Group Windows](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1241-group-windows)
+### 12.4.1 Group Windows
 
 * Group Windows 是使用 window（w:GroupWindow）子句定义的，并且**必须由as子句指定一个别名**。
 * 为了按窗口对表进行分组，窗口的别名必须在 group by 子句中，像常规的分组字段一样引用
@@ -6589,7 +6357,7 @@ Table table = input
   * 会话窗口
 
 
-#### [滚动窗口(Tumbling windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3tumbling-windows-1)
+#### 滚动窗口(Tumbling windows)
 
 * 滚动窗口（Tumbling windows）要用Tumble类来定义
 
@@ -6608,7 +6376,7 @@ Table table = input
 * on：用来分组（按时间间隔）或者排序（按行数）的时间字段
 * as：别名，必须出现在后面的groupBy中
 
-#### [滑动窗口(Sliding windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3sliding-windows-1)
+#### 滑动窗口(Sliding windows)
 
 * 滑动窗口（Sliding windows）要用Slide类来定义
 
@@ -6628,7 +6396,7 @@ Table table = input
 * on：用来分组（按时间间隔）或者排序（按行数）的时间字段
 * as：别名，必须出现在后面的groupBy中
 
-#### [会话窗口(Session windows)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%BC%9A%E8%AF%9D%E7%AA%97%E5%8F%A3session-windows-1)
+#### 会话窗口(Session windows)
 
 * 会话窗口（Session windows）要用Session类来定义
 
@@ -6644,7 +6412,7 @@ Table table = input
 * on：用来分组（按时间间隔）或者排序（按行数）的时间字段
 * as：别名，必须出现在后面的groupBy中
 
-### [12.4.2 SQL中的Group Windows](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1242-sql%E4%B8%AD%E7%9A%84group-windows)
+### 12.4.2 SQL中的Group Windows
 
 Group Windows定义在SQL查询的Group By子句中
 
@@ -6658,7 +6426,7 @@ Group Windows定义在SQL查询的Group By子句中
   * 定义一个绘画窗口，第一个参数是时间字段，第二个参数是窗口间隔
 
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-8)
+#### 测试代码
 
 ```java
 package apitest.tableapi;
@@ -6755,7 +6523,7 @@ sql> (true,sensor_7,1,6.7,2019-01-17T09:43:30)
 sql> (true,sensor_1,1,37.1,2019-01-17T09:43:40)
 ```
 
-### [12.4.3 Over Windows](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1243-over-windows)
+### 12.4.3 Over Windows
 
 > [SQL中over的用法](https://blog.csdn.net/liuyuehui110/article/details/42736667)
 
@@ -6773,7 +6541,7 @@ Table table = input
 
 * Table API 提供了 Over 类，来配置 Over 窗口的属性
 
-#### [无界Over Windows](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%97%A0%E7%95%8Cover-windows)
+#### 无界Over Windows
 
 * 可以在事件时间或处理时间，以及指定为时间间隔、或行计数的范围内，定义 Over windows
 * 无界的 over window 是使用常量指定的
@@ -6794,7 +6562,7 @@ Table table = input
 
 *partitionBy是可选项*
 
-#### [有界Over Windows](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%9C%89%E7%95%8Cover-windows)
+#### 有界Over Windows
 
 * 有界的over window是用间隔的大小指定的
 
@@ -6812,7 +6580,7 @@ Table table = input
 .window(Over.partitionBy("a").orderBy("proctime").preceding("10.rows").as("w"))
 ```
 
-### [12.4.4 SQL中的Over Windows](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1244-sql%E4%B8%AD%E7%9A%84over-windows)
+### 12.4.4 SQL中的Over Windows
 
 * 用 Over 做窗口聚合时，所有聚合必须在同一窗口上定义，也就是说必须是相同的分区、排序和范围
 * 目前仅支持在当前行范围之前的窗口
@@ -6834,7 +6602,7 @@ WINDOW w AS (
   ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
 ```
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-9)
+#### 测试代码
 
 java代码
 
@@ -6951,7 +6719,7 @@ sql> (true,sensor_1,2019-01-17T09:43:32,3,35.4)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora5Yo9u7SljtGG8ez-AtgHmDEj9xJPFhANAND0ISptMYk.png)
 
-## [13.1 用户自定义函数(UDF)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_131-%E7%94%A8%E6%88%B7%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0udf)
+## 13.1 用户自定义函数(UDF)
 
 * 用户定义函数（User-defined Functions，UDF）是一个重要的特性，它们显著地扩展了查询的表达能力
 
@@ -6960,7 +6728,7 @@ sql> (true,sensor_1,2019-01-17T09:43:32,3,35.4)
 * **在大多数情况下，用户定义的函数必须先注册，然后才能在查询中使用**
 * 函数通过调用 `registerFunction()`方法在 TableEnvironment 中注册。当用户定义的函数被注册时，它被插入到 TableEnvironment 的函数目录中，这样Table API 或 SQL 解析器就可以识别并正确地解释它
 
-### [13.1.1 标量函数(Scalar Functions)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1311-%E6%A0%87%E9%87%8F%E5%87%BD%E6%95%B0scalar-functions)
+### 13.1.1 标量函数(Scalar Functions)
 
 **Scalar Funcion类似于map，一对一**
 
@@ -6987,7 +6755,7 @@ public static class HashCode extends ScalarFunction {
 }
 ```
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-10)
+#### 测试代码
 
 ```java
 package apitest.tableapi.udf;
@@ -7079,7 +6847,7 @@ sensor_1,1547718212,-772373508
 sensor_1,1547718212,-772373508
 ```
 
-### [13.1.2 表函数(Table Fcuntions)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1312-%E8%A1%A8%E5%87%BD%E6%95%B0table-fcuntions)
+### 13.1.2 表函数(Table Fcuntions)
 
 **Scalar Funcion类似于map，一对一**
 
@@ -7109,7 +6877,7 @@ public static class Split extends TableFunction<Tuple2<String, Integer>> {
 }
 ```
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-11)
+#### 测试代码
 
 ```Plain Text
 package apitest.tableapi.udf;
@@ -7223,7 +6991,7 @@ sql> sensor_1,1547718212,sensor,6
 sql> sensor_1,1547718212,1,1
 ```
 
-### [13.1.3 聚合函数(Aggregate Functions)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1313-%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0aggregate-functions)
+### 13.1.3 聚合函数(Aggregate Functions)
 
 **聚合，多对一，类似前面的窗口聚合**
 
@@ -7249,7 +7017,7 @@ sql> sensor_1,1547718212,1,1
   * 处理完所有行后，将调用函数的 `getValue()`方法来计算并返回最终结果
 
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-12)
+#### 测试代码
 
 ```java
 package apitest.tableapi.udf;
@@ -7357,7 +7125,7 @@ sql> (false,sensor_1,34.96666666666666)
 sql> (true,sensor_1,35.5)
 ```
 
-### [13.1.4 表聚合函数](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1314-%E8%A1%A8%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0)
+### 13.1.4 表聚合函数
 
 * 用户定义的表聚合函数（User-Defined Table Aggregate Functions，UDTAGGs），可以把一个表中数据，聚合为具有多行和多列的结果表
 * 用户定义表聚合函数，是通过继承 TableAggregateFunction 抽象类来实现的
@@ -7379,7 +7147,7 @@ sql> (true,sensor_1,35.5)
   * 处理完所有行后，将调用函数的`emitValue()`方法来计算并返回最终结果。
 
 
-#### [测试代码](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-13)
+#### 测试代码
 
 > [Flink-函数 | 用户自定义函数（UDF）标量函数 | 表函数 | 聚合函数 | 表聚合函数](https://blog.csdn.net/qq_40180229/article/details/106482550)
 
@@ -7499,9 +7267,9 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 
 ![image-20220326142835492](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraimage-20220326142835492.png)
 
-## [14.1 批处理和流处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_141-%e6%89%b9%e5%a4%84%e7%90%86%e5%92%8c%e6%b5%81%e5%a4%84%e7%90%86)
+## 14.1 批处理和流处理
 
-### [批处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%89%b9%e5%a4%84%e7%90%86)
+### 批处理
 
 批处理主要操作大容量静态数据集，并在计算过程完成后返回结果。
 
@@ -7513,7 +7281,7 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * **持久：数据通常始终存储在某种类型的持久存储位置中**
 * **大量：批处理操作通常是处理极为海量数据集的唯一方法**
 
-### [流处理](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%b5%81%e5%a4%84%e7%90%86)
+### 流处理
 
 流处理可以对随时进入系统的数据进行计算。
 
@@ -7525,7 +7293,7 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * 处理工作是基于事件的，除非明确停止否则没有“尽头”
 * 处理结果立刻可用，并会随着新数据的抵达继续更新。
 
-## [14.2 电商用户行为分析](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_142-%e7%94%b5%e5%95%86%e7%94%a8%e6%88%b7%e8%a1%8c%e4%b8%ba%e5%88%86%e6%9e%90)
+## 14.2 电商用户行为分析
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorayD2LhRzChwozk2gRMmbI0ytPHoNVcTUmAze9Eq1-CKM.png)
 
@@ -7542,17 +7310,17 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
   * 刷单监控，订单失效监控，恶意登录（短时间内频繁登录失败）监控
 
 
-### [项目模块设计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e9%a1%b9%e7%9b%ae%e6%a8%a1%e5%9d%97%e8%ae%be%e8%ae%a1)
+### 项目模块设计
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraPkmZ3hEHkbJAPfW1yfoPCRtFIZdVETb1VaJHs5yjiww.png)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraNO8l50Bh6BfbMRmKOHv6IaiHEiB4hPaUmsvED7jTgoA.png)
 
-### [数据源](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%95%b0%e6%8d%ae%e6%ba%90)
+### 数据源
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraILolEWZu_4yNaUJq3KFXkymTakUvYP1TLtk-3G7nljQ.png)
 
-### [数据源-数据结构](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e6%95%b0%e6%8d%ae%e6%ba%90-%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84)
+### 数据源-数据结构
 
 **UserBehavior**
 
@@ -7562,11 +7330,11 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoratmdcZbifftybvpni2mBMnGwg_yVZFr5eTiD1KNKLRJQ.png)
 
-## [14.3 项目模块](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_143-%e9%a1%b9%e7%9b%ae%e6%a8%a1%e5%9d%97)
+## 14.3 项目模块
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora8cLxUEi1tqGDnqmuKPrTWHCQoAVrypulZe4Wnz43cZs.png)
 
-### [14.3.1 热门实时商品统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1431-%e7%83%ad%e9%97%a8%e5%ae%9e%e6%97%b6%e5%95%86%e5%93%81%e7%bb%9f%e8%ae%a1)
+### 14.3.1 热门实时商品统计
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraBT6vkBWQjjpnM6KXfXKqv3fO1suIANLhe7kpScSSKKI.png)
 
@@ -7648,7 +7416,7 @@ public void apply(Tuple tuple, TimeWindow window,
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorapa6G_N9u3d3YwXandihsdPWA8U9UVgCVSHjDgoOliAQ.png)
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo)
+#### POJO
 
 需要生成get/set、无参/有参构造函数、toString
 
@@ -7670,7 +7438,7 @@ private String behavior;
 private Long timestamp;
 ```
 
-#### [代码1-文件](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e6%96%87%e4%bb%b6)
+#### 代码1-文件
 
 * 父pom依赖
 
@@ -7962,7 +7730,7 @@ NO 5: 商品ID = 2364679 热门度 = 12
 ...
 ```
 
-#### [代码2-kafka](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-kafka)
+#### 代码2-kafka
 
 * java代码
 
@@ -8028,7 +7796,7 @@ NO 3: 商品ID = 3611281 热门度 = 1
 ===============================
 ```
 
-#### [代码3-kafka批量数据测试](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-kafka%e6%89%b9%e9%87%8f%e6%95%b0%e6%8d%ae%e6%b5%8b%e8%af%95)
+#### 代码3-kafka批量数据测试
 
 * java代码
 
@@ -8078,7 +7846,7 @@ public class KafkaProducerUtil {
 * 启动kafka服务
 * 运行该java程序，之后就可以直接启动HotItems程序，读取本地已有的kafka数据了
 
-#### [代码4-Flink-SQL实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%814-flink-sql%e5%ae%9e%e7%8e%b0)
+#### 代码4-Flink-SQL实现
 
 * java代码
 
@@ -8202,7 +7970,7 @@ public class HotItemsWithSql {
 ....
 ```
 
-### [14.3.2 实时流量统计——热门页面](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1432-%e5%ae%9e%e6%97%b6%e6%b5%81%e9%87%8f%e7%bb%9f%e8%ae%a1%e7%83%ad%e9%97%a8%e9%a1%b5%e9%9d%a2)
+### 14.3.2 实时流量统计——热门页面
 
 * 基本需求
   * 从web服务器的日志中，统计实时的热门访问页面
@@ -8213,7 +7981,7 @@ public class HotItemsWithSql {
   * 构建滑动窗口，窗口长度为1分钟，滑动距离为5秒
 
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-1)
+#### POJO
 
 * ApacheLogEvent
 
@@ -8233,7 +8001,7 @@ private Long windowEnd;
 private Long count;
 ```
 
-#### [代码1-文件](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e6%96%87%e4%bb%b6-1)
+#### 代码1-文件
 
 * Java代码
 
@@ -8429,7 +8197,7 @@ NO 3: 页面URL = /blog/geekery/eventdb-ideas.html 浏览量 = 1
 ....
 ```
 
-#### [代码2-乱序数据测试](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e4%b9%b1%e5%ba%8f%e6%95%b0%e6%8d%ae%e6%b5%8b%e8%af%95)
+#### 代码2-乱序数据测试
 
 * java代码
 
@@ -8678,7 +8446,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 ===============================
 ```
 
-#### [代码3-乱序数据-代码改进](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-%e4%b9%b1%e5%ba%8f%e6%95%b0%e6%8d%ae-%e4%bb%a3%e7%a0%81%e6%94%b9%e8%bf%9b)
+#### 代码3-乱序数据-代码改进
 
 **一个数据只有不属于任何窗口了，才会被丢进侧输出流！**
 
@@ -8686,7 +8454,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 
 * java代码
 
-```Plain Text
+```java
 import beans.ApacheLogEvent;
 import beans.PageViewCount;
 import org.apache.commons.compress.utils.Lists;
@@ -8939,7 +8707,7 @@ NO 2: 页面URL = /present 浏览量 = 2
 ===============================
 ```
 
-### [14.3.3 实时流量统计——PV和UV](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1433-%e5%ae%9e%e6%97%b6%e6%b5%81%e9%87%8f%e7%bb%9f%e8%ae%a1pv%e5%92%8cuv)
+### 14.3.3 实时流量统计——PV和UV
 
 * 基本需求
 * 从埋点日志中，统计实时的PV和UV
@@ -8947,11 +8715,11 @@ NO 2: 页面URL = /present 浏览量 = 2
 * 统计埋点日志中的pv行为，利用Set数据结构进行去重
 * 对于超大规模的数据，可以考虑用**布隆过滤器**进行去重
 
-#### [代码1-PV统计-基本实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-pv%e7%bb%9f%e8%ae%a1-%e5%9f%ba%e6%9c%ac%e5%ae%9e%e7%8e%b0)
+#### 代码1-PV统计-基本实现
 
 * java代码
 
-```Plain Text
+```java
 import beans.UserBehavior;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -9033,11 +8801,11 @@ public class PageView {
 (pv,13)
 ```
 
-#### [代码2 PV统计-并行和数据倾斜优化](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-pv%e7%bb%9f%e8%ae%a1-%e5%b9%b6%e8%a1%8c%e5%92%8c%e6%95%b0%e6%8d%ae%e5%80%be%e6%96%9c%e4%bc%98%e5%8c%96)
+#### 代码2 PV统计-并行和数据倾斜优化
 
 * java代码
 
-```Plain Text
+```java
 import beans.PageViewCount;
 import beans.UserBehavior;
 import org.apache.flink.api.common.functions.AggregateFunction;
@@ -9211,11 +8979,11 @@ public class PageView {
 3> PageViewCount{url='pv', windowEnd=1511694000000, count=13}
 ```
 
-#### [代码3-UV统计-Set去重](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-uv%e7%bb%9f%e8%ae%a1-set%e5%8e%bb%e9%87%8d)
+#### 代码3-UV统计-Set去重
 
 * java代码
 
-```Plain Text
+```java
 import beans.PageViewCount;
 import beans.UserBehavior;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -9301,7 +9069,7 @@ PageViewCount{url='uv', windowEnd=1511690400000, count=32356}
 PageViewCount{url='uv', windowEnd=1511694000000, count=13}
 ```
 
-#### [代码4-UV统计-布隆过滤器](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%814-uv%e7%bb%9f%e8%ae%a1-%e5%b8%83%e9%9a%86%e8%bf%87%e6%bb%a4%e5%99%a8)
+#### 代码4-UV统计-布隆过滤器
 
 * pom依赖
 
@@ -9317,7 +9085,7 @@ PageViewCount{url='uv', windowEnd=1511694000000, count=13}
 
 * java代码
 
-```Plain Text
+```java
 import beans.PageViewCount;
 import beans.UserBehavior;
 import org.apache.flink.configuration.Configuration;
@@ -9488,7 +9256,7 @@ PageViewCount{url='uv', windowEnd=1511661600000, count=7474}
 ...
 ```
 
-### [14.3.4 市场营销分析——APP市场推广统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1434-%e5%b8%82%e5%9c%ba%e8%90%a5%e9%94%80%e5%88%86%e6%9e%90app%e5%b8%82%e5%9c%ba%e6%8e%a8%e5%b9%bf%e7%bb%9f%e8%ae%a1)
+### 14.3.4 市场营销分析——APP市场推广统计
 
 * 基本需求
   * 从埋点日志中，统计APP市场推广的数据指标
@@ -9499,7 +9267,7 @@ PageViewCount{url='uv', windowEnd=1511661600000, count=7474}
   * 可以用process function处理，得到自定义的输出数据信息
 
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-2)
+#### POJO
 
 * MarketingUserBehavior
 
@@ -9519,11 +9287,11 @@ private String windowEnd;
 private Long count;
 ```
 
-#### [代码1-自定义测试数据源](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e8%87%aa%e5%ae%9a%e4%b9%89%e6%b5%8b%e8%af%95%e6%95%b0%e6%8d%ae%e6%ba%90)
+#### 代码1-自定义测试数据源
 
 * java代码
 
-```Plain Text
+```java
 import beans.MarketingUserBehavior;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -9582,11 +9350,11 @@ public class AppMarketingByChannel {
 }
 ```
 
-#### [代码2-具体实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0)
+#### 代码2-具体实现
 
 * java代码
 
-```Plain Text
+```java
 import beans.ChannelPromotionCount;
 import beans.MarketingUserBehavior;
 import org.apache.flink.api.common.functions.AggregateFunction;
@@ -9739,11 +9507,11 @@ beans.ChannelPromotionCount{channel='app store', behavior='CLICK', windowEnd='20
 .....
 ```
 
-#### [代码3-不分渠道代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-%e4%b8%8d%e5%88%86%e6%b8%a0%e9%81%93%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
+#### 代码3-不分渠道代码实现
 
 * java代码
 
-```Plain Text
+```java
 import beans.ChannelPromotionCount;
 import beans.MarketingUserBehavior;
 import org.apache.flink.api.common.functions.AggregateFunction;
@@ -9885,7 +9653,7 @@ beans.ChannelPromotionCount{channel='total', behavior='total', windowEnd='2021-0
 ....
 ```
 
-### [14.3.5 市场营销分析——页面广告统计](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1435-%e5%b8%82%e5%9c%ba%e8%90%a5%e9%94%80%e5%88%86%e6%9e%90%e9%a1%b5%e9%9d%a2%e5%b9%bf%e5%91%8a%e7%bb%9f%e8%ae%a1)
+### 14.3.5 市场营销分析——页面广告统计
 
 * 基本需求
   * 从埋点日志中，统计每小时页面广告的点击量，5秒刷新一次，并按照不同省份进行划分
@@ -9896,7 +9664,7 @@ beans.ChannelPromotionCount{channel='total', behavior='total', windowEnd='2021-0
   * 可以用`process function`进行黑名单过滤，检测用户对同一广告的点击量，如果超过上限则将用户信息以侧输出流输出到黑名单中
 
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-3)
+#### POJO
 
 * AdClickEvent
 
@@ -9916,11 +9684,11 @@ private Long adId;
 private String warningMsg;
 ```
 
-#### [代码1-基本实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e5%9f%ba%e6%9c%ac%e5%ae%9e%e7%8e%b0)
+#### 代码1-基本实现
 
 * java代码
 
-```Plain Text
+```java
 import beans.AdClickEvent;
 import beans.AdCountViewByProvince;
 import org.apache.flink.api.common.functions.AggregateFunction;
@@ -10030,11 +9798,11 @@ beans.AdCountViewByProvince{province='shanghai', windowEnd='2017-11-26 09:20:00.
 ....
 ```
 
-#### [代码2-点击异常行为黑名单过滤](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e7%82%b9%e5%87%bb%e5%bc%82%e5%b8%b8%e8%a1%8c%e4%b8%ba%e9%bb%91%e5%90%8d%e5%8d%95%e8%bf%87%e6%bb%a4)
+#### 代码2-点击异常行为黑名单过滤
 
 * java代码
 
-```Plain Text
+```java
 import beans.AdClickEvent;
 import beans.AdCountViewByProvince;
 import beans.BlackListUserWarning;
@@ -10240,7 +10008,7 @@ beans.AdCountViewByProvince{province='guangdong', windowEnd='2017-11-26 09:20:00
 ....
 ```
 
-### [14.3.6 恶意登录监控](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1436-%e6%81%b6%e6%84%8f%e7%99%bb%e5%bd%95%e7%9b%91%e6%8e%a7)
+### 14.3.6 恶意登录监控
 
 * 基本需求
   * 用户在短时间内频繁登录失败，有程序恶意攻击的可能
@@ -10251,7 +10019,7 @@ beans.AdCountViewByProvince{province='guangdong', windowEnd='2017-11-26 09:20:00
   * 更加精确的检测，可以使用CEP库实现事件流的模式匹配
 
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-4)
+#### POJO
 
 * LoginEvent
 
@@ -10271,11 +10039,11 @@ private Long lastFailTime;
 private String warningMsg;
 ```
 
-#### [代码1-简单代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e7%ae%80%e5%8d%95%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
+#### 代码1-简单代码实现
 
 * java代码
 
-```Plain Text
+```java
 import beans.LoginEvent;
 import beans.LoginFailWarning;
 import org.apache.commons.compress.utils.Lists;
@@ -10403,11 +10171,11 @@ LoginFailWarning{userId=76456, firstFailTime=1558430859, lastFailTime=1558430859
 LoginFailWarning{userId=23565, firstFailTime=1558430862, lastFailTime=1558430862, warningMsg='login fail in 2s for 1 times'}
 ```
 
-#### [代码2-代码实效性改进](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-%e4%bb%a3%e7%a0%81%e5%ae%9e%e6%95%88%e6%80%a7%e6%94%b9%e8%bf%9b)
+#### 代码2-代码实效性改进
 
 * java代码
 
-```Plain Text
+```java
 import beans.LoginEvent;
 import beans.LoginFailWarning;
 import org.apache.commons.compress.utils.Lists;
@@ -10582,13 +10350,13 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430843,
 LoginFailWarning{userId=1035, firstFailTime=1558430843, lastFailTime=1558430844, warningMsg='login fail 2 times in 2s'}
 ```
 
-#### [代码3-CEP代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%813-cep%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
+#### 代码3-CEP代码实现
 
 * pom依赖
 
 CEP编程
 
-```Plain Text
+```xml
 <dependencies>
   <dependency>
     <groupId>org.apache.flink</groupId>
@@ -10600,7 +10368,7 @@ CEP编程
 
 * java代码
 
-```Plain Text
+```java
 import beans.LoginEvent;
 import beans.LoginFailWarning;
 import org.apache.flink.cep.CEP;
@@ -10694,11 +10462,11 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430843,
 LoginFailWarning{userId=1035, firstFailTime=1558430843, lastFailTime=1558430844, warningMsg='login fail 2 times'}
 ```
 
-#### [代码4-CEP利用循环模式优化](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%814-cep%e5%88%a9%e7%94%a8%e5%be%aa%e7%8e%af%e6%a8%a1%e5%bc%8f%e4%bc%98%e5%8c%96)
+#### 代码4-CEP利用循环模式优化
 
 * java代码
 
-```Plain Text
+```java
 import beans.LoginEvent;
 import beans.LoginFailWarning;
 import org.apache.flink.cep.CEP;
@@ -10784,7 +10552,7 @@ public class LoginFailWithCep {
 LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430844, warningMsg='login fail 3 times'}
 ```
 
-### [14.3.7 订单支付实时监控](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1437-%e8%ae%a2%e5%8d%95%e6%94%af%e4%bb%98%e5%ae%9e%e6%97%b6%e7%9b%91%e6%8e%a7)
+### 14.3.7 订单支付实时监控
 
 * 基本需求
   * 用户下单之后，应设置订单失效事件，以提高用户支付的意愿，并降低系统风险
@@ -10795,7 +10563,7 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430844,
   * 也可以利用状态编程，用process function实现处理逻辑
 
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-5)
+#### POJO
 
 * OrderEvent
 
@@ -10821,11 +10589,11 @@ private String payChannel;
 private Long timestamp;
 ```
 
-#### [代码1-CEP代码实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-cep%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0)
+#### 代码1-CEP代码实现
 
 * pom依赖
 
-```Plain Text
+```xml
 <dependencies>
   <dependency>
 <groupId>org.apache.flink</groupId>
@@ -10839,7 +10607,7 @@ private Long timestamp;
 
 （实际如果处理超时订单，应该修改对应的数据库数据，好让下次用户再次操作超时订单时失效）
 
-```Plain Text
+```java
 import beans.OrderEvent;
 import beans.OrderResult;
 import org.apache.flink.cep.CEP;
@@ -10983,7 +10751,7 @@ payed normally> OrderResult{orderId=34731, resultState='payed'}
 payed normally> OrderResult{orderId=34730, resultState='payed'}
 ```
 
-#### [代码2-ProcessFunction实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-processfunction%e5%ae%9e%e7%8e%b0)
+#### 代码2-ProcessFunction实现
 
 CEP虽然更加简洁，但是ProcessFunction能控制的细节操作更多。
 
@@ -10993,7 +10761,7 @@ ProcessFunction用来处理每个独立且靠状态就能联系的事件，灵�
 
 * java代码
 
-```Plain Text
+```java
 import beans.OrderEvent;
 import beans.OrderResult;
 import org.apache.flink.api.common.state.ValueState;
@@ -11182,7 +10950,7 @@ timeout> OrderResult{orderId=34768, resultState='payed but not found created log
 timeout> OrderResult{orderId=34756, resultState='timeout'}
 ```
 
-### [14.3.8 订单支付实时对帐](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1438-%e8%ae%a2%e5%8d%95%e6%94%af%e4%bb%98%e5%ae%9e%e6%97%b6%e5%af%b9%e5%b8%90)
+### 14.3.8 订单支付实时对帐
 
 * 基本需求
   * 用户下单并支付之后，应查询到账信息，进行实时对帐
@@ -11193,7 +10961,7 @@ timeout> OrderResult{orderId=34756, resultState='timeout'}
   * 用connect连接合并两条流，用coProcessFunction做匹配处理
 
 
-#### [POJO](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=pojo-6)
+#### POJO
 
 * ReceiptEvent
 
@@ -11203,11 +10971,11 @@ private String payChannel;
 private Long timestamp;
 ```
 
-#### [代码1-具体实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%811-%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0)
+#### 代码1-具体实现
 
 * java代码实现
 
-```Plain Text
+```java
 import beans.OrderEvent;
 import beans.ReceiptEvent;
 import org.apache.flink.api.common.state.ValueState;
@@ -11399,13 +11167,13 @@ unmatched-receipts> ReceiptEvent{txId='9032n4fd2', payChannel='wechat', timestam
 unmatched-pays> OrderEvent{orderId=34768, eventType='pay', txId='88snrn932', timestamp=1558430950}
 ```
 
-#### [代码2-Join实现](https://ashiamd.github.io/docsify-notes/#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%e4%bb%a3%e7%a0%812-join%e5%ae%9e%e7%8e%b0)
+#### 代码2-Join实现
 
 **这种方法的缺陷，只能获得正常匹配的结果，不能获得未匹配成功的记录。**
 
 * java代码
 
-```Plain Text
+```java
 import beans.OrderEvent;
 import beans.ReceiptEvent;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -11507,16 +11275,16 @@ public class TxPayMatchByJoin {
 
 > [Flink之CEP(复杂时间处理)](https://blog.csdn.net/qq_37135484/article/details/106327567)
 
-## [15.1 基本概念](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_151-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5)
+## 15.1 基本概念
 
-### [15.1.1 什么是CEP](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1511-%E4%BB%80%E4%B9%88%E6%98%AFcep)
+### 15.1.1 什么是CEP
 
 * 复杂事件处理（Complex Event Processing，CEP）
 * Flink CEP是在Flink中实现的复杂事件处理（CEP）库
 * CEP允许在**无休止的事件流**中检测事件模式，让我们有机会掌握数据中重要的部分
 * **一个或多个由简单事件构成的事件流通过一定的规则匹配，然后输出用户想得到的数据——满足规则的复杂事件**
 
-### [15.1.2 CEP特点](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_1512-cep%E7%89%B9%E7%82%B9)
+### 15.1.2 CEP特点
 
 ![img](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorav2-1c7057bda8a3ba077a3b8059f35d9bc4_1440w.jpg)
 
@@ -11525,7 +11293,7 @@ public class TxPayMatchByJoin {
 * 处理：识别简单事件之间的内在联系，多个符合一定规则的简单事件构成复杂事件
 * 输出：满足规则的复杂事件
 
-## [15.2 Pattern API](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_152-pattern-api)
+## 15.2 Pattern API
 
 * 处理事件的规则，被叫做"模式"（Pattern）
 * Flink CEP提供了Pattern API，用于对输入流数据进行复杂事件规则定义，用来提取符合规则的时间序列
@@ -11542,7 +11310,7 @@ PatternStream<Event> patternStream = CEP.pattern(input,pattern);
 DataStream<Alert> result = patternStream.select(...);
 ```
 
-### [个体模式(Individual Patterns)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E4%B8%AA%E4%BD%93%E6%A8%A1%E5%BC%8Findividual-patterns)
+### 个体模式(Individual Patterns)
 
 * 组成复杂规则的每一个单独的模式定义,就是"个体模式"
 
@@ -11611,7 +11379,7 @@ pattern.where(event => ... /* some condition */).or(event => ... /* or condition
 
 可以调用`ctx.getEventsForPattern("name").where(new IterativeCondition<Event>(){...})`
 
-### [组合模式(Combining Patterns)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8Fcombining-patterns)
+### 组合模式(Combining Patterns)
 
 组合模式(Combining Patterns)也叫模式序列。
 
@@ -11657,11 +11425,11 @@ Pattern<Event, Event> start = Pattern.<Event>begin("start")
   * 此外,还可以为模式指定事件约束，用来要求在多长时间内匹配有效:  `next.within(Time.seconds(10))`
 
 
-### [模式组(Groups of patterns)](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=%E6%A8%A1%E5%BC%8F%E7%BB%84groups-of-patterns)
+### 模式组(Groups of patterns)
 
 * 将一个模式序列作为条件嵌套在个体模式里，成为一组模式
 
-## [15.3 模式的检测](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_153-%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%A3%80%E6%B5%8B)
+## 15.3 模式的检测
 
 * 指定要查找的模式序列后，就可以将其应用于输入流以检测潜在匹配
 * 调用`CEP.pattern()`，给定输入流和模式，就能得到一个PatternStream
@@ -11673,7 +11441,7 @@ Pattern<Event, Event> pattern = Pattern.<Event>begin("start").where(...)...
 PatternStream<Event> patternStream = CEP.pattern(input, pattern);
 ```
 
-## [15.4 匹配事件的提取](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_154-%E5%8C%B9%E9%85%8D%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%8F%90%E5%8F%96)
+## 15.4 匹配事件的提取
 
 * 创建PatternStrean之后，就可以应用select或者flatselect方法，从检测到的事件序列中提取事件了
 * `select()`方法需要输入一个select function作为参数,每个成功匹配的事件序列都会调用它
@@ -11687,12 +11455,12 @@ public OUT select(Map<String, List<IN>> pattern) throws Exception {
 }
 ```
 
-## [15.4 超时事件的提取](#/study/BigData/Flink/%E5%B0%9A%E7%A1%85%E8%B0%B7Flink%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0?id=_154-%E8%B6%85%E6%97%B6%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%8F%90%E5%8F%96)
+## 15.4 超时事件的提取
 
 * **当一个模式通过within关键字定义了检测窗口时间时，部分事件序列可能因为超过窗口长度而被丢弃；为了能够处理这些超时的部分匹配，select和flatSelect API调用允许指定超时处理程序**
 * **超时处理程序会接收到目前为止由模式匹配到的所有事件，由一个OutputTag定义接收到的超时事件序列**
 
-```Plain Text
+```java
 PatternStream<Event> patternStream = CEP.pattern(input, pattern);
 OutputTag<String> outputTag = new OutputTag<String>("side-output"){};
 
