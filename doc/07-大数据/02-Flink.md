@@ -805,7 +805,9 @@ parallelism.default=1
 
 # 05-Flink流处理API
 
-## 5.1 Environment![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorabACd-9xi2DPH3EDDtvG3Lq9TGIXq3EJsQA27Cm16P0Y.png)
+## 5.1 Environment
+
+![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorabACd-9xi2DPH3EDDtvG3Lq9TGIXq3EJsQA27Cm16P0Y.png)
 
 ### 5.1.1 getExecutionEnvironment
 
