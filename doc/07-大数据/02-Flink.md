@@ -439,18 +439,8 @@ No scheduled jobs.
 
 2. 提交job
 
-* \`\`\`
-
-\-c
-
-```Plain Text
-指定入口类
-
-* ```
--p
-```
-
-指定job的并行度
+* `-c`：指定入口类
+* `-p`：指定job的并行度
 
 ```Plain Text
 bin/flink run -c <入口类> -p <并行度> <jar包路径> <启动参数>
@@ -475,13 +465,7 @@ Cancelled job 30d9dda946a170484d55e41358973942.
 
 **注：Total Task Slots只要不小于Job中Parallelism最大值即可。**
 
-eg：这里我配置文件设置
-
-```Plain Text
-taskmanager.numberOfTaskSlots: 4
-```
-
-，实际Job运行时总Tasks显示9，但是里面具体4个任务步骤分别需求（1，3，3，2）数量的Tasks，4>3，满足最大的Parallelism即可运行成功。
+eg：这里我配置文件设置`taskmanager.numberOfTaskSlots: 4`，实际Job运行时总Tasks显示9，但是里面具体4个任务步骤分别需求（1，3，3，2）数量的Tasks，4>3，满足最大的Parallelism即可运行成功。
 
 ## 3.2 yarn模式
 
@@ -795,11 +779,11 @@ parallelism.default=1
 
 ---
 
-* **代码中如果\***\*算子.disableChaining()，能够强制当前算子的子任务不参与任务链的合并，即不和其他Slot资源合并，但是仍然可以保留“Slot共享”的特性\*\*。
-* **如果\***\*StreamExecutionEnvironment env.disableOperatorChaining()则当前执行环境全局设置算子不参与"任务链的合并"。\*\*
-* **如果\***\*算子.startNewChain()表示不管前面任务链合并与否，从当前算子往后重新计算任务链的合并。通常用于前面强制不要任务链合并，而当前往后又需要任务链合并的特殊场景。\*\*
+* 代码中如果算子.disableChaining()，能够强制当前算子的子任务不参与任务链的合并，即不和其他Slot资源合并，但是仍然可以保留“Slot共享”的特性\*\*。
+* 如果StreamExecutionEnvironment env.disableOperatorChaining()则当前执行环境全局设置算子不参与"任务链的合并"。\*\*
+* 如果算子.startNewChain()表示不管前面任务链合并与否，从当前算子往后重新计算任务链的合并。通常用于前面强制不要任务链合并，而当前往后又需要任务链合并的特殊场景。\*\*
 
-*ps：如果\*\*算子.shuffle()\*\*，能够强制算子之后重分区到不同slot执行下一个算子操作，逻辑上也实现了任务不参与任务链合并=>但是仅为“不参与任务链的合并”，这个明显不是最优解操作*
+​	*ps：如果算子`.shuffle()`，能够强制算子之后重分区到不同slot执行下一个算子操作，逻辑上也实现了任务不参与任务链合并=>但是仅为“不参与任务链的合并”，这个明显不是最优解操作*
 
 > [Flink slotSharingGroup disableChain startNewChain 用法案例](https://blog.csdn.net/qq_31866793/article/details/102786249)
 
@@ -3844,7 +3828,7 @@ public static long getWindowStartWithOffset(long timestamp, long offset, long wi
 
 **所以实际应该是1547718212的数据到来时才触发Window输出计算结果。**
 
-```Plain Text
+```java
 .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<SensorReading>(Time.seconds(2)) {
   @Override
   public long extractTimestamp(SensorReading element) {
@@ -5227,7 +5211,7 @@ sql> sensor_1,37.1
 
 * Table API和SQL的程序结构，与流式处理的程序结构十分类似
 
-```Plain Text
+```java
 StreamTableEnvironment tableEnv = ... // 创建表的执行环境
 
 // 创建一张表，用于读取数据
@@ -5317,7 +5301,7 @@ public class TableTest2_CommonApi {
 
 * TableEnvironment可以调用`connect()`方法，连接外部系统，并调用`.createTemporaryTable()`方法，在Catalog中注册表
 
-```Plain Text
+```java
 tableEnv
   .connect(...)    //    定义表的数据来源，和外部系统建立连接
   .withFormat(...)    //    定义数据格式化方法
@@ -5834,19 +5818,19 @@ public class TableTest4_KafkaPipeLine {
 
 * 启动kafka目录里自带的zookeeper
 
-```Plain Text
+```shell
 $ bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 * 启动kafka服务
 
-```Plain Text
+```shell
 $ bin/kafka-server-start.sh config/server.properties
 ```
 
 * 新建kafka生产者和消费者
 
-```Plain Text
+```shell
 $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic sensor
 
 $ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic sinktest
@@ -5958,7 +5942,7 @@ aggResultSqlTable.insertInto("jdbcOutputTable");
   * 用于表只会被插入（Insert）操作更改的场景
 
 
-```Plain Text
+```java
 DataStream<Row> resultStream = tableEnv.toAppendStream(resultTable,Row.class);
 ```
 
@@ -5973,14 +5957,14 @@ DataStream<Row> resultStream = tableEnv.toAppendStream(resultTable,Row.class);
 
 * 对于一个DataStream，可以直接转换成Table，进而方便地调用Table API做转换操作
 
-```Plain Text
+```java
 DataStream<SensorReading> dataStream = ...
 Table sensorTable = tableEnv.fromDataStream(dataStream);
 ```
 
 * 默认转换后的Table schema和DataStream中的字段定义一一对应，也可以单独指定出来
 
-```Plain Text
+```java
 DataStream<SensorReading> dataStream = ...
 Table sensorTable = tableEnv.fromDataStream(dataStream,
                                            "id, timestamp as ts, temperature");
@@ -5990,7 +5974,7 @@ Table sensorTable = tableEnv.fromDataStream(dataStream,
 
 * 基于DataStream创建临时视图
 
-```Plain Text
+```java
 tableEnv.createTemporaryView("sensorView",dataStream);
 tableEnv.createTemporaryView("sensorView",
                             dataStream, "id, timestamp as ts, temperature");
@@ -5998,7 +5982,7 @@ tableEnv.createTemporaryView("sensorView",
 
 * 基于Table创建临时视图
 
-```Plain Text
+```java
 tableEnv.createTemporaryView("sensorView", sensorTable);
 ```
 
@@ -6011,7 +5995,7 @@ tableEnv.createTemporaryView("sensorView", sensorTable);
   * 实际执行计划
 
 
-```Plain Text
+```java
 String explaination = tableEnv.explain(resultTable);
 System.out.println(explaination);
 ```
@@ -6887,7 +6871,7 @@ sensor_1,1547718212,-772373508
 * 为了定义一个表函数，必须扩展 org.apache.flink.table.functions 中的基类 TableFunction 并实现（一个或多个）求值方法
 * **表函数的行为由其求值方法决定，求值方法必须是 public 的，并命名为 eval**
 
-```Plain Text
+```java
 public static class Split extends TableFunction<Tuple2<String, Integer>> {
 
   // 定义属性，分隔符
@@ -6907,7 +6891,7 @@ public static class Split extends TableFunction<Tuple2<String, Integer>> {
 
 #### 测试代码
 
-```Plain Text
+```java
 package apitest.tableapi.udf;
 
 import apitest.beans.SensorReading;
@@ -7388,14 +7372,14 @@ case class MyAggTabTemp() extends TableAggregateFunction[(Double, Int), AggTabTe
 * 窗口聚合策略——没出现一条记录就加一
 * 实现AggregateFunction接口
 
-```Plain Text
+```java
 interface AggregateFunction<IN, ACC, OUT>
 ```
 
 * 定义输出结构——`ItemViewCount(itemId,windowEnd,count)`
 * 实现WindowFunction接口
 
-```Plain Text
+```java
 interface WindowFunction<IN,OUT,KEY,W extends Window>
 ```
 
@@ -7404,7 +7388,7 @@ interface WindowFunction<IN,OUT,KEY,W extends Window>
 * KEY：Tuple泛型，在这里是itemId，窗口根据itemId聚合
 * W：聚合的窗口，`w.getEnd`就能拿到窗口的结束时间
 
-```Plain Text
+```java
 public void apply(Tuple tuple, TimeWindow window,
                  Iterable<Long> input, Collector<ItemViewCount> out)throws Exception {
   Long itemId = tuple.getField(0);
@@ -7450,7 +7434,7 @@ public void apply(Tuple tuple, TimeWindow window,
 
 * ItemViewCount
 
-```Plain Text
+```java
 private Long itemId;
 private Long windowEnd;
 private Long count;
@@ -7458,7 +7442,7 @@ private Long count;
 
 * UserBehavior
 
-```Plain Text
+```java
 private Long uerId;
 private Long itemId;
 private Integer categoryId;
@@ -7784,25 +7768,25 @@ DataStream<String> inputStream = env.addSource(new FlinkKafkaConsumer<>("hotitem
 
 * 启动本地kafka里自带的zookeeper
 
-```Plain Text
+```shell
 $ bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 * 启动kafka
 
-```Plain Text
+```shell
 $ bin/kafka-server-start.sh config/server.properties
 ```
 
 * 启动kafka生产者console
 
-```Plain Text
+```shell
 $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic hotitems
 ```
 
 * 运行Flink程序，输入数据（kafka-console-producer）
 
-```Plain Text
+```shell
 $ bin/kafka-console-producer.sh --broker-list localhost:9092  --topic hotitems
 >543462,1715,1464116,pv,1511658000
 >662867,2244074,1575622,pv,1511658060
@@ -8413,7 +8397,7 @@ public class HotPages {
 
 * 启动本地socket
 
-```Plain Text
+```shell
 nc -lk 7777
 ```
 
@@ -9101,7 +9085,7 @@ PageViewCount{url='uv', windowEnd=1511694000000, count=13}
 
 * pom依赖
 
-```Plain Text
+```xml
 <dependencies>
   <dependency>
     <groupId>redis.clients</groupId>
@@ -9299,7 +9283,7 @@ PageViewCount{url='uv', windowEnd=1511661600000, count=7474}
 
 * MarketingUserBehavior
 
-```Plain Text
+```java
 private Long userId;
 private String behavior;
 private String channel;
@@ -9308,7 +9292,7 @@ private Long timestamp;
 
 * ChannelPromotionCount
 
-```Plain Text
+```java
 private String channel;
 private String behavior;
 private String windowEnd;
@@ -9696,7 +9680,7 @@ beans.ChannelPromotionCount{channel='total', behavior='total', windowEnd='2021-0
 
 * AdClickEvent
 
-```Plain Text
+```java
 private Long userId;
 private Long adId;
 private String province;
@@ -9706,7 +9690,7 @@ private Long timestamp;
 
 * BlackListUserWarning
 
-```Plain Text
+```java
 private Long userId;
 private Long adId;
 private String warningMsg;
@@ -9807,7 +9791,6 @@ public class AdStatisticsByProvince {
     }
   }
 }
-
 ```
 
 * 输出
@@ -10051,7 +10034,7 @@ beans.AdCountViewByProvince{province='guangdong', windowEnd='2017-11-26 09:20:00
 
 * LoginEvent
 
-```Plain Text
+```java
 private Long userId;
 private String ip;
 private String loginState;
@@ -10060,7 +10043,7 @@ private Long timestamp;
 
 * LoginFailWarning
 
-```Plain Text
+```java
 private Long userId;
 private Long firstFailTime;
 private Long lastFailTime;
@@ -10595,7 +10578,7 @@ LoginFailWarning{userId=1035, firstFailTime=1558430842, lastFailTime=1558430844,
 
 * OrderEvent
 
-```Plain Text
+```java
 private Long orderId;
 private String eventType;
 private String txId;
@@ -10623,12 +10606,12 @@ private Long timestamp;
 
 ```xml
 <dependencies>
-  <dependency>
-<groupId>org.apache.flink</groupId>
-  <artifactId>flink-cep_${scala.binary.version}</artifactId>
-  <version>${flink.version}</version>
-  </dependency>
-  </dependencies>
+    <dependency>
+        <groupId>org.apache.flink</groupId>
+        <artifactId>flink-cep_${scala.binary.version}</artifactId>
+        <version>${flink.version}</version>
+    </dependency>
+</dependencies>
 ```
 
 * java代码
