@@ -1,6 +1,4 @@
 # Fink
-[TOC]
-
 # 01-Flink的特点
 
 * 事件驱动（Event-driven）
@@ -207,29 +205,11 @@ public class StreamWordCount {
 5> (hello,4)
 ```
 
- 这里
-
-```Plain Text
-env.execute();
-```
-
-之前的代码，可以理解为是在定义任务，只有执行
-
-```Plain Text
-env.execute()
-```
-
-后，Flink才把前面的代码片段当作一个任务整体（每个线程根据这个任务操作，并行处理流数据）。
+ 这里`env.execute();`之前的代码，可以理解为是在定义任务，只有执行`env.execute()`后，Flink才把前面的代码片段当作一个任务整体（每个线程根据这个任务操作，并行处理流数据）。
 
 ## 2.3 流式数据源测试
 
-1. 通过
-
-```Plain Text
-nc -lk <port>
-```
-
-打开一个socket服务，用于模拟实时的流数据
+1. 通过`nc -lk <port>`打开一个socket服务，用于模拟实时的流数据
 
 ```Plain Text
 nc -lk 7777
@@ -237,7 +217,7 @@ nc -lk 7777
 
 2. 代码修改inputStream的部分
 
-```Plain Text
+```java
 package wc;
 
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -303,19 +283,11 @@ public class StreamWordCount {
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorazUjogSXsH8p-QEpaqTjJhGtXcT5MjG9ve1qtHiwDRmQ.png)
 
-```Plain Text
-conf/flink-conf.yaml
-```
+`conf/flink-conf.yaml`配置文件中
 
-配置文件中
+- `taskmanager.numberOfTaskSlots`
 
-```Plain Text
-taskmanager.numberOfTaskSlots
-```
-
-```Plain Text
-parallelism.default
-```
+- `parallelism.default`
 
 ```Plain Text
 # The number of task slots that each TaskManager offers. Each slot runs one parallel pipeline.
@@ -327,84 +299,47 @@ taskmanager.numberOfTaskSlots: 1
 parallelism.default: 1
 ```
 
-注：**Flink存储State用的是堆外内存**，所以web UI里
-
-```Plain Text
-JVM Heap Size
-```
-
-和
-
-```Plain Text
-Flink Managed MEM
-```
-
-是两个分开的值。
+注：**Flink存储State用的是堆外内存**，所以web UI里`JVM Heap Size` 和 `Flink Managed MEM`是两个分开的值。
 
 ### 3.1.1 Web UI提交job
 
 > [Flink Savepoint简单介绍](https://blog.csdn.net/qq_37142346/article/details/91385333)
 
-启动Flink后，可以在Web UI的
-
-```Plain Text
-Submit New Job
-```
-
-提交jar包，然后指定Job参数。
+启动Flink后，可以在Web UI的`Submit New Job` 提交jar包，然后指定Job参数。
 
 * Entry Class
 
-程序的入口，指定入口类（类的全限制名）
+​	   程序的入口，指定入口类（类的全限制名）
 
 * Program Arguments
 
-程序启动参数，例如
-
-```Plain Text
---host localhost --port 7777
-```
+​	   程序启动参数，例如`--host localhost --port 7777`
 
 * Parallelism
 
-设置Job并行度。
+  设置Job并行度。
 
-Ps：并行度优先级（从上到下优先级递减）
+  *Ps：并行度优先级（从上到下优先级递减）*
 
-* 代码中算子
+  * 代码中算子`setParallelism()`
 
-```Plain Text
-setParallelism()
-```
+  - `ExecutionEnvironment env.setMaxParallelism()`
 
-```Plain Text
-ExecutionEnvironment env.setMaxParallelism()
-```
+  - 设置的Job并行度
 
-* 设置的Job并行度
-* 集群conf配置文件中的
+  - 集群conf配置文件中的`parallelism.default`
 
-```Plain Text
-parallelism.default
-```
-
-ps：**socket等特殊的IO操作，本身不能并行处理，并行度只能是1**
+    ps：**socket等特殊的IO操作，本身不能并行处理，并行度只能是1**
 
 * Savepoint Path
 
-savepoint是通过checkpoint机制为streaming job创建的一致性快照，比如数据源offset，状态等。
+​		savepoint是通过checkpoint机制为streaming job创建的一致性快照，比如数据源offset，状态等。
 
-(savepoint可以理解为手动备份，而checkpoint为自动备份)
+​		(savepoint可以理解为手动备份，而checkpoint为自动备份)
 
 ps：提交job要注意分配的slot总数是否足够使用，如果slot总数不够，那么job执行失败。（资源不够调度）
 
-这里提交前面demo项目的StreamWordCount，在本地socket即
-
-```Plain Text
-nc -lk 7777
-```
-
-中输入字符串，查看结果
+这里提交前面demo项目的StreamWordCount，在本地socket即`nc -lk 7777`中输入字符串，查看结果
 
 输入：
 
@@ -442,9 +377,7 @@ No scheduled jobs.
 * `-c`：指定入口类
 * `-p`：指定job的并行度
 
-```Plain Text
-bin/flink run -c <入口类> -p <并行度> <jar包路径> <启动参数>
-```
+​	`bin/flink run -c <入口类> -p <并行度> <jar包路径> <启动参数>`
 
 ```Plain Text
 $ bin/flink run -c wc.StreamWordCount -p 3 /tmp/Flink_Tutorial-1.0-SNAPSHOT.jar --host localhost --port 7777
@@ -453,9 +386,7 @@ Job has been submitted with JobID 33a5d1f00688a362837830f0b85fd75e
 
 3. 取消job
 
-```Plain Text
-bin/flink cancel <Job的ID>
-```
+​	`bin/flink cancel <Job的ID>`
 
 ```Plain Text
 $ bin/flink cancel 30d9dda946a170484d55e41358973942
@@ -498,7 +429,7 @@ eg：这里我配置文件设置`taskmanager.numberOfTaskSlots: 4`，实际Job�
 ### 3.2.2 Session Cluster
 
 1. 启动\_hadoop\_集群（略）
-2. 启动\_yarn-session\_
+2. 启动\_yarn-session\
 
 ```Plain Text
 ./yarn-session.sh -n 2 -s 2 -jm 1024 -tm 1024 -nm test -d
@@ -3079,7 +3010,7 @@ window function 定义了要对窗口中收集的数据做的计算操作，主�
 
 * 编写java代码
 
-```Plain Text
+```java
 package apitest.window;
 
 import apitest.beans.SensorReading;
