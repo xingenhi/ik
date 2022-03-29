@@ -9619,6 +9619,14 @@ private String city;
 private Long timestamp;
 ```
 
+* AdCountViewProvince
+
+```java
+private String province;
+private String windowEnd;
+private Long count;
+```
+
 * BlackListUserWarning
 
 ```java
