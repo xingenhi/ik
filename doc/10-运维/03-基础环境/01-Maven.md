@@ -38,21 +38,21 @@ mirror相当于一个拦截器，它会拦截maven对remote repository的相关�
 
 ## **三，坐标**
 
-### （1）定义
+（1）定义
 
 坐标用来标识时空中的某个点，方便人们找到位置，如中电信息大厦可以用经纬度坐标找到，也可以通过国家、省市区、街道、门牌组成的坐标去找。
 
-### （2）分类
+（2）分类
 
-groupId: 组织ID，一般是公司、团体名称
+- groupId：组织ID，一般是公司、团体名称
 
-artifactId：实际项目的ID，一般是项目、模块名称
+- artifactId：实际项目的ID，一般是项目、模块名称
 
-version:版本，开发中的版本一般打上 SNAPSHOT 标记
+- version：版本，开发中的版本一般打上 SNAPSHOT 标记
 
-Type/packaging :包类型，如JAR,EAR,POM…
+- Type/packaging：包类型，如JAR,EAR,POM…
 
-classifier:分类，如二进制包、源、文档
+- classifier：分类，如二进制包、源、文档
 
 通过这个规则就可以定位到世界上任何一个构件。  
 
@@ -72,17 +72,17 @@ classifier:分类，如二进制包、源、文档
 
 7，依赖范围有六种：
 
-> compile：编译依赖范围，在三个classpath都有效。
+- compile：编译依赖范围，在三个classpath都有效。
 
-> test：测试依赖范围，在编译代码和运行代码是无效。
+- test：测试依赖范围，在编译代码和运行代码是无效。
 
-> provided：以提供的依赖范围，在编译和测试的时候有效，在运行的时候无效。例如servlet-api,因为容器已经提供，在运行的时候是不需要的。
+- provided：以提供的依赖范围，在编译和测试的时候有效，在运行的时候无效。例如servlet-api,因为容器已经提供，在运行的时候是不需要的。
 
-> runtime：运行时依赖范围，仅在测试和运行的时候有效。例如jdbc只有在测试和运行的时候才有效。
+- runtime：运行时依赖范围，仅在测试和运行的时候有效。例如jdbc只有在测试和运行的时候才有效。
 
-> system：系统依赖范围，与provided范围一致，但是依赖是通过系统变量来指定依赖，不利于移植。
+- system：系统依赖范围，与provided范围一致，但是依赖是通过系统变量来指定依赖，不利于移植。
 
-> import(在maven2.0.9后支持)：导入依赖范围，对三个classpath没有实际影响。
+- import(在maven2.0.9后支持)：导入依赖范围，对三个classpath没有实际影响。
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.45850734076513744.png)
 
@@ -102,8 +102,6 @@ Maven 内置了远程公用仓库： [http://repo1.maven.org/maven2](http://repo
 
 Maven 会将工程中依赖的构件(Jar包)从远程下载到本机一个目录下管理，通常默认在 \$user.home/.m2/repository 下。
 
-
-
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.6517100338971942.png)
 
 
@@ -119,8 +117,6 @@ Maven 会将工程中依赖的构件(Jar包)从远程下载到本机一个目录
 下载地址[http://maven.apache.org/download.cgi](http://maven.apache.org/download.cgi)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora3b7276ee-e131-4c1d-a023-ac83f1443670.png)
-
-![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorabf35140e-2846-4812-9853-c129b8a7c6f8.png)
 
 ## 二，配置环境变量并测试
 
@@ -168,11 +164,11 @@ Maven 会将工程中依赖的构件(Jar包)从远程下载到本机一个目录
 
 ```xml
 <mirror>  
-      <id>alimaven</id>  
-      <name>aliyun maven</name>  
-      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>  
-      <mirrorOf>central</mirrorOf>          
-    </mirror>  
+    <id>alimaven</id>  
+    <name>aliyun maven</name>  
+    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>  
+    <mirrorOf>central</mirrorOf>          
+</mirror>  
 ```
 
 3，私服务  
@@ -187,17 +183,17 @@ Maven 会将工程中依赖的构件(Jar包)从远程下载到本机一个目录
 
 ```xml
 <profile>  
-        <id>jdk1.8</id>  
-        <activation>  
-            <activeByDefault>true</activeByDefault>  
-            <jdk>1.8</jdk>  
-        </activation>  
-        <properties>  
-            <maven.compiler.source>1.8</maven.compiler.source>  
-            <maven.compiler.target>1.8</maven.compiler.target>  
-            <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
-        </properties>  
-    </profile>
+    <id>jdk1.8</id>  
+    <activation>  
+        <activeByDefault>true</activeByDefault>  
+        <jdk>1.8</jdk>  
+    </activation>  
+    <properties>  
+        <maven.compiler.source>1.8</maven.compiler.source>  
+        <maven.compiler.target>1.8</maven.compiler.target>  
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
+    </properties>  
+</profile>
 ```
 
 ---
@@ -220,9 +216,9 @@ Maven 会将工程中依赖的构件(Jar包)从远程下载到本机一个目录
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora98d6f224-8f4f-4681-a929-b28509fd6c2f.png)
 
-6、在Default VM Arguments中输入\[选择性配置\]
+6、在Default VM Arguments中输入\[选择性配置]
 
-\-Dmaven.multiModuleProjectDirectory=M2\_HOME（注意前面的-不可省略）  
+`-Dmaven.multiModuleProjectDirectory=M2\_HOME`（注意前面的-不可省略）  
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorab72ccb1a-0812-439d-b7d2-9c6521f949f4.png)
 
@@ -250,8 +246,7 @@ File-->new--other,然后如图所示，点击next
 
 ---
 
-\*\*4，Finish完成创建--项目目录说明
-\*\*
+4，Finish完成创建--项目目录说明
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorae3cd8d45-5a10-403f-9e59-606eeecef072.png)
 
@@ -300,23 +295,23 @@ File-->new--other,然后如图所示，点击next
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typoraf5ce6308-db41-4c21-9036-2af9bd724772.png)
 
-**groupId** ：定义当前Maven项目隶属的实际项目。首先，Maven项目和实际项目不一定是一对一的关系。比如SpringFrameWork这一实际项目，其对应的Maven项目会有很多，如spring-core,spring-context等。这是由于Maven中模块的概念，因此，一个实际项目往往会被划分成很多模块。其次，groupId不应该对应项目隶属的组织或公司。原因很简单，一个组织下会有很多实际项目，如果groupId只定义到组织级别，而后面我们会看到，artifactId只能定义Maven项目（模块），那么实际项目这个层次将难以定义。最后，groupId的表示方式与Java包名的表达方式类似，通常与域名反向一一对应。上例中，groupId为junit，是不是感觉很特殊，这样也是可以的，因为全世界就这么个junit，它也没有很多分支。
+- **groupId** ：定义当前Maven项目隶属的实际项目。首先，Maven项目和实际项目不一定是一对一的关系。比如SpringFrameWork这一实际项目，其对应的Maven项目会有很多，如spring-core,spring-context等。这是由于Maven中模块的概念，因此，一个实际项目往往会被划分成很多模块。其次，groupId不应该对应项目隶属的组织或公司。原因很简单，一个组织下会有很多实际项目，如果groupId只定义到组织级别，而后面我们会看到，artifactId只能定义Maven项目（模块），那么实际项目这个层次将难以定义。最后，groupId的表示方式与Java包名的表达方式类似，通常与域名反向一一对应。上例中，groupId为junit，是不是感觉很特殊，这样也是可以的，因为全世界就这么个junit，它也没有很多分支。
 
-**artifactId** : 该元素定义当前实际项目中的一个Maven项目（模块），推荐的做法是使用实际项目名称作为artifactId的前缀。比如上例中的junit，junit就是实际的项目名称，方便而且直观。在默认情况下，maven生成的构件，会以artifactId作为文件头，如junit-3.8.1.jar，使用实际项目名称作为前缀，就能方便的从本地仓库找到某个项目的构件。
+- **artifactId** : 该元素定义当前实际项目中的一个Maven项目（模块），推荐的做法是使用实际项目名称作为artifactId的前缀。比如上例中的junit，junit就是实际的项目名称，方便而且直观。在默认情况下，maven生成的构件，会以artifactId作为文件头，如junit-3.8.1.jar，使用实际项目名称作为前缀，就能方便的从本地仓库找到某个项目的构件。
 
-**version** : 该元素定义了使用构件的版本，如上例中junit的版本是3.8.1，你也可以改为4.0表示使用4.0版本的junit。
+- **version** : 该元素定义了使用构件的版本，如上例中junit的版本是3.8.1，你也可以改为4.0表示使用4.0版本的junit。
 
-**packaging** ：定义Maven项目打包的方式，使用构件的什么包。首先，打包方式通常与所生成构件的文件扩展名对应，如上例中没有packaging，则默认为jar包，最终的文件名为junit-3.8.1.jar。也可以打包成war等。
+- **packaging** ：定义Maven项目打包的方式，使用构件的什么包。首先，打包方式通常与所生成构件的文件扩展名对应，如上例中没有packaging，则默认为jar包，最终的文件名为junit-3.8.1.jar。也可以打包成war等。
 
-**classifier**: 该元素用来帮助定义构建输出的一些附件。附属构件与主构件对应，如上例中的主构件为junit-3.8.1.jar,该项目可能还会通过一些插件生成如junit-3.8.1-javadoc.jar,junit-3.8.1-sources.jar, 这样附属构件也就拥有了自己唯一的坐标。
+- **classifier**: 该元素用来帮助定义构建输出的一些附件。附属构件与主构件对应，如上例中的主构件为junit-3.8.1.jar,该项目可能还会通过一些插件生成如junit-3.8.1-javadoc.jar,junit-3.8.1-sources.jar, 这样附属构件也就拥有了自己唯一的坐标。
 
-**上述5个元素中，groupId、artifactId、version是必须定义的，packaging是可选的（默认为jar），而classfier是不能直接定义的，需要结合插件使用。**
+​	**上述5个元素中，groupId、artifactId、version是必须定义的，packaging是可选的（默认为jar），而classfier是不能直接定义的，需要结合插件使用。**
 
 # 04【掌握】eclipse下maven项目聚合
 
-**一，项目继承1**
+## **一，项目继承1**
 
-## 1，建立maven\_parent父项目
+1，建立maven\_parent父项目
 
 项目的packaging：pom
 
@@ -355,7 +350,7 @@ Packaging为pom的项目，不用来开发java代码。用来声明整个系统�
 </project>
 ```
 
-## 2，建立bjsxtoa子项目
+2，建立bjsxtoa子项目
 
 继承maven\_parent.
 
@@ -393,11 +388,11 @@ Packaging为pom的项目，不用来开发java代码。用来声明整个系统�
 
 ---
 
-**二，项目继承2**
+## **二，项目继承2**
 
 在继承的过程中，可以在子项目，做出选择。
 
-## 1建立maven\_parent2父项目
+1. 建立maven\_parent2父项目
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -444,7 +439,7 @@ Packaging为pom的项目，不用来开发java代码。用来声明整个系统�
 
 ```
 
-2建立bjsxtoa2子项目
+2. 建立bjsxtoa2子项目
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -470,19 +465,15 @@ Packaging为pom的项目，不用来开发java代码。用来声明整个系统�
 
 ```
 
-3查看子项目的依赖
+3. 查看子项目的依赖
 
   
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.3896434485495244.png)
 
- 
-
 ---
 
-**三，项目聚合**
-
-\*\*
+## **三，项目聚合**
 
 使用maven的module项目，完成项目的拆分，将一个系统可以拆分为n个子系统（子项目）进行开发：
 
@@ -643,13 +634,13 @@ Packageing：war
 
 
 
-**2，webap\*\*\*\*p目录**
+**2，webapp目录**
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorad90ad556-a799-4daf-ae73-8d11d17512ef.jpg)
 
 
 
-**3，导入web项\*\*\*\*目需要依赖**
+**3，导入web项目需要依赖**
 
 Jsp,servlet,jstl.
 
@@ -706,7 +697,7 @@ Jsp,servlet,jstl.
 
 ```
 
-**4，配置tomc\*\*\*\*at插件**
+**4，配置tomcat插件**
 
 用来部署，发布web项目。
 
@@ -729,17 +720,17 @@ Jsp,servlet,jstl.
   </build>
 ```
 
-**5，编写jsp文\*\*\*\*件**
+**5，编写jsp文件**
 
-**6，配置we\*\*b**.xml\*\*
+**6，配置web.xml** 
 
-**7，部署\*\*\*\*项目**
+**7，部署项目**
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorad17d69b0-5b78-4ccb-b856-dde35b2af422.jpg)
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora8a735988-e02d-4a14-84b2-09a3af5e2294.jpg)
 
-**8，解决Can\*\*\*\*not change version of project facet Dynamic web module to 3.0**
+**8，解决Cannot change version of project facet Dynamic web module to 3.0**
 
 1、打开项目所在目录下的.settings文件夹
 
@@ -818,19 +809,11 @@ Jsp,servlet,jstl.
 
  **2，配置maven的settings.xml**
 
-  
-
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora90429148-6c2d-467c-b45a-77d1633d31da.jpg)
 
- 
-
-\**3.****使用****admin\*\*\**登**陆**to\*\***mcat**
-
-  
+**3.使用admin登陆tomcat**
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.5891795886856912.png)
-
- 
 
 ---
 
@@ -838,34 +821,34 @@ Jsp,servlet,jstl.
 
 ```xml
  <build>
-        <!-- 打包生成war包的名字 -->
-        <finalName>05_maven_web</finalName>
-        <!-- 配置插件 -->
-        <plugins>
-            <!-- 配置tomcat的插件 -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <uriEncoding>UTF-8</uriEncoding><!--  解决页面提交数据乱码问题 -->
-                    <port>8080</port><!-- tomcat插件的请求端口 -->
-                    <!-- <path>/bjsxt</path> --><!-- 项目的请求路径 -->
-                    <!-- 指tomcat的manager项目的访问地址     
+     <!-- 打包生成war包的名字 -->
+     <finalName>05_maven_web</finalName>
+     <!-- 配置插件 -->
+     <plugins>
+         <!-- 配置tomcat的插件 -->
+         <plugin>
+             <groupId>org.apache.tomcat.maven</groupId>
+             <artifactId>tomcat7-maven-plugin</artifactId>
+             <version>2.2</version>
+             <configuration>
+                 <uriEncoding>UTF-8</uriEncoding><!--  解决页面提交数据乱码问题 -->
+                 <port>8080</port><!-- tomcat插件的请求端口 -->
+                 <!-- <path>/bjsxt</path> --><!-- 项目的请求路径 -->
+                 <!-- 指tomcat的manager项目的访问地址     
                     http://127.0.0.1:8080/manager
                     text必须要加，不加的话，使用maven打包的话不能帮我们把项目部署到tomcat7里面
                      -->
-                    <url>http://localhost:8080/manager/text</url>
-                    <!-- tomcat的登陆名和密码 -->
-                    <username>admin</username>
-                    <password>admin</password>
-                    <!-- 打成war包的名字 -->
-                    <path>/bjsxt</path>
-                </configuration>
-            </plugin>
-        </plugins>
+                 <url>http://localhost:8080/manager/text</url>
+                 <!-- tomcat的登陆名和密码 -->
+                 <username>admin</username>
+                 <password>admin</password>
+                 <!-- 打成war包的名字 -->
+                 <path>/bjsxt</path>
+             </configuration>
+         </plugin>
+     </plugins>
 
-    </build>
+</build>
 
 ```
 
@@ -875,27 +858,17 @@ Jsp,servlet,jstl.
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorabcfa3fa8-968c-4d37-831f-4975d0edece9.png)
 
-
-
 ---
 
 **6，使用mvn命令部署**  
 
 1，切换到项目目录 
 
-  
-
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.5066993995002389.png)
-
- 、
 
   
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0.7147492084267362.png)
-
- 
-
-  
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora4953d2c0-03c0-4f5b-88b6-d00b61d939b1.png)
 
@@ -903,7 +876,7 @@ tomcat的webapps下面看
 
 ---
 
-## 7.注意点
+7.注意点
 
 以上的操作：tomcat状态必须是启动状态
 
@@ -949,8 +922,7 @@ tomcat的webapps下面看
 
 ---
 
-\*\*四，拷贝原项目的相关代码
-\*\*
+**四，拷贝原项目的相关代码**
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora0d7b4764-f206-411e-b14c-ca9dc08c4280.png)
 
@@ -1741,7 +1713,4 @@ pom
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorac85419b8-910f-4686-baba-ef6ee01390a4.png)
 
-访问
-
-[http://127.0.0.1:8080/car/index.jsp](http://127.0.0.1:8080/car/index.jsp)
-
+访问[http://127.0.0.1:8080/car/index.jsp](http://127.0.0.1:8080/car/index.jsp)
