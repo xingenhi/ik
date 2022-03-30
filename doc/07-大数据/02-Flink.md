@@ -729,7 +729,7 @@ parallelism.default=1
  创建一个执行环境，表示当前执行程序的上下文。如果程序是独立调用的，则此方法返回本地执行环境；如果从命令行客户端调用程序以提交到集群，则此方法返回此集群的执行环境，也就是说，getExecutionEnvironment会根据查询运行的方式决定返回什么样的运行环境，是最常用的一种创建执行环境的方式。
 
 ```Plain Text
-ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment*();
+ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 ```
 
 ```Plain Text
@@ -1760,7 +1760,7 @@ Flink对Java和Scala中的一些特殊目的的类型也都是支持的，比如
 
  下面例子实现了FilterFunction接口：
 
-```Plain Text
+```java
 DataStream<String> flinkTweets = tweets.filter(new FlinkFilter()); 
 public static class FlinkFilter implements FilterFunction<String> { 
   @Override public boolean filter(String value) throws Exception { 
@@ -1771,7 +1771,7 @@ public static class FlinkFilter implements FilterFunction<String> {
 
  还可以将函数实现成匿名类
 
-```Plain Text
+```java
 DataStream<String> flinkTweets = tweets.filter(
   new FilterFunction<String>() { 
     @Override public boolean filter(String value) throws Exception { 
@@ -1783,7 +1783,7 @@ DataStream<String> flinkTweets = tweets.filter(
 
  我们filter的字符串"flink"还可以当作参数传进去。
 
-```Plain Text
+```java
 DataStream<String> tweets = env.readTextFile("INPUT_FILE "); 
 DataStream<String> flinkTweets = tweets.filter(new KeyWordFilter("flink")); 
 public static class KeyWordFilter implements FilterFunction<String> { 
@@ -1801,7 +1801,7 @@ public static class KeyWordFilter implements FilterFunction<String> {
 
 ### 5.5.2 匿名函数(Lambda Functions)
 
-```Plain Text
+```java
 DataStream<String> tweets = env.readTextFile("INPUT_FILE"); 
 DataStream<String> flinkTweets = tweets.filter( tweet -> tweet.contains("flink") );
 ```
@@ -1823,7 +1823,7 @@ DataStream<String> flinkTweets = tweets.filter( tweet -> tweet.contains("flink")
 * **close()**方法是生命周期中的最后一个调用的方法，做一些清理工作。
 * **getRuntimeContext()**方法提供了函数的RuntimeContext的一些信息，例如函数执行的并行度，任务的名字，以及state状态
 
-```Plain Text
+```java
 public static class MyMapFunction extends RichMapFunction<SensorReading, Tuple2<Integer, String>> { 
 
   @Override public Tuple2<Integer, String> map(SensorReading value) throws Exception {
@@ -2845,11 +2845,11 @@ orangeStream
 
 * 我们可以用`.window()`来定义一个窗口，然后基于这个window去做一些聚合或者其他处理操作。
 
-**注意：**window()方法必须在keyBy之后才能使用。
+​	**注意：**window()方法必须在keyBy之后才能使用。
 
 * Flink提供了更加简单的`.timeWindow()`和`.countWindow()`方法，用于定义时间窗口和计数窗口。
 
-```Plain Text
+```java
 DataStream<Tuple2<String,Double>> minTempPerWindowStream = 
   datastream
   .map(new MyMapper())
@@ -2864,40 +2864,41 @@ DataStream<Tuple2<String,Double>> minTempPerWindowStream =
 
 * WindowAssigner负责将每条输入的数据分发到正确的window中
 * Flink提供了通用的WindowAssigner
-* 滚动窗口（tumbling window）
-* 滑动窗口（sliding window）
-* 会话窗口（session window）
-* **全局窗口（global window）**
+  * 滚动窗口（tumbling window）
+  * 滑动窗口（sliding window）
+  * 会话窗口（session window）
+  * **全局窗口（global window）**
+
 
 #### 创建不同类型的窗口
 
 * 滚动时间窗口（tumbling time window）
 
-```Plain Text
+```java
 .timeWindow(Time.seconds(15))
 ```
 
 * 滑动时间窗口（sliding time window）
 
-```Plain Text
+```java
 .timeWindow(Time.seconds(15),Time.seconds(5))
 ```
 
 * 会话窗口（session window）
 
-```Plain Text
+```java
 .window(EventTimeSessionWindows.withGap(Time.minutes(10)))
 ```
 
 * 滚动计数窗口（tumbling count window）
 
-```Plain Text
+```java
 .countWindow(5)
 ```
 
 * 滑动计数窗口（sliding count window）
 
-```Plain Text
+```java
 .countWindow(10,2)
 ```
 
@@ -2911,7 +2912,7 @@ DataStream<Tuple2<String,Double>> minTempPerWindowStream =
 
  Flink默认的时间窗口根据ProcessingTime进行窗口的划分，将Flink获取到的数据根据进入Flink的时间划分到不同的窗口中。
 
-```Plain Text
+```java
 DataStream<Tuple2<String, Double>> minTempPerWindowStream = dataStream 
   .map(new MapFunction<SensorReading, Tuple2<String, Double>>() { 
     @Override 
@@ -2932,7 +2933,7 @@ DataStream<Tuple2<String, Double>> minTempPerWindowStream = dataStream
 
  下面代码中的sliding\_size设置为了5s，也就是说，每5s就计算输出结果一次，每一次计算的window范围是15s内的所有元素。
 
-```Plain Text
+```java
 DataStream<SensorReading> minTempPerWindowStream = dataStream 
   .keyBy(SensorReading::getId) 
   .timeWindow( Time.seconds(15), Time.seconds(5) ) 
@@ -2951,7 +2952,7 @@ DataStream<SensorReading> minTempPerWindowStream = dataStream
 
  默认的CountWindow是一个滚动窗口，只需要指定窗口大小即可，**当元素数量达到窗口大小时，就会触发窗口的执行**。
 
-```Plain Text
+```java
 DataStream<SensorReading> minTempPerWindowStream = dataStream 
   .keyBy(SensorReading::getId) 
   .countWindow( 5 ) 
@@ -2964,7 +2965,7 @@ DataStream<SensorReading> minTempPerWindowStream = dataStream
 
  下面代码中的sliding\_size设置为了2，也就是说，每收到两个相同key的数据就计算一次，每一次计算的window范围是10个元素。
 
-```Plain Text
+```java
 DataStream<SensorReading> minTempPerWindowStream = dataStream 
   .keyBy(SensorReading::getId) 
   .countWindow( 10, 2 ) 
@@ -2981,12 +2982,12 @@ window function 定义了要对窗口中收集的数据做的计算操作，主�
 #### 增量聚合函数
 
 * **每条数据到来就进行计算**，保持一个简单的状态。（来一条处理一条，但是不输出，到窗口临界位置才输出）
-* 典型的增量聚合函数有ReduceFunction, AggregateFunction。
+* 典型的增量聚合函数有`ReduceFunction`  和   `AggregateFunction`。
 
 #### 全窗口函数
 
 * **先把窗口所有数据收集起来，等到计算的时候会遍历所有数据**。（来一个放一个，窗口临界位置才遍历且计算、输出）
-* ProcessWindowFunction，WindowFunction。
+* `ProcessWindowFunction`  和  `WindowFunction`
 
 ### 6.2.5 其它可选API
 
@@ -3438,9 +3439,10 @@ env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 ### 7.3.1 概念
 
 * **Flink对于迟到数据有三层保障**，先来后到的保障顺序是：
-* WaterMark => 约等于放宽窗口标准
-* allowedLateness => 允许迟到（ProcessingTime超时，但是EventTime没超时）
-* sideOutputLateData => 超过迟到时间，另外捕获，之后可以自己批处理合并先前的数据
+  * WaterMark => 约等于放宽窗口标准
+  * allowedLateness => 允许迟到（ProcessingTime超时，但是EventTime没超时）
+  * sideOutputLateData => 超过迟到时间，另外捕获，之后可以自己批处理合并先前的数据
+
 
 ---
 
@@ -3489,11 +3491,11 @@ Watermark = maxEventTime-延迟时间t
 
 乱序流的Watermarker如下图所示：（延迟时间设置为2s）
 
-*乱序流，所以可能出现EventTime前后顺序不一致的情况，这里延迟时间设置2s，第一个窗口则为****5s+2s****，当EventTime=7s的数据到达时，关闭第一个窗口。第二个窗口则是****5\*2+2=12s****，当12s这个EventTime的数据到达时，关闭第二个窗口。*
+*乱序流，所以可能出现EventTime前后顺序不一致的情况，这里延迟时间设置2s，第一个窗口则为**5s+2s**，当EventTime=7s的数据到达时，关闭第一个窗口。第二个窗口则是**5\*2+2=12s**，当12s这个EventTime的数据到达时，关闭第二个窗口。*
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typorafdD8teAKd0r9y4oTxHIURtTopW-G5nVUdKBq94BwDnM.png)
 
- 当Flink接收到数据时，会按照一定的规则去生成Watermark，这条Watermark就等于当前所有到达数据中的maxEventTime-延迟时长，也就是说，**Watermark是基于数据携带的时间戳生成的**，一旦Watermark比当前未触发的窗口的停止时间要晚，那么就会触发相应窗口的执行。
+ 当Flink接收到数据时，会按照一定的规则去生成Watermark，这条Watermark就等于当前所有到达数据中的`maxEventTime-延迟时长`，也就是说，**Watermark是基于数据携带的时间戳生成的**，一旦Watermark比当前未触发的窗口的停止时间要晚，那么就会触发相应窗口的执行。
 
  **由于event time是由数据携带的，因此，如果运行过程中无法获取新的数据，那么没有被触发的窗口将永远都不被触发**。
 
@@ -3526,7 +3528,7 @@ Watermark = maxEventTime-延迟时间t
 
  watermark的引入很简单，对于乱序数据，最常见的引用方式如下：
 
-```Plain Text
+```java
 dataStream.assignTimestampsAndWatermarks( new BoundedOutOfOrdernessTimestampExtractor<SensorReading>(Time.milliseconds(1000)) {
   @Override
   public long extractTimestamp(element: SensorReading): Long = { 
@@ -3539,7 +3541,7 @@ dataStream.assignTimestampsAndWatermarks( new BoundedOutOfOrdernessTimestampExtr
 
  我们看到上面的例子中创建了一个看起来有点复杂的类，这个类实现的其实就是分配时间戳的接口。Flink暴露了TimestampAssigner接口供我们实现，使我们可以自定义如何从事件数据中抽取时间戳。
 
-```Plain Text
+```java
 StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 // 设置事件时间语义 env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 DataStream<SensorReading> dataStream = env.addSource(new SensorSource()) .assignTimestampsAndWatermarks(new MyAssigner());
@@ -3557,13 +3559,7 @@ MyAssigner有两种类型
 ##### AssignerWithPeriodicWatermarks
 
 * 周期性的生成 watermark：系统会周期性的将 watermark 插入到流中
-* 默认周期是200毫秒，可以使用 
-
-```Plain Text
-ExecutionConfig.setAutoWatermarkInterval()
-```
-
- 方法进行设置
+* 默认周期是200毫秒，可以使用 `ExecutionConfig.setAutoWatermarkInterval()` 方法进行设置
 
 * **升序和前面乱序的处理 BoundedOutOfOrderness ，都是基于周期性 watermark 的**。
 
@@ -3591,7 +3587,7 @@ java代码（旧版Flink），新版的代码我暂时不打算折腾，之后�
 
 **这里设置的Watermark的延时时间是2s，实际一般设置和window大小一致。**
 
-```Plain Text
+```java
 public class WindowTest3_EventTimeWindow {
   public static void main(String[] args) throws Exception {
     StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -3732,7 +3728,7 @@ minTemp:3> SensorReading{id='sensor_6', timestamp=1547718201, temperature=15.4}
 
 从`TumblingProcessingTimeWindows` 类里的`assignWindows` 方法，我们可以得知窗口的起点计算方法如下： \$ 窗口起点start = timestamp - (timestamp -offset+WindowSize) % WindowSize \$ 由于我们没有设置offset，所以这里`start=第一个数据的时间戳1547718199-(1547718199-0+15)%15=1547718195` 计算得到窗口初始位置为`Start = 1547718195` ，那么这个窗口理论上本应该在1547718195+15的位置关闭，也就是`End=1547718210`
 
-```Plain Text
+```java
 @Override
 public Collection<TimeWindow> assignWindows(
   Object element, long timestamp, WindowAssignerContext context) {
@@ -3803,7 +3799,7 @@ public final Watermark getCurrentWatermark() {
 
 > [flink-Window Assingers(窗口分配器)中offset偏移量](https://juejin.cn/post/6844904110941011976)
 
- 时间偏移一个很大的用处是用来调准非0时区的窗口，例如:在中国你需要指定一个8小时的时间偏移。
+ 时间偏移一个很大的用处是用来调准非0时区的窗口，例如：在中国你需要指定一个8小时的时间偏移。
 
 # 08-Flink状态管理
 
