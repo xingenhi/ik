@@ -2611,19 +2611,7 @@ mysql> SELECT * FROM sensor_temp;
 
  A window join joins the elements of two streams that share a common key and lie in the same window. These windows can be defined by using a [window assigner](https://ci.apache.org/projects/flink/flink-docs-release-1.12/zh/dev/stream/operators/windows.html#window-assigners) and are evaluated on elements from both of the streams.
 
- The elements from both sides are then passed to a user-defined 
-
-```Plain Text
-JoinFunction
-```
-
- or 
-
-```Plain Text
-FlatJoinFunction
-```
-
- where the user can emit results that meet the join criteria.
+ The elements from both sides are then passed to a user-defined `JoinFunction` or `FlatJoinFunction` where the user can emit results that meet the join criteria.
 
  The general usage can be summarized as follows:
 
@@ -2637,19 +2625,7 @@ stream.join(otherStream)
 
 #### Tumbling Window Join
 
- When performing a tumbling window join, all elements with a common key and a common tumbling window are joined as pairwise combinations and passed on to a 
-
-```Plain Text
-JoinFunction
-```
-
- or 
-
-```Plain Text
-FlatJoinFunction
-```
-
-. Because this behaves like an inner join, elements of one stream that do not have elements from another stream in their tumbling window are not emitted!
+ When performing a tumbling window join, all elements with a common key and a common tumbling window are joined as pairwise combinations and passed on to a `JoinFunction` or `FlatJoinFunction`. Because this behaves like an inner join, elements of one stream that do not have elements from another stream in their tumbling window are not emitted!
 
 ![image](https://picgo-1301208976.cos.ap-beijing.myqcloud.com//typora4Ja3jiT-k-U_yxVTz5FnAC1i2JthvgzTQwyxIdlau_Y.svg)
 
@@ -2751,13 +2727,7 @@ When a pair of elements are passed to the `ProcessJoinFunction` , they will be a
 
 In the example above, we join two streams ‘orange’ and ‘green’ with a lower bound of -2 milliseconds and an upper bound of +1 millisecond. Be default, these boundaries are inclusive, but `.lowerBoundExclusive()` and `.upperBoundExclusive`  can be applied to change the behaviour.
 
-Using the more formal notation again this will translate to
-
-```Plain Text
-orangeElem.ts + lowerBound <= greenElem.ts <= orangeElem.ts + upperBound
-```
-
-as indicated by the triangles.
+Using the more formal notation again this will translate to `orangeElem.ts + lowerBound <= greenElem.ts <= orangeElem.ts + upperBound` as indicated by the triangles.
 
 ```Plain Text
 import org.apache.flink.api.java.functions.KeySelector;
@@ -11290,40 +11260,45 @@ start.timesOrMore(2),optional.greedy
 
 * 条件（Condition）
   * **每个模式都需要指定触发条件**，作为模式是否接受事件进入的判断依据
+  
   * CEP中的个体模式主要通过调用`.where()`，`.or()`和`.until()`来指定条件
-
+  
   * 按不同的调用方式，可以分成以下几类
     * 简单条件（Simple Condition）
-
-
-​				通过`.where()`方法对事件中的字段进行判断筛选，决定是否接受该事件
-
-```Plain Text
-start.where(new SimpleCondition<Event>){
-  @Override
-  public boolean filter(Event value) throws Exception{
-    return value.getName.startsWith("foo");
-  }
-}
-```
-
-* 组合条件（Combining Condition）
-
-将简单条件进行合并；`.or()`方法表示或逻辑相连，where的直接组合就是AND
-
-```Plain Text
-pattern.where(event => ... /* some condition */).or(event => ... /* or condition */)
-```
-
-* 终止条件（Stop Condition）
-
-如果使用了`oneOrMore`或者`oneOrMore.optional`，建议使用`.until()`作为终止条件，以便清理状态
-
-* 迭代条件（Iterative Condition）
-
-能够对模式之前所有接收的事件进行处理
-
-可以调用`ctx.getEventsForPattern("name").where(new IterativeCondition<Event>(){...})`
+    
+      通过`.where()`方法对事件中的字段进行判断筛选，决定是否接受该事件
+    
+      ```java
+      start.where(new SimpleCondition<Event>){
+        @Override
+        public boolean filter(Event value) throws Exception{
+          return value.getName.startsWith("foo");
+        }
+      }
+      ```
+    
+    - 组合条件（Combining Condition）
+    
+      将简单条件进行合并；`.or()`方法表示或逻辑相连，where的直接组合就是AND
+    
+      ```java
+      pattern.where(event => ... /* some condition */).or(event => ... /* or condition */)
+      ```
+    
+    * 终止条件（Stop Condition）
+    
+      如果使用了`oneOrMore`或者`oneOrMore.optional`，建议使用`.until()`作为终止条件，以便清理状态
+    
+    * 迭代条件（Iterative Condition）
+    
+      能够对模式之前所有接收的事件进行处理
+    
+      可以调用`ctx.getEventsForPattern("name")`
+    
+      ```java
+      .where(new IterativeCondition<Event>(){...})
+      ```
+    
 
 ### 组合模式(Combining Patterns)
 
@@ -11358,15 +11333,15 @@ Pattern<Event, Event> start = Pattern.<Event>begin("start")
 
 * 除了以上模式序列外,还可以定义"不希望出现某种近邻关系":
 
-  *  `.notNext()`不严格近邻
-  * `.notFollowedBy()`不在两个事件之间发生
+  *  `.notNext()`——不想让某个事件严格紧邻前一个事件发生
+  * `.notFollowedBy()`——不想让某个事件在两个事件之间发生
 
 
 ​			（eg，a not FollowedBy c，a Followed By b，a希望之后出现b，且不希望ab之间出现c）
 
 * 需要注意：
-  * **所有模式序列必须以\***\*.begin()开始\*\*
-  * **模式序列不能以\***\*.notFollowedBy()结束\*\*
+  * **所有模式序列必须以`.begin()`开始**
+  * **模式序列不能以`.notFollowedBy()`结束**
   * **"not "类型的模式不能被optional 所修饰**
   * 此外,还可以为模式指定事件约束，用来要求在多长时间内匹配有效:  `next.within(Time.seconds(10))`
 
