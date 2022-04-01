@@ -275,6 +275,7 @@
 ### Docker Compose
 
 - [学习文档](/doc/10-运维/04-集成部署/02-Docker%20Compose.md)
+- [常用部署方案](/doc/10-运维/04-集成部署/07-部署方案.md)
 
 ### Docker Registry
 
