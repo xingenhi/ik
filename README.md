@@ -139,6 +139,12 @@
 
 ### Kafka
 
+- 相关链接
+  - [官方网站](https://kafka.apache.org/)
+- 尚硅谷课程（个人感觉讲的挺好）
+  * 课程视频：[Kafka]((https://www.bilibili.com/video/bv1a4411B7V9))
+  * 配套文档：[Kafka](/doc/07-大数据/03-Kafka.md)
+
 ## 搜索引擎
 
 ### Solr
