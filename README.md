@@ -5,7 +5,7 @@
 >
 > 本文大部分资料都是自己学习的过程中不断摸索、搜罗得来的，经过了很长时间的整理与沉淀，在这里列出来分享给大家:muscle:  
 >
-> 如果本文涉及到**侵权**等行为，请及时[邮箱](xingenhi@163.com)联系小主:kissing_heart:  
+> 如果本文涉及到**侵权**等行为，请及时[Gitee](https://gitee.com/xingenhi)私信联系小主:kissing_heart:  
 >
 > 下面给大家推荐一些非常:cow2::beer:的UP主，本文大部分内容均取自以下几位大佬的资源:point_down::point_down::point_down:  
 >
