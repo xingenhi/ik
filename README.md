@@ -1,5 +1,21 @@
 > 🎈🎈🎈🎈  
-> 更多内容陆续发布中，请持续关注...
+> **更多内容陆续发布中，请持续关注...**
+>
+> ------
+>
+> 本文大部分资料都是自己学习的过程中不断摸索、搜罗得来的，经过了很长时间的整理与沉淀，在这里列出来分享给大家:muscle:  
+>
+> 如果本文涉及到**侵权**等行为，请及时[邮箱](xingenhi@163.com)联系小主:kissing_heart:  
+>
+> 下面给大家推荐一些非常:cow2::beer:的UP主，本文大部分内容均取自以下几位大佬的资源:point_down::point_down::point_down:  
+>
+> - [倜傥的雷哥的个人空间_哔哩哔哩_bilibili ](https://space.bilibili.com/328600605) 
+>
+> - [风骚的稽哥的个人空间_哔哩哔哩_bilibili](https://space.bilibili.com/12327895)  
+> - [雷俊华老师_雷俊华老师腾讯课堂官网 (qq.com) ](https://leijh.ke.qq.com/) 
+> - [撸帝说的个人空间_哔哩哔哩_bilibili ](https://space.bilibili.com/31137138) 
+> - [尚硅谷的个人空间_哔哩哔哩_bilibili ](https://space.bilibili.com/302417610) 
+> - ......  
 
 # **前端**
 
@@ -26,20 +42,23 @@
 
 ### Spring
 
-* 学习文档
-  * [Spring](/doc/02-JAVA/02-框架/01-Spring.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1Bt411p7mB)
+  * [配套文档](/doc/02-JAVA/02-框架/01-Spring.md)
 * 相关链接
   * [官方网站](https://spring.io/)
 
 ### SpringMVC
 
-- 学习文档
-  - [SpringMVC](/doc/02-JAVA/02-框架/02-SpringMVC.md)
+- 学习课程
+  - [课程视频](https://www.bilibili.com/video/BV1sb411v7zq)
+  - [配套文档](/doc/02-JAVA/02-框架/02-SpringMVC.md)
 
 ### SpringBoot
 
-* 学习文档
-  * [SpringBoot](/doc/02-JAVA/02-框架/03-SpringBoot.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1NJ411t7db)
+  * [配套文档](/doc/02-JAVA/02-框架/03-SpringBoot.md)
 
 ## 模块详解
 
@@ -67,22 +86,25 @@
 
 ## Mybatis
 
-- 学习文档
-  - [Mybatis](/doc/03-数据库/01-Mybatis.md)
+- 学习课程
+  - [课程视频](https://www.bilibili.com/video/BV1Bt411p7x8)
+  - [配套文档](/doc/03-数据库/01-Mybatis.md)
 - 相关链接
   - [官方网站](https://mybatis.org/mybatis-3/zh/index.html)
 
 ## MyBatis Plus
 
-* 学习文档
-  * [Mybatis Plus](/doc/03-数据库/02-MybatisPlus.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1EJ411M7pu)
+  * [配套文档](/doc/03-数据库/02-MybatisPlus.md)
 * 相关链接
   * [官方网站](https://baomidou.com/)
 
 ## MyCat
 
-* 学习文档
-  * [MyCat](/doc/03-数据库/03-MyCat.md)
+* 学习课程
+  * [课程视频](https://ke.qq.com/course/1741064)
+  * [配套文档](/doc/03-数据库/03-MyCat.md)
 
 ## Oracle
 
@@ -91,28 +113,32 @@
 
 ## Redis
 
-* 学习文档
-  * [Redis](/doc/03-数据库/05-Redis.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1pE411C7RL)
+  * [配套文档](/doc/03-数据库/05-Redis.md)
 * 相关链接
   * [官方网站](http://www.redis.cn/)
   * [菜鸟链接](https://www.runoob.com/redis/redis-tutorial.html)
 
 ## MongoDB
 
-* 学习文档
-  * [MongoDB](/doc/03-数据库/06-mongoDB.md)
+* 学习课程
+  * [课程视频](https://ke.qq.com/course/2930572)
+  * [配套文档](/doc/03-数据库/06-mongoDB.md)
 
 ## InfluxDB
 
-* 学习文档
-  * [InfluxDB](/doc/03-数据库/07-InfluxDB.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1gK4y1h7Bt)
+  * [配套文档](/doc/03-数据库/07-InfluxDB.md)
 * 相关链接
   * [官方网站](https://www.influxdata.com/)
 
 ## Zookeeper
 
 * 学习文档
-  * [Zookeeper](/doc/03-数据库/08-Zookeeper.md)
+  * [课程视频](https://www.bilibili.com/video/BV1xE411C7u1)
+  * [配套文档](/doc/03-数据库/08-Zookeeper.md)
 
 #  **分布式中间件**
 
@@ -120,9 +146,10 @@
 
 ### Dubbo
 
-* 学习文档
-  * [Dubbo](/doc/04-分布式中间件/01-Dubbo.md)
-
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1NJ411i7ku)
+  * [配套文档](/doc/04-分布式中间件/01-Dubbo.md)
+  
 * 相关链接
   * [官方网站](https://dubbo.apache.org/zh/)
 
@@ -130,12 +157,17 @@
 
 ### ActiveMQ
 
-* 学习文档
-  * [ActiveMQ](/doc/04-分布式中间件/02-ActiveMQ.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1QJ411e7vN)
+  * [配套文档](/doc/04-分布式中间件/02-ActiveMQ.md)
 
 ### RabbitMq
 
+- [课程视频](https://www.bilibili.com/video/BV1Y54y1R7xe)
+
 ### RacketMQ
+
+...
 
 ### Kafka
 
@@ -149,21 +181,29 @@
 
 ### Solr
 
-* 学习文档
-  * [Solr](/doc/04-分布式中间件/03-Solr.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1k54y1X72q)
+  * [配套文档](/doc/04-分布式中间件/03-Solr.md)
 
 ### ES
+
+...
 
 ## 分布式存储
 
 ### FastDFS
 
-* 学习文档
-  * [FastDFS](/doc/04-分布式中间件/04-FastDFS.md)
+* 学习课程
+  * [课程视频](https://www.bilibili.com/video/BV1iJ411j7QY)
+  * [配套文档](/doc/04-分布式中间件/04-FastDFS.md)
 
 ### OSS
 
+...
+
 ### COS
+
+...
 
 #  **微服务解决方案**
 
@@ -223,7 +263,7 @@
   * [地鼠文档](https://www.topgoer.cn/)
 
 * 学习课程
-  * [Go基础](https://www.bilibili.com/video/BV1ME411Y71o?p=64&share_source=copy_web)
+  * [Go基础](https://www.bilibili.com/video/BV1ME411Y71o)
 
 * 相关链接
   * [七牛云 - Goproxy.cn](https://goproxy.cn/)
@@ -237,7 +277,7 @@
 ## Gin
 
 - 学习课程
-  - [Gin实战](https://www.bilibili.com/video/BV1gJ411p7xC?p=25&share_source=copy_web)
+  - [Gin实战](https://www.bilibili.com/video/BV1gJ411p7xC)
 - 相关链接
   - [Gin Web Framework]([文档 | Gin Web Framework (gin-gonic.com)](https://gin-gonic.com/zh-cn/docs/))
 
@@ -262,37 +302,45 @@
 
 ### Maven
 
+- [课程视频](https://www.bilibili.com/video/BV1EJ411M7oB)
 - [学习文档](/doc/10-运维/03-基础环境/01-Maven.md)
 
 ### Git
 
+- [课程视频](https://www.bilibili.com/video/BV16E411o772)
 - [学习文档](/doc/10-运维/03-基础环境/02-Git.md)
 
 ### Nexus
 
+- [课程视频](https://www.bilibili.com/video/BV1et411T7Rt)  *P31*
 - [学习文档](/doc/10-运维/03-基础环境/03-Nexus.md)
 
 ## 集成部署
 
 ### Docker
 
-- [学习文档](/doc/10-运维/04-集成部署/01-Docker.md)
+- [课程视频](https://www.bilibili.com/video/BV1PE411Z7PH)
+- [配套文档](/doc/10-运维/04-集成部署/01-Docker.md)
 
 ### Docker Compose
 
+- [课程视频](https://www.bilibili.com/video/BV1et411T7Rt)   *P26-P34*
 - [学习文档](/doc/10-运维/04-集成部署/02-Docker%20Compose.md)
 - [常用部署方案](/doc/10-运维/04-集成部署/07-部署方案.md)
 
 ### Docker Registry
 
+- [课程视频](https://space.bilibili.com/31137138)
 - [学习文档](/doc/10-运维/04-集成部署/03-Docker%20Registry.md)
 
 ### GitLib
 
+- [课程视频](https://www.bilibili.com/video/BV1et411T7Rt)  *P29-P30*
 - [学习文档](/doc/10-运维/04-集成部署/04-GitLab.md)
 
 ### Jenkins
 
+- [课程视频](https://space.bilibili.com/31137138)
 - [学习文档](/doc/10-运维/04-集成部署/05-Jenkins.md)
 
 ### Kubernetes
