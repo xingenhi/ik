@@ -324,16 +324,28 @@
 - [课程视频](https://www.bilibili.com/video/BV1PE411Z7PH)
 - [配套文档](/doc/10-运维/04-集成部署/01-Docker.md)
 
-### Docker Compose
+#### Dockerfile
+
+- [文档](/doc/10-运维/04-集成部署/02-Docker%20Dockerfile.md)
+
+#### Docker Registry
+
+- [课程视频](https://space.bilibili.com/31137138)
+- [学习文档](/doc/10-运维/04-集成部署/03-Docker%20Registry.md)
+
+#### Docker Compose
 
 - [课程视频](https://www.bilibili.com/video/BV1et411T7Rt)   *P26-P34*
 - [学习文档](/doc/10-运维/04-集成部署/02-Docker%20Compose.md)
 - [常用部署方案](/doc/10-运维/04-集成部署/07-部署方案.md)
 
-### Docker Registry
+#### Docker Machine
 
-- [课程视频](https://space.bilibili.com/31137138)
-- [学习文档](/doc/10-运维/04-集成部署/03-Docker%20Registry.md)
+- [文档](/doc/10-运维/04-集成部署/02-Docker%20Machine.md)
+
+#### Swarm 集群管理
+
+- [文档](/doc/10-运维/04-集成部署/02-Swarm集群.md)
 
 ### GitLib
 
