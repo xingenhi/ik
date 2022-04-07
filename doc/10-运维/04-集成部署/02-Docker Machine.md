@@ -78,6 +78,10 @@ $ docker-machine ls
 创建一台名为 test 的机器。
 
 ```
+docker-machine create --driver generic --generic-ip-address=192.168.42.101 swarm-manager
+```
+
+```
 $ docker-machine create --driver virtualbox test
 ```
 

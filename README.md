@@ -347,6 +347,10 @@
 
 - [文档](/doc/10-运维/04-集成部署/02-Swarm集群.md)
 
+#### Docker Stack
+
+- [文档](/doc/10-运维/04-集成部署/02-Docker%20Stack.md)
+
 ### GitLib
 
 - [课程视频](https://www.bilibili.com/video/BV1et411T7Rt)  *P29-P30*

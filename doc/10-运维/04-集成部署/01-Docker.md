@@ -263,6 +263,7 @@ yum install docker
 
 ```python
 systemctl start docker
+systemctl enable docker # 自启
 ```
 
 ### 2.6，查看版本
