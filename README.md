@@ -366,3 +366,10 @@
 - [学习文档](/doc/10-运维/04-集成部署/06-Kuberbetes.md)
 
 - [配套课程视频](https://www.bilibili.com/video/BV1Qv41167ck?share_source=copy_web)
+
+# **规则引擎**
+
+## Drools
+
+- [课程视频](http://【黑马博学谷2020年最新Java项目Drools业务规则管理系统（BRMS）】 https://www.bilibili.com/video/BV1Pa4y1a7u6?p=2&share_source=copy_web&vd_source=060cd26cc816f7218dcbb7765d5746b4)
+- [配套文档](/doc/11-规则引擎/01-Drools.md)
