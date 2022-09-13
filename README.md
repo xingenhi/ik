@@ -371,5 +371,5 @@
 
 ## Drools
 
-- [课程视频](http://【黑马博学谷2020年最新Java项目Drools业务规则管理系统（BRMS）】 https://www.bilibili.com/video/BV1Pa4y1a7u6?p=2&share_source=copy_web&vd_source=060cd26cc816f7218dcbb7765d5746b4)
+- [课程视频](https://www.bilibili.com/video/BV1Pa4y1a7u6?p=2&share_source=copy_web&vd_source=060cd26cc816f7218dcbb7765d5746b4)
 - [配套文档](/doc/11-规则引擎/01-Drools.md)
