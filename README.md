@@ -373,3 +373,7 @@
 
 - [课程视频](https://www.bilibili.com/video/BV1Pa4y1a7u6?p=2&share_source=copy_web&vd_source=060cd26cc816f7218dcbb7765d5746b4)
 - [配套文档](/doc/11-规则引擎/01-Drools.md)
+
+## AviatorScript
+
+- [文档](https://www.yuque.com/boyan-avfmj/aviatorscript)
