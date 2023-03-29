@@ -77,6 +77,7 @@
 ## 面试资料
 
 * [JavaGuide](https://snailclimb.gitee.io/javaguide/#/)
+* [pdai](https://pdai.tech/)
 
 ## 相关链接
 
@@ -349,8 +350,6 @@
 
 #### Docker Stack
 
-- [文档](/doc/10-运维/04-集成部署/02-Docker%20Stack.md)
-
 ### GitLib
 
 - [课程视频](https://www.bilibili.com/video/BV1et411T7Rt)  *P29-P30*
@@ -363,7 +362,7 @@
 
 ### Kubernetes
 
-- [学习文档](/doc/10-运维/04-集成部署/06-Kuberbetes.md)
+- [学习文档](/doc/10-运维/04-集成部署/06-Kubernetes.md)
 
 - [配套课程视频](https://www.bilibili.com/video/BV1Qv41167ck?share_source=copy_web)
 
