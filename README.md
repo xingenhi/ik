@@ -77,7 +77,7 @@
 ## 面试资料
 
 * [JavaGuide](https://snailclimb.gitee.io/javaguide/#/)
-
+* [pdai](https://pdai.tech/)
 
 ## 相关链接
 
