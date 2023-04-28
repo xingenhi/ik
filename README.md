@@ -28,7 +28,7 @@
   * [小满zs博客](http://t.csdn.cn/acdi0)
 * [Vue2](https://v2.cn.vuejs.org/)
 * [Vue3](https://v3.cn.vuejs.org/)
-  * [文档](/doc/01-前端/06-Vue3.md)
+  * [学习笔记](/doc/01-前端/06-Vue3.md)
   * [小满zx博客](http://t.csdn.cn/6lIol)
 * [Vite](https://vitejs.cn/vite3-cn/)
 * 前端框架
