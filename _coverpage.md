@@ -1,6 +1,6 @@
 ![logo](media/logo.png)
 
-# TWO Balloons Knowledge Base
+# Two Balloons Knowledge Base
 
 > 苦逼程序员的修炼历程  
 >   
