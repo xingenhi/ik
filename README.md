@@ -326,7 +326,7 @@
 
 ## CMake
 
-- [课程视频](【从零开始详细介绍CMake】 https://www.bilibili.com/video/BV1vR4y1u77h/?p=3&share_source=copy_web&vd_source=060cd26cc816f7218dcbb7765d5746b4)
+- [课程视频](https://www.bilibili.com/video/BV1vR4y1u77h)
 - [配套文档](/doc/10-运维/03-基础环境/04-Cmake.md)
 
 ## 集成部署
@@ -387,7 +387,7 @@
 ## AviatorScript
 
 - [文档](https://www.yuque.com/boyan-avfmj/aviatorscript)
-- 
+
 # **C++**
 
 
