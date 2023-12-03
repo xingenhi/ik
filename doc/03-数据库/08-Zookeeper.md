@@ -848,7 +848,7 @@ import org.I0Itec.zkclient.serialize.ZkSerializer;
 import java.io.UnsupportedEncodingException;
 
 /**
- * @作者：辛根
+ * @作者：
  * @描述：自定义序列化和反序列化
  * @日期： 2020/4/2
  */
@@ -904,7 +904,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @作者：辛根
+ * @作者：
  * @描述：订阅/监控
  * @日期： 2020/4/2
  */
@@ -928,7 +928,7 @@ public class TestZKSubData {
          * 描述.监听
          * 参数1：监听的节点
          * 参数2：方法回调
-         * @Author 辛根 2020/4/2
+         * @Author  2020/4/2
          **/
 //        zkClient.subscribeDataChanges("/javaee", new IZkDataListener() {
 //
@@ -945,7 +945,7 @@ public class TestZKSubData {
 
         /**
          * 描述.监听子节点的数据添加和删除
-         * @Author 辛根 2020/4/2
+         * @Author  2020/4/2
          **/
         zkClient.subscribeChildChanges("/java", new IZkChildListener() {
             @Override
@@ -1226,7 +1226,7 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 
 /**
- * @作者：辛根
+ * @作者：
  * @描述：
  * @日期： 2020/4/2
  */
